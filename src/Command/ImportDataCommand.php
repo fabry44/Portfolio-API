@@ -131,20 +131,27 @@ class ImportDataCommand extends Command
                 ],
                 "technology" => [
                     "langages" => [
-                        ["name" => "HTML", "icon" => "Html", "class" => "bg-[#963419] text-white"],
-                        ["name" => "CSS", "icon" => "Css", "class" => "bg-[#07436b] text-white"],
-                        ["name" => "JavaScript", "icon" => "Js", "class" => "bg-[#a39535] text-white"],
-                        ["name" => "PHP", "icon" => "Php", "class" => "bg-[#4F5D95] text-white"]
+                        ["name" => "HTML", "icon" => "Html", "class" => "bg-[#963419] text-white", "style" => "background-color: #963419; color: #fff;"],
+                        ["name" => "CSS", "icon" => "Css", "class" => "bg-[#07436b] text-white", "style" => "background-color: #07436b; color: #fff;"],
+                        ["name" => "JavaScript", "icon" => "Js", "class" => "bg-[#a39535] text-white", "style" => "background-color: #a39535; color: #fff;"],
+                        ["name" => "Python", "icon" => "Python", "class" => "bg-[#306998] text-white", "style" => "background-color: #306998; color: #fff;"],
+                        ["name" => "PHP", "icon" => "Php", "class" => "bg-[#4F5D95] text-white", "style" => "background-color: #4F5D95; color: #fff;"]
                     ],
                     "frameworks_libraries" => [
-                        ["name" => "Astro", "icon" => "AstroIcon", "class" => "bg-[#FF5A1F] text-white"],
-                        ["name" => "Bootstrap", "icon" => "Bootstrap", "class" => "bg-[#563D7C] text-white"],
-                        ["name" => "React", "icon" => "React", "class" => "bg-[#1c7777] text-white"]
+                        ["name" => "Astro", "icon" => "AstroIcon", "class" => "bg-[#FF5A1F] text-white", "style" => "background-color: #FF5A1F; color: #fff;"],
+                        ["name" => "Tailwind CSS", "icon" => "Tailwind", "class" => "bg-[#06B6D4] text-white", "style" => "background-color: #06B6D4; color: #fff;"],
+                        ["name" => "Symfony", "icon" => "Symfony", "class" => "bg-[#000000] text-white", "style" => "background-color: #000000; color: #fff;"],
+                        ["name" => "Bootstrap", "icon" => "Bootstrap", "class" => "bg-[#563D7C] text-white", "style" => "background-color: #563D7C; color: #fff;"],
+                        ["name" => "React", "icon" => "React", "class" => "bg-[#1c7777] text-white", "style" => "background-color: #1c7777; color: #fff;"],
+                        ["name" => "Django", "icon" => "Django", "class" => "bg-[#092E20] text-white", "style" => "background-color: #092E20; color: #fff;"],
+                        ["name" => "jQuery", "icon" => "Jquery", "class" => "bg-[#0769AD] text-white", "style" => "background-color: #0769AD; color: #fff;"]
                     ],
                     "bases_de_donnees" => [
-                        ["name" => "MongoDB", "icon" => "Mongo", "class" => "bg-[#47A248] text-white"],
-                        ["name" => "MySQL", "icon" => "Mysql", "class" => "bg-[#00758F] text-white"]
-                    ]
+                        ["name" => "MongoDB", "icon" => "Mongo", "class" => "bg-[#47A248] text-white", "style" => "background-color: #47A248; color: #fff;"],
+                        ["name" => "MariaDB", "icon" => "Maria", "class" => "bg-[#003545] text-white", "style" => "background-color: #003545; color: #fff;"],
+                        ["name" => "SQLite", "icon" => "Sqlite", "class" => "bg-[#003B57] text-white", "style" => "background-color: #003B57; color: #fff;"],
+                        ["name" => "MySQL", "icon" => "Mysql", "class" => "bg-[#00758F] text-white", "style" => "background-color: #00758F; color: #fff;"]
+                    ]                    
                 ]
             ];
 
@@ -266,11 +273,12 @@ class ImportDataCommand extends Command
                     `title` VARCHAR(255) NOT NULL,
                     `icon` VARCHAR(255) NOT NULL,
                     `class` VARCHAR(255) NOT NULL,
+                    `style` TEXT NOT NULL,
                     PRIMARY KEY (`id`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
             ");
 
-            $sqlTechnology = "REPLACE INTO `technology` (`name`, `icon`, `class`) VALUES (:name, :icon, :class)";
+            $sqlTechnology = "REPLACE INTO `technology` (`name`, `icon`, `class`, `style`) VALUES (:name, :icon, :class, :style)";
             $stmtTechnology = $pdo->prepare($sqlTechnology);
 
             foreach ($dataPortfolio['technology'] as $category => $techs) {
@@ -279,6 +287,7 @@ class ImportDataCommand extends Command
                         ':name' => $techData['name'],
                         ':icon' => $techData['icon'],
                         ':class' => $techData['class'],
+                        ':style' => $techData['style'],
                     ]);
                 }
             }

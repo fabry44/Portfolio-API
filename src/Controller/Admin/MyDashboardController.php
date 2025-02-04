@@ -52,7 +52,7 @@ class MyDashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('Portfolio API')
             // you can include HTML contents too (e.g. to link to an image)
-            ->setTitle('<img src="..."> ACME <span class="text-small">Corp.</span>')
+            // ->setTitle('<img src="..."> ACME <span class="text-small">Corp.</span>')
 
             // by default EasyAdmin displays a black square as its default favicon;
             // use this method to display a custom favicon: the given path is passed
@@ -104,20 +104,20 @@ class MyDashboardController extends AbstractDashboardController
             // because many languages/locales are not associated to a single country)
             ->setLocales([
                 'en' => '🇬🇧 English',
-                'pl' => '🇵🇱 Polski'
+                'fr' => '🇫🇷 Français',
             ])
             // to further customize the locale option, pass an instance of
             // EasyCorp\Bundle\EasyAdminBundle\Config\Locale
-            ->setLocales([
-                'en', // locale without custom options
-                ConfigLocale::new('pl', 'polski', 'far fa-language') // custom label and icon
-            ])
+            // ->setLocales([
+            //     'fr', // locale without custom options
+            //     ConfigLocale::new('fr', '🇫🇷 Français','far fa-language') // custom label and icon
+            // ])
         ;
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('admin', 'fa fa-home');
+        yield MenuItem::linkToDashboard('Portfolio', 'fa fa-image');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
         yield MenuItem::linkToCrud('Gestion des utilisateurs', 'fa fa-user', User::class);
         yield MenuItem::linkToCrud('Expériences', 'fa fa-briefcase', Experience::class);

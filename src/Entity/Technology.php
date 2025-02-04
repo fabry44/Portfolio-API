@@ -23,7 +23,9 @@ class Technology
 
     #[ORM\Column(length: 255)]
     private ?string $class = null;
-    
+
+    #[ORM\Column(length: 255)]
+    private ?string $style = null;
 
     /**
      * @var Collection<int, Project>
@@ -77,6 +79,18 @@ class Technology
         return $this;
     }
 
+    public function getStyle(): ?string
+    {
+        return $this->style;
+    }
+
+    public function setStyle(string $style): static
+    {
+        $this->style = $style;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Project>
      */
@@ -102,5 +116,10 @@ class Technology
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }
