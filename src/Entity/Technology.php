@@ -21,6 +21,10 @@ class Technology
     #[ORM\Column(length: 255)]
     private ?string $icon = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $class = null;
+    
+
     /**
      * @var Collection<int, Project>
      */
@@ -57,6 +61,18 @@ class Technology
     public function setIcon(string $icon): static
     {
         $this->icon = $icon;
+
+        return $this;
+    }
+
+    public function getClass(): ?string
+    {
+        return $this->class;
+    }
+
+    public function setClass(string $class): static
+    {
+        $this->class = $class;
 
         return $this;
     }

@@ -21,10 +21,7 @@ class Formation
     private ?string $institution = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $beginAt = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $endAt = null;
+    private ?\DateTimeImmutable $date = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -58,26 +55,14 @@ class Formation
         return $this;
     }
 
-    public function getBeginAt(): ?\DateTimeImmutable
+    public function getDate(): ?\DateTimeImmutable
     {
-        return $this->beginAt;
+        return $this->date;
     }
 
-    public function setBeginAt(\DateTimeImmutable $beginAt): static
+    public function setDate(\DateTimeImmutable $date): static
     {
-        $this->beginAt = $beginAt;
-
-        return $this;
-    }
-
-    public function getEndAt(): ?\DateTimeImmutable
-    {
-        return $this->endAt;
-    }
-
-    public function setEndAt(?\DateTimeImmutable $endAt): static
-    {
-        $this->endAt = $endAt;
+        $this->date = $date;
 
         return $this;
     }

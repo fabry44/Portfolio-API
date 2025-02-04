@@ -90,7 +90,6 @@ class Project
         if (!$this->technology->contains($technology)) {
             $this->technology->add($technology);
         }
-
         return $this;
     }
 

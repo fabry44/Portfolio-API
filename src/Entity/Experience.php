@@ -21,10 +21,10 @@ class Experience
     private ?string $company = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $beginAt = null;
+    private ?\DateTime $beginAt = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $endAt = null;
+    private ?\DateTime $endAt = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
