@@ -6,6 +6,7 @@ use App\Repository\TechnologyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TechnologyRepository::class)]
 class Technology
@@ -16,22 +17,20 @@ class Technology
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['api.portfolio'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['api.portfolio'])]
     private ?string $icon = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['api.portfolio'])]
     private ?string $class = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $style = null;
-
-    /**
-     * @var Collection<int, Project>
-     */
     #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'technology')]
     private Collection $projects;
+
 
     public function __construct()
     {

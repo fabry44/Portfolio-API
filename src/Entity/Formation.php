@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\FormationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
 class Formation
@@ -15,15 +16,19 @@ class Formation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['api.portfolio'])]
     private ?string $degree = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['api.portfolio'])]
     private ?string $institution = null;
 
     #[ORM\Column]
+    #[Groups(['api.portfolio'])]
     private ?\DateTimeImmutable $date = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['api.portfolio'])]
     private ?string $description = null;
 
     public function getId(): ?int

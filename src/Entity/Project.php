@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
@@ -17,18 +18,19 @@ class Project
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['api.portfolio'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['api.portfolio'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['api.portfolio'])]
     private ?string $link = null;
 
-    /**
-     * @var Collection<int, Technology>
-     */
     #[ORM\ManyToMany(targetEntity: Technology::class, inversedBy: 'projects')]
+    #[Groups(['api.portfolio'])]
     private Collection $technology;
 
     public function __construct()
