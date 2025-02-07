@@ -15,8 +15,8 @@ final class PortfolioController extends AbstractController{
     public function getPortfolioData(
         UserRepository $userRepository,
         FormationRepository $formationRepository,
-        ProjectRepository $projectRepository,
-        TechnologyRepository $technologyRepository
+        TechnologyRepository $technologyRepository,
+        ProjectRepository $projectRepository
     ): JsonResponse {
         $user = $userRepository->findOneBy([]); // On suppose qu'il n'y a qu'un seul utilisateur
         $formations = $formationRepository->findAll();
