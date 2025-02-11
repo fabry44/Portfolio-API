@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # On ignore la route si c'est un fichier ou dossier existant
+  RewriteRule ^index\.php$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Sinon, on redirige vers index.php
+  RewriteRule . index.php [L]
+</IfModule>
+
