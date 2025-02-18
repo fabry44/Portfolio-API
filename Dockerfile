@@ -53,6 +53,12 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 COPY docker.sh /usr/local/bin/docker.sh
 RUN chmod +x /usr/local/bin/docker.sh
 
+# Donner les permissions nécessaires
+# S'assurer que le user www-data a bien les permissions
+# RUN chown -R www-data:www-data /var/www/html/var
+# RUN chmod -R 775 /var/www/html/var
+# USER www-data
+
 # Expose le port 80
 EXPOSE 80
 

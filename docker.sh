@@ -2,12 +2,13 @@
 set -e
 
 echo "nstallation des dépendances (Composer)..."
-composer install --prefer-dist --no-progress -
+composer install --prefer-dist --no-progress 
 
 echo "Création (ou vérification) de la base de données..."
 php bin/console doctrine:database:create --if-not-exists
 
 echo "Exécution des migrations..."
+php bin/console make:migration
 php bin/console doctrine:migrations:migrate --no-interaction
 
 # Par exemple si tu as une commande pour importer des données :

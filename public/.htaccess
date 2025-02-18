@@ -10,3 +10,4 @@
   RewriteRule . index.php [L]
 </IfModule>
 
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1

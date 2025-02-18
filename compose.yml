@@ -17,6 +17,20 @@ services:
       retries: 5
     networks:
       - portfolio-network
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: portfolio-phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db  # Le nom du service MariaDB dans Docker
+      PMA_USER: root
+      PMA_PASSWORD: root
+      UPLOAD_LIMIT: 100M
+    ports:
+      - "8081:80"  # Accès via http://localhost:8081
+    networks:
+      - portfolio-network
 
   backend:
     build:
