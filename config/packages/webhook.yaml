@@ -1,0 +1,6 @@
+framework:
+  webhook:
+    routing:
+      rebuildAstro:
+        service: App\Webhook\RebuildAstroRequestParser
+        secret: your_secret_here

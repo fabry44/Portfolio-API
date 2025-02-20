@@ -65,7 +65,7 @@ services:
     volumes:
       # Montre le code local du frontend dans /app si tu veux faire du dev
       - ../Portfolio-Astro:/app
-      - /app/node_modules
+      # - /app/node_modules
     depends_on:
       - backend
     networks:
