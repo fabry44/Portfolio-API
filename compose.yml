@@ -59,7 +59,7 @@ services:
     container_name: portfolio-astro
     restart: always
     ports:
-      - "4322:4321"
+      - "4321:4321"
     # environment:
     #   - NODE_ENV=production
     volumes:

@@ -4,12 +4,3 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-oauth2:
-    resource: '@LeagueOAuth2ServerBundle/Resources/config/routes.php'
-    type: php
-
-api_portfolio:
-    path: /api/portfolio-data
-    controller: App\Controller\API\PortfolioController::getPortfolioData
-    defaults:
-        oauth2_scopes: ['portfolio']

@@ -10,7 +10,7 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: true       # Allows optimizing the container by removing unused services; this also means you cannot fetch it from the container via $container->get().
+        public: false       
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -21,46 +21,34 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
     
-    security.user.provider.oauth2:
-        alias: security.user.provider.concrete.oauth2_provider
-        public: true
-
-    # App\Security\APIAuthenticator:
-    #     arguments:
-    #         $userProvider: '@security.user.provider.oauth2'
-
-    League\Bundle\OAuth2ServerBundle\Security\Authenticator\OAuth2Authenticator:
+    # Service GitHub
+    App\Service\GitHubService:
         arguments:
-            Symfony\Component\Security\Core\User\UserProviderInterface: '@security.user.provider.concrete.oauth2_provider'
-            $rolePrefix: 'ROLE_OAUTH2_'
+            $githubToken: '%env(GITHUB_TOKEN)%'
+            $repoOwner: '%env(GITHUB_REPO_OWNER)%'
+            $repoName: '%env(GITHUB_REPO_NAME)%'
+            $branch: '%env(GITHUB_BRANCH)%'
 
-    Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface:
-        alias: 'league.oauth2_server.factory.psr_http'
-
-   
+    # Service Netlify 
+    App\Service\NetlifyService:
+        arguments:
+            $httpClient: '@http_client'
+            $params: '@parameter_bag'
+            $logger: '@logger'
+            $netlifyHookUrl: '%env(NETLIFY_BUILD_HOOK)%'
             
-   
-    # Register nyholm/psr7 services for autowiring with PSR-17 (HTTP factories)
-    # Psr\Http\Message\RequestFactoryInterface: '@nyholm.psr7.psr17_factory'
-    # Psr\Http\Message\ResponseFactoryInterface: '@nyholm.psr7.psr17_factory'
-    # Psr\Http\Message\ServerRequestFactoryInterface: '@nyholm.psr7.psr17_factory'
-    # Psr\Http\Message\StreamFactoryInterface: '@nyholm.psr7.psr17_factory'
-    # Psr\Http\Message\UploadedFileFactoryInterface: '@nyholm.psr7.psr17_factory'
-    # Psr\Http\Message\UriFactoryInterface: '@nyholm.psr7.psr17_factory'
 
-    # nyholm.psr7.psr17_factory:
-    #     class: Nyholm\Psr7\Factory\Psr17Factory
 
-    # # Custom implementation of ServerRequestInterface
-    # App\Service\Psr17ServerRequest:
-    #     arguments:
-    #         $psr17Factory: '@nyholm.psr7.psr17_factory'
+    # Service PortfolioDataService
+    App\Service\PortfolioDataService: 
+        arguments:
+            $userRepository: '@App\Repository\UserRepository'
+            $formationRepository: '@App\Repository\FormationRepository'
+            $technologyRepository: '@App\Repository\TechnologyRepository'
+            $projectRepository: '@App\Repository\ProjectRepository'
+            $params: '@parameter_bag'
 
-    # Alias for ServerRequestInterface
-    # Psr\Http\Message\ServerRequestInterface: '@App\Service\Psr17ServerRequest'
-
-    # # Alias pour UserProviderInterface
-    # Symfony\Component\Security\Core\User\UserProviderInterface: '@security.user.provider.concrete.oauth2_provider'
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Déclarations des alias pour les interfaces globales de Symfony
+    Symfony\Contracts\HttpClient\HttpClientInterface: '@http_client'
+    Psr\Log\LoggerInterface: '@logger'
+    Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface: '@parameter_bag'

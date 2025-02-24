@@ -29,6 +29,10 @@ class Project
     #[Groups(['api.portfolio'])]
     private ?string $link = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['api.portfolio'])]
+    private ?string $github = null;
+
     #[ORM\ManyToMany(targetEntity: Technology::class, inversedBy: 'projects')]
     #[Groups(['api.portfolio'])]
     private Collection $technology;
@@ -75,6 +79,18 @@ class Project
     public function setLink(?string $link): static
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function getGithub(): ?string
+    {
+        return $this->github;
+    }
+
+    public function setGithub(?string $github): static
+    {
+        $this->github = $github;
 
         return $this;
     }

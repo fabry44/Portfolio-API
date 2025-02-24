@@ -47,7 +47,7 @@ class SecurityController extends AbstractController
             'csrf_token_intention' => 'authenticate',
 
             // the URL users are redirected to after the login (default: '/admin')
-            'target_path' => $this->generateUrl('admin'),
+            'target_path' => $this->generateUrl('admin_dashboard'),
 
             // the label displayed for the username form field (the |trans filter is applied to it)
             'username_label' => 'email',

@@ -28,8 +28,7 @@ RUN install-php-extensions \
     xml \
     curl \
     json \
-    mbstring \
-    sodium 
+    mbstring 
 
 # Installer un gestionnaire d'extensions PHP
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/

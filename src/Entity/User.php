@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -42,6 +43,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['api.portfolio'])]
     private ?string $phone = null;
 
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    #[Groups(['api.portfolio'])]
+    private ?DateTimeImmutable $birth = null;
+
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['api.portfolio'])]
     private ?string $address = null;
@@ -60,7 +65,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Groups(['api.portfolio'])]
-    private ?string $bio = null;
+    private ?string $about = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['api.portfolio'])]
+    private ?string $function = null;
 
     public function getId(): ?int
     {
@@ -78,6 +87,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+  
 
     /**
      * A visual identifier that represents this user.
@@ -161,6 +172,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getBirth(): ?DateTimeImmutable
+    {
+        return $this->birth;
+    }
+
+    public function setBirth(DateTimeImmutable $birth): static
+    {
+        $this->birth = $birth;
+
+        return $this;
+    }
+
+
     public function getAddress(): ?string
     {
         return $this->address;
@@ -209,14 +233,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBio(): ?string
+    public function getAbout(): ?string
     {
-        return $this->bio;
+        return $this->about;
     }
 
-    public function setBio(string $bio): static
+    public function setAbout(string $about): static
     {
-        $this->bio = $bio;
+        $this->about = $about;
+
+        return $this;
+    }
+
+    public function getFunction(): ?string
+    {
+        return $this->function;
+    }
+
+    public function setFunction(string $function): static
+    {
+        $this->function = $function;
 
         return $this;
     }

@@ -3,14 +3,18 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Project;
+use App\Repository\ProjectRepository;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 class ProjectCrudController extends AbstractCrudController
 {
@@ -19,21 +23,31 @@ class ProjectCrudController extends AbstractCrudController
         return Project::class;
     }
 
+    private ProjectRepository $projectRepository;
+
+    public function __construct(ProjectRepository $projectRepository)
+    {
+        $this->projectRepository = $projectRepository;
+        
+    }
+
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->onlyOnIndex();
         yield TextField::new('title')->setLabel('Nom')->setRequired(true);
         yield TextEditorField::new('description')->setLabel('Description')->setRequired(true);
-        yield TextField::new('link')->setLabel('Link')->setRequired(false);
+        yield TextField::new('link')->setLabel('Liens du site')->setRequired(false);
+        yield TextField::new('github')->setLabel('Github')->setRequired(false);
 
         // Pour les relations ManyToMany, on utilise AssociationField
         if (in_array($pageName, [Crud::PAGE_NEW, Crud::PAGE_EDIT])) {
             yield AssociationField::new('technology')
                 ->setLabel('Technologies')
                 ->setFormTypeOptions([
-                    // Important pour que les éléments soient ajoutés/supprimés correctement
                     'by_reference' => false,
-                ]);
+                    'multiple' => true,
+                ])
+                ->setRequired(true);
         } else {
             // En mode affichage (index, detail), vous pouvez personnaliser l'affichage
             yield AssociationField::new('technology')

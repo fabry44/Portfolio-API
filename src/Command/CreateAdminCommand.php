@@ -59,7 +59,7 @@ class CreateAdminCommand extends Command
     {
         if (null === $input->getArgument('email') || null === $input->getArgument('password')) {
             $this->io->title('Création d\'un administrateur');
-            $this->io->text('Bonjour Jalila, entre tes informations afin de devenir l\'administratrice de votre site SOS PRO:');
+            $this->io->text('Bonjour, entrez les informations:');
             $this->askArgument($input, 'email', 'Quel est votre email ?');
             $this->askArgument($input, 'password', 'Quel est votre mot de passe ?');
             $this->askOption($input, 'name', 'Quel est votre nom et prénom?');

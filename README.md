@@ -1,156 +1,119 @@
-# Portfolio-API
+📌 Portfolio-API (Backend)
 
-## Table des matières
-- [Présentation](#présentation)
-- [Prérequis](#prérequis)
-- [Installation](#installation)
-    - [Cloner le projet](#cloner-le-projet)
-    - [Configuration](#configuration)
-    - [Génération des clés OAuth2](#génération-des-clés-oauth2)
-    - [Lancement du projet](#lancement-du-projet)
-- [Gestion des tokens OAuth2](#gestion-des-tokens-oauth2)
-- [Commandes utiles](#commandes-utiles)
-- [API Endpoints](#api-endpoints)
-- [Docker](#docker)
-- [Tests](#tests)
-- [Licence](#licence)
 
-## Présentation
-Portfolio-API est une API construite avec Symfony 7 qui permet de gérer le backend d’un portfolio. Elle implémente OAuth2 pour l’authentification et est déployée via Docker.
+📂 Projet Full-Stack : API Symfony (backend) & Astro (frontend)
+    🔗 Backend : Symfony 7 (API) – hébergé sur un serveur mutualisé
+    🔗 Frontend : Astro.js – déployé sur Netlify avec un webhook de build automatique
 
-## Prérequis
-Avant d’installer le projet, assurez-vous d’avoir installé :
-- Docker et Docker Compose
-- PHP 8.3 ou supérieur
-- Composer
-- Symfony CLI
-- MariaDB ou MySQL
 
-## Installation
+📖 Table des matières   
+    🚀 Aperçu du projet
+    🛠️ Technologies utilisées
+    ⚙️ Installation et Configuration
+    🔄 Workflow CI/CD (Mise à jour & Déploiement)
+    📂 Structure du projet
+    ✅ Fonctionnalités principales
+    📌 To-Do List
+    📜 Licence
+    🚀 Aperçu du projet
 
-### Cloner le projet
-```sh
-git clone https://github.com/mon-compte/portfolio-api.git
-cd portfolio-api
-```
 
-### Configuration
-Copier le fichier `.env.example` en `.env` :
-```sh
-cp .env.example .env
-```
-Modifier les variables de configuration :
-```ini
-DATABASE_URL="mysql://root:@portfolio-db:3306/portfolio?serverVersion=mariadb-10.4.34&charset=utf8mb4"
-OAUTH_PRIVATE_KEY=%kernel.project_dir%/config/jwt/private.pem
-OAUTH_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
-```
 
-### Génération des clés OAuth2
-```sh
-mkdir -p config/jwt
-openssl genpkey -algorithm RSA -out config/jwt/private.pem -aes256
-openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
-```
-Ajouter la passphrase dans le fichier `.env` si nécessaire :
-```ini
-OAUTH_PASSPHRASE=ma_passphrase
-```
+Le backend (Symfony) expose une API JSON (Formulaire de contact) consommée par le frontend (Astro.js).
+Les données sont mises à jour dynamiquement via GitHub et un webhook Netlify.
 
-### Lancement du projet
-Démarrer les services Docker :
-```sh
-docker-compose up -d --build
-```
-Installer les dépendances :
-```sh
-docker exec -it portfolio-api composer install
-```
-Exécuter les migrations :
-```sh
-docker exec -it portfolio-api php bin/console doctrine:migrations:migrate
-```
-Créer un client OAuth2 :
-```sh
-docker exec -it portfolio-api php bin/console oauth2:create-client --redirect-uri=http://localhost
-```
 
-## Gestion des tokens OAuth2
+🛠️ Technologies utilisées:
 
-### Obtenir un token d'accès
-```sh
-curl -X POST http://localhost:8000/token \
-         -H "Content-Type: application/x-www-form-urlencoded" \
-         -d "grant_type=client_credentials" \
-         -d "client_id=TON_CLIENT_ID" \
-         -d "client_secret=TON_SECRET" \
-         -d "scope=portfolio"
-```
+    🔹 Backend (API) :
+        Symfony 7 – Framework PHP pour gérer l’API
+        Doctrine ORM – Gestion de la base de données
+        MariaDB – Base de données SQL
+        JWT Auth – Sécurisation de l’API
+        EasyAdmin – Administration des contenus
 
-### Accéder aux endpoints protégés
-```sh
-curl -H "Authorization: Bearer TON_ACCESS_TOKEN" http://localhost:8000/api/protected
-```
+    🔹 Frontend (Portfolio) :
+        Astro.js – Framework pour générer un site statique
+        Tailwind CSS + DaisyUI – Styling moderne et responsive
+        Fetch API – Récupération des données du backend
+        Netlify – Hébergement et build automatique
+        
+    🔹 CI/CD & Hébergement :
+        GitHub Actions – Gestion des mises à jour automatiques
+        Netlify Build Hooks – Déclenchement automatique du build
+        Docker (local) – Conteneurisation de Symfony en dev
 
-## Commandes utiles
 
-| Commande | Description |
-|----------|-------------|
-| `php bin/console cache:clear` | Nettoyer le cache Symfony |
-| `php bin/console doctrine:migrations:diff` | Générer une nouvelle migration |
-| `php bin/console doctrine:migrations:migrate` | Appliquer les migrations |
-| `php bin/console oauth2:create-client` | Créer un client OAuth2 |
-| `php bin/console security:hash-password` | Générer un hash de mot de passe |
-| `php bin/console debug:container` | Lister les services Symfony |
+⚙️ Installation et Configuration
 
-## API Endpoints
+    1️⃣ Cloner le projet
 
-### Endpoints protégés
+        git clone https://github.com/fabry44/portfolio-api.git
+        git clone https://github.com/fabry44/portfolio-astro.git
 
-| Méthode | Endpoint | Description |
-|---------|----------|-------------|
-| GET | `/api/protected` | Vérifier l'authentification avec OAuth2 |
-| GET | `/api/portfolio` | Récupérer les projets du portfolio |
+    2️⃣ Backend : Installation Symfony
 
-### Endpoints publics
 
-| Méthode | Endpoint | Description |
-|---------|----------|-------------|
-| POST | `/token` | Obtenir un token OAuth2 |
-| GET | `/health` | Vérifier si l'API est active |
+        cd portfolio-api
+        composer install
+        copier .env.example .env  # Configurer les variables d'environnement
+        php bin/console doctrine:database:create
+        php bin/console doctrine:migrations:migrate
+        php bin/console cache:clear
+        symfony serve
 
-## Docker
+    3️⃣ Frontend : Installation Astro
 
-### Fichiers importants
-- `docker-compose.yml` : Définition des services (API, base de données)
-- `Dockerfile` : Image Docker pour Symfony
+        cd ../portfolio-astro
+        npm install
+        npm run dev
 
-### Commandes Docker
+    🔄 Workflow CI/CD (Mise à jour & Déploiement)
 
-| Commande | Description |
-|----------|-------------|
-| `docker-compose up -d --build` | Démarrer les conteneurs |
-| `docker-compose down` | Arrêter les conteneurs |
-| `docker ps` | Lister les conteneurs actifs |
-| `docker logs portfolio-api` | Voir les logs |
-| `docker exec -it portfolio-api bash` | Accéder au shell du conteneur |
-| `docker-compose restart` | Redémarrer les services |
+    🚀 Mise à jour du contenu
 
-## Tests
+        Mise à jour de la base de données (backend Symfony).
+        Génération du fichier data.json.
+        Push du fichier data.json sur GitHub.
+        Déclenchement automatique du build Netlify via webhook (Build Hook Netlifly).
 
-### Lancer les tests PHPUnit
-```sh
-docker exec -it portfolio-api php bin/phpunit
-```
+    ⚡ Commande pour forcer la mise à jour
 
-### Tester l'authentification OAuth2
-```sh
-curl -X POST http://localhost:8000/token \
-         -d "grant_type=client_credentials" \
-         -d "client_id=TON_CLIENT_ID" \
-         -d "client_secret=TON_SECRET" \
-         -d "scope=portfolio"
-```
+        rl -X POST -d {} https://api.netlify.com/build_hooks/LE_TOKEN_NETLIFLY
 
-## Licence
-Ce projet est sous licence MIT.
+
+📂 Structure du projet
+
+    📁 backend-symfony/        # API Symfony
+        ├── src/                   # Logique métier
+        ├── public/                # Accès public
+        ├── var/                   # Cache & logs
+        ├── .env                   # Configuration
+        ├── composer.json          # Dépendances PHP
+        ├── docker-compose.yml     # Docker 
+        ├── Dockerfile             # Configuration Docker pour la production
+        ├── docker.sh              # Script pour gérer Docker en dev
+        └── apache.conf            # Configuration Apache
+
+
+✅ Fonctionnalités principales
+
+    ✔️ Formulaire de contact pour envoyer le formulaire de contact et récupérer les soumissions via le frontend Astro
+    ✔️ Backend sécurisé avec JWT et CORS
+    ✔️ Admin Dashboard via EasyAdmin pour gérer le contenu
+    ✔️ Stockage des données en JSON pour un rendu ultra rapide en static par le frontend Astro
+    ✔️ Déploiement automatisé sur Netlify via API GitHub Actions (API GitHub) & Webhooks
+    ✔️ Utilisation de Docker en dev pour une config standardisée
+    ✔️ Gestion des styles avec Tailwind
+
+
+📌 To-Do List
+
+    Améliorer la sécurité de l’API avec des scopes OAuth2
+    Ajouter des tests unitaires pour l’API
+    Ajouter une fonctionnalité de commentaires sur les projets
+
+
+📜 Licence
+
+    Ce projet est sous licence MIT – vous pouvez le modifier et l’utiliser librement.
