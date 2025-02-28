@@ -28,7 +28,8 @@ RUN install-php-extensions \
     xml \
     curl \
     json \
-    mbstring 
+    mbstring \
+    sodium 
 
 # Installer un gestionnaire d'extensions PHP
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
@@ -48,9 +49,15 @@ WORKDIR /var/www/html
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer
 
+    # Copier tous les fichiers du projet
+COPY . /var/www/html/
+
+# Donner les permissions nécessaires au script
+RUN chmod +x /var/www/html/docker.sh
+
 # Copie du script de démarrage
-COPY docker.sh /usr/local/bin/docker.sh
-RUN chmod +x /usr/local/bin/docker.sh
+# COPY docker.sh /usr/local/bin/docker.sh
+# RUN chmod +x /usr/local/bin/docker.sh
 
 # Donner les permissions nécessaires
 # S'assurer que le user www-data a bien les permissions
@@ -61,5 +68,5 @@ RUN chmod +x /usr/local/bin/docker.sh
 # Expose le port 80
 EXPOSE 80
 
-# Commande d'entrée
-ENTRYPOINT ["/usr/local/bin/docker.sh"]
+# Exécuter le script de démarrage
+ENTRYPOINT ["bash", "/var/www/html/docker.sh"]

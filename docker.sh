@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 set -e
 
 echo "nstallation des dépendances (Composer)..."

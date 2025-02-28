@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\ContactRequest;
 use App\Entity\Experience;
 use App\Entity\Formation;
 use App\Entity\Project;
@@ -106,6 +107,7 @@ class MyDashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Portfolio', 'fa fa-image');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Contact', 'fa fa-envelope', ContactRequest::class);
         yield MenuItem::linkToCrud('Gestion des utilisateurs', 'fa fa-user', User::class);
         yield MenuItem::linkToCrud('Expériences', 'fa fa-briefcase', Experience::class);
         yield MenuItem::linkToCrud('Formations', 'fa fa-graduation-cap', Formation::class);
