@@ -45,9 +45,7 @@ class CreateAdminCommand extends Command
         $this
             ->addArgument('email', InputArgument::OPTIONAL, 'Email')
             ->addArgument('password', InputArgument::OPTIONAL, 'Password')
-            ->addOption('name', null, InputOption::VALUE_OPTIONAL, 'Last name')
-            ->addOption('phone', null, InputOption::VALUE_OPTIONAL, 'Phone number')
-            ->addOption('address', null, InputOption::VALUE_OPTIONAL, 'Address');
+            ->addOption('name', null, InputOption::VALUE_OPTIONAL, 'Name');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
@@ -63,8 +61,6 @@ class CreateAdminCommand extends Command
             $this->askArgument($input, 'email', 'Quel est votre email ?');
             $this->askArgument($input, 'password', 'Quel est votre mot de passe ?');
             $this->askOption($input, 'name', 'Quel est votre nom et prénom?');
-            $this->askOption($input, 'phone', 'Quel est votre numéro de téléphone ?');
-            $this->askOption($input, 'address', 'Quel est votre adresse ?');
         }
     }
 
@@ -97,8 +93,6 @@ class CreateAdminCommand extends Command
             )
         );
         $user->setName($input->getOption('name'));
-        $user->setPhone($input->getOption('phone'));
-        $user->setAddress($input->getOption('address'));
         $user->setRoles(['ROLE_ADMIN']);
 
         $this->usersRepository->save($user, true);

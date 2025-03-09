@@ -17,24 +17,19 @@ class Technology
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['api.portfolio'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['api.portfolio'])]
     private ?string $icon = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['api.portfolio'])]
     private ?string $class = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['api.portfolio'])]
     private ?string $style = null;
 
     #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'technology')]
     private Collection $projects;
-
 
     public function __construct()
     {

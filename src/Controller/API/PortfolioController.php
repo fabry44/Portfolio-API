@@ -2,8 +2,9 @@
 
 namespace App\Controller\Api;
 
-use App\Service\PortfolioDataService;
+use App\Service\ResumeDataService;
 use App\Service\GitHubService;
+use App\Service\PortfolioDataService;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,16 +15,19 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class PortfolioController extends AbstractController
 {
+    private ResumeDataService $resumeDataService;
     private PortfolioDataService $portfolioDataService;
     private GitHubService $gitHubService;
     private LoggerInterface $logger;
 
     public function __construct(
+        ResumeDataService $resumeDataService,
         PortfolioDataService $portfolioDataService,
         GitHubService $gitHubService,
         LoggerInterface $logger
 
     ) {
+        $this->resumeDataService = $resumeDataService;
         $this->portfolioDataService = $portfolioDataService;
         $this->gitHubService = $gitHubService;
         $this->logger = $logger;
@@ -37,19 +41,29 @@ class PortfolioController extends AbstractController
     {
         try {
             // Étape 1 : Générer le fichier JSON depuis la BDD
-            $jsonPath = $this->portfolioDataService->generateJsonFile();
-            $this->logger->info("Fichier JSON généré : " . $jsonPath);
+            $jsonPathResume = $this->resumeDataService->generateJsonFile();
+            $this->logger->info("Fichier JSON généré : " . $jsonPathResume);
+            $jsonPathPortfolio = $this->portfolioDataService->generateJsonFile();
+            $this->logger->info("Fichier JSON généré : " . $jsonPathPortfolio);
 
             // Étape 2 : Pousser sur GitHub
-            $jsonContent = file_get_contents($jsonPath);
+            $jsonContentResume = file_get_contents($jsonPathResume);
             $this->gitHubService->updateFile(
-                'src/data/data.json',
-                $jsonContent,
-                'Mise à jour automatique de data.json',
+                'resume.json',
+                $jsonContentResume,
+                'Mise à jour automatique de resume.json',
                 'Mise à jour du portfolio'
             );
-            $this->logger->info("data.json poussé sur GitHub");
+            $this->logger->info("resume.json poussé sur GitHub");
 
+            $jsonContentPortfolio = file_get_contents($jsonPathPortfolio);
+            $this->gitHubService->updateFile(
+                'src/data/data.json',
+                $jsonContentPortfolio,
+                'Mise à jour automatique de portfolio.json',
+                'Mise à jour du portfolio'
+            );
+            $this->logger->info("portfolio.json poussé sur GitHub");
 
             return new JsonResponse([
                 'status' => 'success',

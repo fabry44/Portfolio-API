@@ -11,7 +11,9 @@ echo "Exécution des migrations..."
 # php bin/console make:migration
 php bin/console doctrine:migrations:migrate --no-interaction
 
-# Par exemple si tu as une commande pour importer des données :
+
+echo "Importation des données..."
+php bin/console app:import-techno
 php bin/console app:import-data
 
 echo "Nettoyage du cache..."

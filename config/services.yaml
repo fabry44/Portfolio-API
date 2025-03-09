@@ -43,9 +43,15 @@ services:
     App\Service\PortfolioDataService: 
         arguments:
             $userRepository: '@App\Repository\UserRepository'
-            $formationRepository: '@App\Repository\FormationRepository'
-            $technologyRepository: '@App\Repository\TechnologyRepository'
+            $workRepository: '@App\Repository\WorkRepository'
+            $skillRepository: '@App\Repository\SkillRepository'
+            $languageRepository: '@App\Repository\LanguageRepository'
+            $interestRepository: '@App\Repository\InterestRepository'
+            $portfolioReferenceRepository: '@App\Repository\PortfolioReferenceRepository'
             $projectRepository: '@App\Repository\ProjectRepository'
+            $profileRepository: '@App\Repository\ProfileRepository'
+            $locationRepository: '@App\Repository\LocationRepository'
+            $educationRepository: '@App\Repository\EducationRepository'
             $params: '@parameter_bag'
 
     # Déclarations des alias pour les interfaces globales de Symfony

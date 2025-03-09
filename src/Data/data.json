@@ -3,40 +3,40 @@
         "email": "fabienroy2@gmail.com",
         "name": "Roy Fabien",
         "phone": "0650262098",
-        "birth": "1984-09-16T14:22:49+00:00",
+        "birth": "1984-09-16T00:00:00+00:00",
         "address": "22 rue des Renardi\u00e8res 44100 Nantes",
         "linkedin": null,
         "github": null,
-        "status": null,
+        "status": "Open to work",
         "about": "Apr\u00e8s 15 ans d\u2019exp\u00e9rience dans les r\u00e9seaux fibre optique, dont 6 ans en tant que conducteur de travaux, j\u2019ai d\u00e9cid\u00e9 de relever un nouveau d\u00e9fi en me reconvertissant dans le d\u00e9veloppement web et mobile. Passionn\u00e9 par la programmation depuis toujours, je me sp\u00e9cialise aujourd\u2019hui en Symfony tout en explorant Node.js et Python.",
-        "function": null,
+        "function": "D\u00e9veloppeur Web et Web Mobile",
         "age": 40
     },
     "formations": [
         {
-            "degree": "Certificat d'\u00c9tat niveau 5 - D\u00e9veloppement Web et Web Mobile",
+            "degree": "Certificat d'\u00c9tat niveau 5",
             "institution": "\u00c9cole Studi",
             "date": "2025-01-01T00:00:00+00:00",
-            "description": "Formation suivie en candidat libre \u00e0 l'\u00e9cole Studi, sp\u00e9cialis\u00e9e en d\u00e9veloppement backend avec Symfony."
+            "description": "D\u00e9veloppement Web et Web Mobile"
         },
         {
             "degree": "BTS G\u00e9nie Optique option Photonique",
             "institution": "Lyc\u00e9e F\u00e9lix le Dantec \u00e0 Lannion",
             "date": "2010-06-01T00:00:00+00:00",
-            "description": "Sp\u00e9cialisation en optique physique, g\u00e9om\u00e9trique et photonique."
+            "description": "Optique physique, g\u00e9om\u00e9trique et photonique"
         },
         {
             "degree": "Bac Scientifique",
             "institution": "Lyc\u00e9e Chateaubriand \u00e0 Combourg",
             "date": "2008-06-01T00:00:00+00:00",
-            "description": "Sp\u00e9cialit\u00e9 Math\u00e9matiques."
+            "description": "Math\u00e9matiques"
         }
     ],
     "projects": [
         {
             "title": "Site web pour un zoo (Arcadia)",
-            "description": "<div>Projet d'\u00e9tude Studi (ECF) : conception d'un site web Zoo-Arcadia<\/div>",
-            "link": "#",
+            "description": "Projet d'\u00e9tude Studi (ECF) : conception d'un site web Zoo-Arcadia",
+            "link": null,
             "github": null,
             "technology": [
                 {
@@ -79,8 +79,8 @@
         },
         {
             "title": "SOS PRO, Site vitrine pour une auto-entreprise",
-            "description": "<div>Site vitrine pour une auto-entreprise de services \u00e0 la personne avec Symfony 7.2, Bootstrap 5, JQuery et MariaDB<\/div>",
-            "link": "#",
+            "description": "Site vitrine pour une auto-entreprise de services \u00e0 la personne avec Symfony 7.2, Bootstrap 5, JQuery et MariaDB",
+            "link": null,
             "github": null,
             "technology": [
                 {
@@ -224,7 +224,103 @@
             "icon": "Mysql",
             "class": "bg-[#00758F] text-white",
             "style": "background-color: #00758F; color: #fff;"
+        },
+        {
+            "name": "HTML",
+            "icon": "Html",
+            "class": "bg-[#963419] text-white",
+            "style": "background-color: #963419; color: #fff;"
+        },
+        {
+            "name": "CSS",
+            "icon": "Css",
+            "class": "bg-[#07436b] text-white",
+            "style": "background-color: #07436b; color: #fff;"
+        },
+        {
+            "name": "JavaScript",
+            "icon": "Js",
+            "class": "bg-[#a39535] text-white",
+            "style": "background-color: #a39535; color: #fff;"
+        },
+        {
+            "name": "Python",
+            "icon": "Python",
+            "class": "bg-[#306998] text-white",
+            "style": "background-color: #306998; color: #fff;"
+        },
+        {
+            "name": "PHP",
+            "icon": "Php",
+            "class": "bg-[#4F5D95] text-white",
+            "style": "background-color: #4F5D95; color: #fff;"
+        },
+        {
+            "name": "Astro",
+            "icon": "AstroIcon",
+            "class": "bg-[#FF5A1F] text-white",
+            "style": "background-color: #FF5A1F; color: #fff;"
+        },
+        {
+            "name": "Tailwind CSS",
+            "icon": "Tailwind",
+            "class": "bg-[#06B6D4] text-white",
+            "style": "background-color: #06B6D4; color: #fff;"
+        },
+        {
+            "name": "Symfony",
+            "icon": "Symfony",
+            "class": "bg-[#000000] text-white",
+            "style": "background-color: #000000; color: #fff;"
+        },
+        {
+            "name": "Bootstrap",
+            "icon": "Bootstrap",
+            "class": "bg-[#563D7C] text-white",
+            "style": "background-color: #563D7C; color: #fff;"
+        },
+        {
+            "name": "React",
+            "icon": "React",
+            "class": "bg-[#1c7777] text-white",
+            "style": "background-color: #1c7777; color: #fff;"
+        },
+        {
+            "name": "Django",
+            "icon": "Django",
+            "class": "bg-[#092E20] text-white",
+            "style": "background-color: #092E20; color: #fff;"
+        },
+        {
+            "name": "jQuery",
+            "icon": "Jquery",
+            "class": "bg-[#0769AD] text-white",
+            "style": "background-color: #0769AD; color: #fff;"
+        },
+        {
+            "name": "MongoDB",
+            "icon": "Mongo",
+            "class": "bg-[#47A248] text-white",
+            "style": "background-color: #47A248; color: #fff;"
+        },
+        {
+            "name": "MariaDB",
+            "icon": "Maria",
+            "class": "bg-[#003545] text-white",
+            "style": "background-color: #003545; color: #fff;"
+        },
+        {
+            "name": "SQLite",
+            "icon": "Sqlite",
+            "class": "bg-[#003B57] text-white",
+            "style": "background-color: #003B57; color: #fff;"
+        },
+        {
+            "name": "MySQL",
+            "icon": "Mysql",
+            "class": "bg-[#00758F] text-white",
+            "style": "background-color: #00758F; color: #fff;"
         }
     ],
-    "updated_at": "2025-02-23 16:34:37"
+    "updated_at": "2025-03-03 15:16:55"
 }

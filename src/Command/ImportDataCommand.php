@@ -2,8 +2,18 @@
 
 namespace App\Command;
 
-use PDO;
-use PDOException;
+use App\Entity\User;
+use App\Entity\Work;
+use App\Entity\Skill;
+use App\Entity\Language;
+use App\Entity\Interest;
+use App\Entity\Reference;
+use App\Entity\Project;
+use App\Entity\Profile;
+use App\Entity\Location;
+use App\Entity\Education;
+use App\Entity\Technology;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,296 +22,229 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:import-data',
-    description: 'Importe les données du portfolio (formations, expériences, projets et technologies) dans la base de données.',
+    description: 'Importe les données initiales du portfolio dans la base de données.',
 )]
 class ImportDataCommand extends Command
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        parent::__construct();
+        $this->entityManager = $entityManager;
+    }
+
     protected function configure(): void
     {
-        $this
-            ->setHelp('Cette commande crée les tables nécessaires (si elles n\'existent pas) et insère les données du portfolio définies dans le tableau $dataPortfolio.');
+        $this->setHelp('Cette commande insère les données de base du portfolio dans la base de données.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-
-        // Connexion à la base de données via PDO
-        $dbUrl = $_ENV['DATABASE_URL'] ?? null;
-        if (!$dbUrl) {
-            $io->error('La variable d\'environnement DATABASE_URL n\'est pas définie.');
-            return Command::FAILURE;
-        }
-        $db = parse_url($dbUrl);
-
-        $host = $db["host"] ?? 'localhost';
-        $port = $db["port"] ?? 3306;
-        $user = $db["user"] ?? null;
-        $password = $db["pass"] ?? null;
-        $database = ltrim($db["path"], "/");
-
-        $dsn = sprintf("mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4", $host, $port, $database);
+        $io->title("📥 Importation des données du portfolio...");
 
         try {
-            $io->writeln('Connexion à la base de données...');
-            $pdo = new PDO($dsn, $user, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $io->writeln('Connexion réussie.');
-
-            /*
-             * Définition des données du portfolio
-             */
+            // **Données JSON de référence**
             $dataPortfolio = [
-                "formations" => [
+                "basics" => [
+                    "name" => "Roy Fabien",
+                    "birthdate" => "1984-09-16",
+                    "label" => "Développeur Web et Web Mobile",
+                    "status" => "Open to work",
+                    "image" => "/developpeur.webp",
+                    "email" => "fabienroy2@gmail.com",
+                    "phone" => "0650262098",
+                    "password" => "12345678",
+                    "website" => "",
+                    "url" => "",
+                    "summary" => "Après 15 ans d’expérience dans les réseaux fibre optique, dont 6 ans en tant que conducteur de travaux, j’ai décidé de relever un nouveau défi en me reconvertissant dans le développement web et mobile. Passionné par la programmation depuis toujours, je me spécialise aujourd’hui en Symfony tout en explorant Node.js et Python.",
+                    "location" => [
+                        "address" => "22 rue des Renardières 44100 Nantes",
+                        "postalCode" => "44100",
+                        "city" => "Nantes",
+                        "countryCode" => "FR",
+                        "region" => "Pays de la Loire"
+                    ],
+                    "profiles" => []
+                ],
+
+                "education" => [
                     [
-                        "date" => "2025-01-01",
-                        "degree" => "Certificat d'État niveau 5 - Développement Web et Web Mobile",
                         "institution" => "École Studi",
-                        "description" => "Formation suivie en candidat libre à l'école Studi, spécialisée en développement backend avec Symfony."
+                        "url" => "",
+                        "area" => "Développement Web et Web Mobile",
+                        "studyType" => "Certificat d'État niveau 5",
+                        "startDate" => "2023-07-20",
+                        "endDate" => "2025-01-01",
+                        "score" => "",
+                        "courses" => []
                     ],
                     [
-                        "date" => "2010-06-01",
-                        "degree" => "BTS Génie Optique option Photonique",
                         "institution" => "Lycée Félix le Dantec à Lannion",
-                        "description" => "Spécialisation en optique physique, géométrique et photonique."
+                        "url" => "",
+                        "area" => "Optique physique, géométrique et photonique",
+                        "studyType" => "BTS Génie Optique option Photonique",
+                        "startDate" => "2010-09-01",
+                        "endDate" => "2010-06-01",
+                        "score" => "",
+                        "courses" => []
                     ],
                     [
-                        "date" => "2008-06-01",
-                        "degree" => "Bac Scientifique",
                         "institution" => "Lycée Chateaubriand à Combourg",
-                        "description" => "Spécialité Mathématiques."
+                        "url" => "",
+                        "area" => "Mathématiques",
+                        "studyType" => "Bac Scientifique",
+                        "startDate" => "",
+                        "endDate" => "2008-06-01",
+                        "score" => "",
+                        "courses" => []
                     ]
                 ],
-                "experiences" => [
+                "skills" => [
                     [
-                        "title" => "Tech Startup",
-                        "beginAt" => "2024",
-                        "endAt" => null,
-                        "position" => "Développeur Web Junior",
-                        "summary" => "Développement et maintenance d’applications web en JavaScript, HTML et CSS.",
-                        "responsibilities" => [
-                            "Collaboration avec les développeurs seniors pour concevoir et implémenter des applications web modernes.",
-                            "Débogage et optimisation du code frontend pour garantir une expérience utilisateur fluide.",
-                            "Participation aux revues de code et amélioration des standards de codage de l’équipe."
-                        ],
-                        "achievements" => [
-                            "Développement et maintenance d’applications web en JavaScript, HTML et CSS.",
-                            "Implémentation de nouvelles fonctionnalités en collaboration avec l’équipe."
-                        ],
-                        "skills" => ["React", "Tailwind", "GitHub"],
-                        "location" => "Auckland, Nouvelle-Zélande",
-                        "location_type" => "Sur site"
+                        "name" => "Languages",
+                        "level" => "",
+                        "keywords" => [
+                            "HTML",
+                            "CSS",
+                            "JavaScript",
+                            "PHP",
+                            "Rust",
+                            "Python",
+                        ]
+
                     ],
                     [
-                        "title" => "Innovative Solutions",
-                        "beginAt" => "2022",
-                        "endAt" => "2023",
-                        "position" => "Développeur Logiciel Junior",
-                        "summary" => "Développement et maintenance d’applications logicielles en Python et Django.",
-                        "responsibilities" => [
-                            "Développement et maintenance des services backend en Python et Django.",
-                            "Travail en étroite collaboration avec les développeurs frontend pour intégrer les éléments orientés utilisateur.",
-                            "Participation aux réunions quotidiennes et aux sprints bihebdomadaires pour aligner les objectifs du projet."
-                        ],
-                        "achievements" => [
-                            "Mise en œuvre d’une fonctionnalité améliorant l’authentification utilisateur et la sécurité."
-                        ],
-                        "skills" => ["Python", "Django", "SQL", "Git"],
-                        "location" => "Wellington, Nouvelle-Zélande",
-                        "location_type" => "Hybride"
+                        "name" => "Frameworks et Librairies",
+                        "level" => "",
+                        "keywords" => [
+                            "Symfony",
+                            "Astro",
+                            "React",
+                            "Symfony",
+                            "Bootstrap",
+                            "Tailwind CSS",
+                            "Node.js",
+                        ]
+
+                    ],
+                    [
+                        "name" => "Bases de Données",
+                        "level" => "",
+                        "keywords" => [
+                            "MongoDB",
+                            "MySQL",
+                        ]
+
+                    ],
+                    [
+                        "name" => "Outils Additionnels",
+                        "level" => "",
+                        "keywords" => [
+                            "Figma",
+                            "Git",
+                            "GitHub",
+                            "Netlify",
+                        ]
+
                     ]
                 ],
                 "projects" => [
                     [
-                        "title" => "Site web pour un zoo (Arcadia)",
+                        "name" => "Site web pour un zoo (Arcadia)",
                         "description" => "Projet d'étude Studi (ECF) : conception d'un site web Zoo-Arcadia",
-                        "link" => "#",
-                        // "github" => "https://github.com/fabry44/Studi_project_Zoo_Arcadia.git",
-                        // "image" => "/projects/proyecto1.webp",
-                        "technology" => ["Html", "Css", "Js", "React"]
+                        "keywords" => ["HTML", "CSS", "JavaScript", "PHP", "Symfony", "Bootstrap"],
+                        "url" => "#",
+                        "type" => "application"
                     ],
                     [
-                        "title" => "SOS PRO, Site vitrine pour une auto-entreprise",
+                        "name" => "SOS PRO, Site vitrine pour une auto-entreprise",
                         "description" => "Site vitrine pour une auto-entreprise de services à la personne avec Symfony 7.2, Bootstrap 5, JQuery et MariaDB",
-                        "link" => "#",
-                        // "github" => "https://github.com/fabry44/SOSPRO.git",
-                        // "image" => "/projects/proyecto2.webp",
-                        "technology" => ["Html", "Css", "Js"]
+                        "keywords" => ["HTML", "CSS", "JavaScript", "PHP", "Symfony", "Bootstrap", "MariaDB"],
+                        "url" => "#",
+                        "type" => "application"
                     ]
-                ],
-                "technology" => [
-                    "langages" => [
-                        ["name" => "HTML", "icon" => "Html", "class" => "bg-[#963419] text-white", "style" => "background-color: #963419; color: #fff;"],
-                        ["name" => "CSS", "icon" => "Css", "class" => "bg-[#07436b] text-white", "style" => "background-color: #07436b; color: #fff;"],
-                        ["name" => "JavaScript", "icon" => "Js", "class" => "bg-[#a39535] text-white", "style" => "background-color: #a39535; color: #fff;"],
-                        ["name" => "Python", "icon" => "Python", "class" => "bg-[#306998] text-white", "style" => "background-color: #306998; color: #fff;"],
-                        ["name" => "PHP", "icon" => "Php", "class" => "bg-[#4F5D95] text-white", "style" => "background-color: #4F5D95; color: #fff;"]
-                    ],
-                    "frameworks_libraries" => [
-                        ["name" => "Astro", "icon" => "AstroIcon", "class" => "bg-[#FF5A1F] text-white", "style" => "background-color: #FF5A1F; color: #fff;"],
-                        ["name" => "Tailwind CSS", "icon" => "Tailwind", "class" => "bg-[#06B6D4] text-white", "style" => "background-color: #06B6D4; color: #fff;"],
-                        ["name" => "Symfony", "icon" => "Symfony", "class" => "bg-[#000000] text-white", "style" => "background-color: #000000; color: #fff;"],
-                        ["name" => "Bootstrap", "icon" => "Bootstrap", "class" => "bg-[#563D7C] text-white", "style" => "background-color: #563D7C; color: #fff;"],
-                        ["name" => "React", "icon" => "React", "class" => "bg-[#1c7777] text-white", "style" => "background-color: #1c7777; color: #fff;"],
-                        ["name" => "Django", "icon" => "Django", "class" => "bg-[#092E20] text-white", "style" => "background-color: #092E20; color: #fff;"],
-                        ["name" => "jQuery", "icon" => "Jquery", "class" => "bg-[#0769AD] text-white", "style" => "background-color: #0769AD; color: #fff;"]
-                    ],
-                    "bases_de_donnees" => [
-                        ["name" => "MongoDB", "icon" => "Mongo", "class" => "bg-[#47A248] text-white", "style" => "background-color: #47A248; color: #fff;"],
-                        ["name" => "MariaDB", "icon" => "Maria", "class" => "bg-[#003545] text-white", "style" => "background-color: #003545; color: #fff;"],
-                        ["name" => "SQLite", "icon" => "Sqlite", "class" => "bg-[#003B57] text-white", "style" => "background-color: #003B57; color: #fff;"],
-                        ["name" => "MySQL", "icon" => "Mysql", "class" => "bg-[#00758F] text-white", "style" => "background-color: #00758F; color: #fff;"]
-                    ]                    
                 ]
             ];
 
-            /*
-             * Création de la table `formation`
-             */
-            $pdo->exec("
-                CREATE TABLE IF NOT EXISTS `formation` (
-                    `id` INT(11) NOT NULL AUTO_INCREMENT,
-                    `date` DATE NOT NULL,
-                    `degree` VARCHAR(255) NOT NULL,
-                    `institution` VARCHAR(255) NOT NULL,
-                    `description` TEXT NOT NULL,
-                    PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-            ");
+            // **1️⃣ Création de l'utilisateur**
+            $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $dataPortfolio['basics']['email']]);
+            if ($existingUser) {
+                $io->warning("⚠️ Utilisateur avec l'email " . $dataPortfolio['basics']['email'] . " existe déjà.");
+            } else {
+                $user = new User();
+                $user->setName($dataPortfolio['basics']['name'])
+                    ->setBirth(new \DateTimeImmutable($dataPortfolio['basics']['birthdate']))
+                    ->setLabel($dataPortfolio['basics']['label'])
+                    ->setEmail($dataPortfolio['basics']['email'])
+                    ->setPhone($dataPortfolio['basics']['phone'])
+                    ->setStatus($dataPortfolio['basics']['status'])
+                    ->setPassword(password_hash($dataPortfolio['basics']['password'], PASSWORD_BCRYPT))
+                    ->setSummary($dataPortfolio['basics']['summary']);
+                $this->entityManager->persist($user);
+                $io->success("✅ Utilisateur ajouté.");
+            
 
-            $sqlFormation = "REPLACE INTO `formation` (`date`, `degree`, `institution`, `description`) VALUES (:date, :degree, :institution, :description)";
-            $stmtFormation = $pdo->prepare($sqlFormation);
-
-            foreach ($dataPortfolio['formations'] as $formation) {
-                $stmtFormation->execute([
-                    ':date' => (new \DateTimeImmutable($formation['date']))->format('Y-m-d'),
-                    ':degree' => $formation['degree'],
-                    ':institution' => $formation['institution'],
-                    ':description' => $formation['description'],
-                ]);
+                // **2️⃣ Création de la localisation**
+                $location = new Location();
+                $location->setUser($user)
+                    ->setAddress($dataPortfolio['basics']['location']['address'])
+                    ->setPostalCode($dataPortfolio['basics']['location']['postalCode'])
+                    ->setCity($dataPortfolio['basics']['location']['city'])
+                    ->setCountryCode($dataPortfolio['basics']['location']['countryCode'])
+                    ->setRegion($dataPortfolio['basics']['location']['region']);
+                $this->entityManager->persist($location);
+                $io->success("✅ Localisation ajoutée.");
             }
-            $io->writeln('Les formations ont été insérées.');
 
-            /*
-             * Création de la table `experience`
-             * On stocke les tableaux (responsibilities, achievements, skills) en JSON
-             */
-            // $pdo->exec("
-            //     CREATE TABLE IF NOT EXISTS `experience` (
-            //         `id` INT(11) NOT NULL AUTO_INCREMENT,
-            //         `title` VARCHAR(255) NOT NULL,
-            //         `beginAt` VARCHAR(20) NOT NULL,
-            //         `endAt` VARCHAR(20) DEFAULT NULL,
-            //         `position` VARCHAR(255) NOT NULL,
-            //         `summary` TEXT NOT NULL,
-            //         `responsibilities` TEXT,
-            //         `achievements` TEXT,
-            //         `skills` TEXT,
-            //         `location` VARCHAR(255) NOT NULL,
-            //         `location_type` VARCHAR(50) NOT NULL,
-            //         PRIMARY KEY (`id`)
-            //     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-            // ");
-
-            // $sqlExperience = "REPLACE INTO `experience` 
-            //     (`title`, `beginAt`, `endAt`, `position`, `summary`, `responsibilities`, `achievements`, `skills`, `location`, `location_type`) 
-            //     VALUES 
-            //     (:title, :beginAt, :endAt, :position, :summary, :responsibilities, :achievements, :skills, :location, :location_type)";
-            // $stmtExperience = $pdo->prepare($sqlExperience);
-
-            // foreach ($dataPortfolio['experiences'] as $experience) {
-            //     $stmtExperience->execute([
-            //         ':title' => $experience['title'],
-            //         ':beginAt' => $experience['beginAt'],
-            //         ':endAt' => $experience['endAt'],
-            //         ':position' => $experience['position'],
-            //         ':summary' => $experience['summary'],
-            //         ':responsibilities' => json_encode($experience['responsibilities']),
-            //         ':achievements' => json_encode($experience['achievements']),
-            //         ':skills' => json_encode($experience['skills']),
-            //         ':location' => $experience['location'],
-            //         ':location_type' => $experience['location_type'],
-            //     ]);
-            // }
-            // $io->writeln('Les expériences ont été insérées.');
-
-            /*
-             * Création de la table `project`
-             * On stocke le tableau "technology" en JSON
-             */
-            $pdo->exec("
-                CREATE TABLE IF NOT EXISTS `project` (
-                    `id` INT(11) NOT NULL AUTO_INCREMENT,
-                    `title` VARCHAR(255) NOT NULL,
-                    `description` TEXT NOT NULL,
-                    `link` VARCHAR(255) NOT NULL,
-                    PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-            ");
-
-            $pdo->exec("
-                CREATE TABLE IF NOT EXISTS `project_technology` (
-                    `project_id` INT(11) NOT NULL,
-                    `technology_id` INT(11) NOT NULL,
-                    PRIMARY KEY (`project_id`, `technology_id`),
-                    FOREIGN KEY (`project_id`) REFERENCES `project`(`id`) ON DELETE CASCADE,
-                    FOREIGN KEY (`technology_id`) REFERENCES `technology`(`id`) ON DELETE CASCADE
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-            ");
-
-            $sqlProject = "REPLACE INTO `project` (`title`, `description`, `link`) VALUES (:title, :description, :link)";
-            $stmtProject = $pdo->prepare($sqlProject);
-
-            foreach ($dataPortfolio['projects'] as $project) {
-                $stmtProject->execute([
-                    ':title' => $project['title'],
-                    ':description' => $project['description'],
-                    ':link' => $project['link'],
-                    // ':technology' => json_encode($project['technology']),
-                ]);
+            // **3️⃣ Insertion des formations**
+            foreach ($dataPortfolio['education'] as $edu) {
+                $education = new Education();
+                $education->setInstitution($edu['institution'])
+                    ->setUrl($edu['url'])
+                    ->setArea($edu['area'])
+                    ->setStudyType($edu['studyType'])
+                    ->setStartDate(new \DateTime($edu['startDate']))
+                    ->setEndDate(new \DateTime($edu['endDate']));
+                $this->entityManager->persist($education);
             }
-            $io->writeln('Les projets ont été insérés.');
+            $io->success("✅ Formations ajoutées.");
 
-            /*
-             * Création de la table `technology`
-             * Chaque technologie sera insérée avec sa catégorie (langages, frameworks_libraries, bases_de_donnees)
-             */
-            $pdo->exec("
-                CREATE TABLE IF NOT EXISTS `technology` (
-                    `id` INT(11) NOT NULL AUTO_INCREMENT,
-                    `category` VARCHAR(50) NOT NULL,
-                    `title` VARCHAR(255) NOT NULL,
-                    `icon` VARCHAR(255) NOT NULL,
-                    `class` VARCHAR(255) NOT NULL,
-                    `style` TEXT NOT NULL,
-                    PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-            ");
+            // **4️⃣ Insertion des compétences**
+            foreach ($dataPortfolio['skills'] as $skillData) {
+                $skill = new Skill();
+                $skill->setName($skillData['name'])
+                    ->setKeywords($skillData['keywords']);
+                $this->entityManager->persist($skill);
+            }
+            $io->success("✅ Compétences ajoutées.");
 
-            $sqlTechnology = "REPLACE INTO `technology` (`name`, `icon`, `class`, `style`) VALUES (:name, :icon, :class, :style)";
-            $stmtTechnology = $pdo->prepare($sqlTechnology);
-
-            foreach ($dataPortfolio['technology'] as $category => $techs) {
-                foreach ($techs as $techData) {
-                    $stmtTechnology->execute([
-                        ':name' => $techData['name'],
-                        ':icon' => $techData['icon'],
-                        ':class' => $techData['class'],
-                        ':style' => $techData['style'],
-                    ]);
+            $technology = [];
+            // **5️⃣ Insertion des projets**
+            foreach ($dataPortfolio['projects'] as $projectData) {
+                
+                $project = new Project();
+                foreach ($projectData['keywords'] as $keyword) {
+                    $technology = $this->entityManager->getRepository(Technology::class)->findOneBy(['name' => $keyword]);
+                    $project->addTechnology($technology);
                 }
+                $project->setName($projectData['name'])
+                    ->setDescription($projectData['description'])
+                    
+                    ->setUrl($projectData['url'])
+                    ->setType($projectData['type']);
+                $this->entityManager->persist($project);
             }
-            $io->writeln('Les technologies ont été insérées.');
+            $io->success("✅ Projets ajoutés.");
 
-            $io->success('Données du portfolio importées avec succès.');
+            // **Flush final**
+            $this->entityManager->flush();
+            $io->success("🚀 Données du portfolio importées avec succès.");
             return Command::SUCCESS;
-        } catch (PDOException $e) {
-            $io->error('Erreur lors de la connexion ou de l\'exécution SQL: ' . $e->getMessage());
-            return Command::FAILURE;
         } catch (\Exception $e) {
-            $io->error('Une erreur inattendue est survenue: ' . $e->getMessage());
+            $io->error("❌ Erreur: " . $e->getMessage());
             return Command::FAILURE;
         }
     }
 }
-

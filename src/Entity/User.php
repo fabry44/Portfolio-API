@@ -2,93 +2,93 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[ORM\Entity]
+#[ORM\Table(name: "users")]
+#[ORM\UniqueConstraint(name: "UNIQ_IDENTIFIER_EMAIL", fields: ["email"])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: "integer")]
+    #[Groups(["api.portfolio"])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
-    #[Groups(['api.portfolio'])]
+    #[ORM\Column(type: "string", length: 255, unique: true)]
+    #[Groups(["api.portfolio"])]
     private ?string $email = null;
 
-    /**
-     * @var list<string> The user roles
-     */
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    #[Groups(['api.portfolio'])]
+    #[ORM\Column(type: "string", length: 255)]
+    #[Groups(["api.portfolio"])]
     private ?string $name = null;
 
-    #[ORM\Column(length: 10)]
-    #[Groups(['api.portfolio'])]
-    private ?string $phone = null;
-
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
-    #[Groups(['api.portfolio'])]
-    private ?DateTimeImmutable $birth = null;
-
-    #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['api.portfolio'])]
-    private ?string $address = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['api.portfolio'])]
-    private ?string $linkedin = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['api.portfolio'])]
-    private ?string $github = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['api.portfolio'])]
+    #[ORM\Column(type: "string", length: 255)]
     private ?string $status = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups(['api.portfolio'])]
-    private ?string $about = null;
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    #[Groups(["api.portfolio"])]
+    private ?string $label = null; // Fonction (ex: Développeur Web)
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['api.portfolio'])]
-    private ?string $function = null;
+    #[ORM\Column(type: "text", nullable: true)]
+    #[Groups(["api.portfolio"])]
+    private ?string $summary = null;
 
+    #[ORM\Column(type: "string", length: 20, nullable: true)]
+    #[Groups(["api.portfolio"])]
+    private ?string $phone = null;
+
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    #[Groups(["api.portfolio"])]
+    private ?string $website = null;
+
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    #[Groups(["api.portfolio"])]
+    private ?string $url = null;
+
+    #[ORM\OneToOne(mappedBy: "user", targetEntity: Location::class, cascade: ["persist", "remove"])]
+    #[Groups(["api.portfolio"])]
+    private ?Location $location = null;
+
+    #[ORM\OneToMany(mappedBy: "user", targetEntity: Profile::class, cascade: ["persist", "remove"], orphanRemoval: true)]
+    #[Groups(["api.portfolio"])]
+    private Collection $profiles;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private ?DateTimeImmutable $birth = null;
+
+    public function __construct()
+    {
+        $this->profiles = new ArrayCollection();
+    }
+
+    // Getters et Setters
     public function getId(): ?int
     {
         return $this->id;
     }
-
     public function getEmail(): ?string
     {
         return $this->email;
     }
-
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
-
-  
 
     /**
      * A visual identifier that represents this user.
@@ -152,11 +152,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->name;
     }
-
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
 
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+    public function setLabel(?string $label): self
+    {
+        $this->label = $label;
+        return $this;
+    }
+
+    public function getSummary(): ?string
+    {
+        return $this->summary;
+    }
+    public function setSummary(?string $summary): self
+    {
+        $this->summary = $summary;
         return $this;
     }
 
@@ -164,12 +193,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->phone;
     }
-
-    public function setPhone(string $phone): static
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
-
         return $this;
+    }
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+    public function setWebsite(?string $website): self
+    {
+        $this->website = $website;
+        return $this;
+    }
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
+        return $this;
+    }
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
+        return $this;
+    }
+    public function getProfiles(): Collection
+    {
+        return $this->profiles;
     }
 
     public function getBirth(): ?DateTimeImmutable
@@ -183,84 +241,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): static
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getLinkedin(): ?string
-    {
-        return $this->linkedin;
-    }
-
-    public function setLinkedin(string $linkedin): static
-    {
-        $this->linkedin = $linkedin;
-
-        return $this;
-    }
-
-    public function getGithub(): ?string
-    {
-        return $this->github;
-    }
-
-    public function setGithub(string $github): static
-    {
-        $this->github = $github;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    public function getAbout(): ?string
-    {
-        return $this->about;
-    }
-
-    public function setAbout(string $about): static
-    {
-        $this->about = $about;
-
-        return $this;
-    }
-
-    public function getFunction(): ?string
-    {
-        return $this->function;
-    }
-
-    public function setFunction(string $function): static
-    {
-        $this->function = $function;
-
-        return $this;
-    }
 }
-
-
-
-
-
-
-

@@ -12,12 +12,11 @@ use App\Repository\ProjectRepository;
 use App\Repository\ProfileRepository;
 use App\Repository\LocationRepository;
 use App\Repository\EducationRepository;
-use App\Repository\TechnologyRepository;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class PortfolioDataService
+class ResumeDataService
 {
     private UserRepository $userRepository;
     private WorkRepository $workRepository;
@@ -29,7 +28,6 @@ class PortfolioDataService
     private ProfileRepository $profileRepository;
     private LocationRepository $locationRepository;
     private EducationRepository $educationRepository;
-    private TechnologyRepository $technologyRepository;
     private ParameterBagInterface $params;
     private SerializerInterface $serializer;
 
@@ -44,7 +42,6 @@ class PortfolioDataService
         ProfileRepository $profileRepository,
         LocationRepository $locationRepository,
         EducationRepository $educationRepository,
-        TechnologyRepository $technologyRepository,
         ParameterBagInterface $params,
         SerializerInterface $serializer
     ) {
@@ -58,7 +55,6 @@ class PortfolioDataService
         $this->profileRepository = $profileRepository;
         $this->locationRepository = $locationRepository;
         $this->educationRepository = $educationRepository;
-        $this->technologyRepository = $technologyRepository;
         $this->params = $params;
         $this->serializer = $serializer;
     }
@@ -75,58 +71,84 @@ class PortfolioDataService
         $portfolioReferences = $this->portfolioReferenceRepository->findAll();
         $projects = $this->projectRepository->findAll();
         $education = $this->educationRepository->findAll();
-        $technologies = $this->technologyRepository->findAll();
-
-        // Calcul de l'âge
-        $birthdate = $user->getBirth();
-        $age = $birthdate ? (new \DateTime())->diff($birthdate)->y : null;
-        $linkedin = $profiles ? array_filter($profiles, fn ($profile) => $profile->getNetwork() === 'linkedin') : null;
-        $github = $profiles ? array_filter($profiles, fn ($profile) => $profile->getNetwork() === 'github') : null;
 
         $data = [
-            "user" => [
-                "email" => $user->getEmail(),
+            "\$schema" => "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+            "basics" => [
                 "name" => $user->getName(),
+                "label" => $user->getLabel(),
+                "email" => $user->getEmail(),
                 "phone" => $user->getPhone(),
-                "birth" => $birthdate ? $birthdate->format(\DateTime::ATOM) : null,
-                "address" => $location ? $location->getAddress() : "",
-                "linkedin" => $linkedin,
-                "github" => $github,
-                "status" => $user->getStatus(),
-                "about" => $user->getSummary(),
-                "function" => $user->getLabel(),
-                "age" => $age
+                "summary" => $user->getSummary(),
+                "location" => $location ? [
+                    "address" => $location->getAddress(),
+                    "postalCode" => $location->getPostalCode(),
+                    "city" => $location->getCity(),
+                    "countryCode" => $location->getCountryCode(),
+                    "region" => $location->getRegion()
+                ] : [],
+                "profiles" => array_map(fn($profile) => [
+                    "network" => $profile->getNetwork(),
+                    "username" => $profile->getUsername(),
+                    "url" => $profile->getUrl()
+                ], $profiles),
             ],
-            "formations" => array_map(fn ($edu) => [
-                "degree" => $edu->getStudyType(),
+            "work" => array_map(fn($work) => [
+                "name" => $work->getName(),
+                "location" => $work->getLocation(),
+                "position" => $work->getPosition(),
+                "startDate" => $work->getStartDate()->format('Y-m-d'),
+                "endDate" => $work->getEndDate() ? $work->getEndDate()->format('Y-m-d') : null,
+                "summary" => $work->getSummary(),
+                "highlights" => $work->getHighlights()
+            ], $works),
+            "education" => array_map(fn($edu) => [
                 "institution" => $edu->getInstitution(),
-                "date" => $edu->getEndDate()?->format(\DateTime::ATOM),
-                "description" => $edu->getArea()
+                "url" => $edu->getUrl(),
+                "area" => $edu->getArea(),
+                "studyType" => $edu->getStudyType(),
+                "startDate" => $edu->getStartDate()->format('Y-m-d'),
+                "endDate" => $edu->getEndDate() ? $edu->getEndDate()->format('Y-m-d') : null,
+                "score" => $edu->getScore(),
+                "courses" => $edu->getCourses()
             ], $education),
-            "projects" => array_map(fn ($project) => [
-                "title" => $project->getName(),
+            "project" => array_map(fn($project) => [
+                "name" => $project->getName(),
                 "description" => $project->getDescription(),
-                "link" => $project->getLink(),
-                "github" => $project->getGithub(),
-                "technology" => array_map(fn ($tech) => [
-                    "name" => $tech->getName(),
-                    "icon" => $tech->getIcon(),
-                    "class" => $tech->getClass(),
-                    "style" => $tech->getStyle()
-                ], $project->getTechnology()->toArray())
+                "highlights" => $project->getHighlights(),
+                "keywords" => $project->getTechnology()->map(fn($technology) => $technology->getName())->toArray(),
+                "startDate" => $project->getStartDate() ? $project->getStartDate()->format('Y-m-d') : null,
+                "endDate" => $project->getEndDate() ? $project->getEndDate()->format('Y-m-d') : null,
+                "url" => $project->getUrl(),
+                "roles" => $project->getRoles(),
+                "entity" => $project->getEntity(),
+                "type" => $project->getType()
             ], $projects),
-            "technologies" => array_map(fn ($tech) => [
-                "name" => $tech->getName(),
-                "icon" => $tech->getIcon(),
-                "class" => $tech->getClass(),
-                "style" => $tech->getStyle()
-            ], $technologies),
-            "updated_at" => (new \DateTime())->format('Y-m-d H:i:s')
+            "skills" => array_map(fn($skill) => [
+                "name" => $skill->getName(),
+                "level" => $skill->getLevel(),
+                "keywords" => $skill->getKeywords()
+            ], $skills),
+            "languages" => array_map(fn($language) => [
+                "language" => $language->getLanguage(),
+                "fluency" => $language->getFluency()
+            ], $languages),
+            "interests" => array_map(fn($interest) => [
+                "name" => $interest->getName(),
+                "keywords" => $interest->getKeywords()
+            ], $interests),
+            "references" => array_map(fn($portfolioReference) => [
+                "name" => $portfolioReference->getName(),
+                "reference" => $portfolioReference->getRef()
+            ], $portfolioReferences),
+            "meta" => [
+                "version" => "v1.0.0",
+                "lastModified" => (new \DateTime())->format('c')
+            ]
         ];
 
-        // Génération du fichier JSON
         $filesystem = new Filesystem();
-        $jsonPath = $this->params->get('kernel.project_dir') . '/src/Data/data.json';
+        $jsonPath = $this->params->get('kernel.project_dir') . '/src/resume.json';
         $filesystem->dumpFile($jsonPath, json_encode($data, JSON_PRETTY_PRINT));
 
         return $jsonPath;
