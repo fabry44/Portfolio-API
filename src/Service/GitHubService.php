@@ -49,4 +49,38 @@ class GitHubService
             ],
         ]);
     }
+
+    public function uploadImage(string $filePath, string $localFilePath, string $commitMessage): void
+    {
+        // Lire le fichier en base64
+        $imageContent = base64_encode(file_get_contents($localFilePath));
+
+        // Vérifier si le fichier existe déjà dans le repo
+        $response = $this->httpClient->request('GET', "https://api.github.com/repos/$this->repoOwner/$this->repoName/contents/$filePath?ref=$this->branch", [
+            'headers' => [
+                'Authorization' => "token $this->githubToken",
+                'Accept' => 'application/vnd.github.v3+json',
+            ],
+        ]);
+
+        $sha = null;
+        if ($response->getStatusCode() === 200) {
+            $sha = json_decode($response->getContent(), true)['sha'] ?? null;
+        }
+
+        // Envoyer l'image sur GitHub
+        $this->httpClient->request('PUT', "https://api.github.com/repos/$this->repoOwner/$this->repoName/contents/$filePath", [
+            'headers' => [
+                'Authorization' => "token $this->githubToken",
+                'Accept' => 'application/vnd.github.v3+json',
+            ],
+            'json' => [
+                'message' => $commitMessage,
+                'content' => $imageContent,
+                'sha' => $sha,
+                'branch' => $this->branch,
+            ],
+        ]);
+    }
+
 }

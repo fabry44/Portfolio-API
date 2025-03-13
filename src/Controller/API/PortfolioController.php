@@ -46,7 +46,7 @@ class PortfolioController extends AbstractController
             $jsonPathPortfolio = $this->portfolioDataService->generateJsonFile();
             $this->logger->info("Fichier JSON généré : " . $jsonPathPortfolio);
 
-            // Étape 2 : Pousser sur GitHub
+            // Étape 2 : Pousser les json sur GitHub
             $jsonContentResume = file_get_contents($jsonPathResume);
             $this->gitHubService->updateFile(
                 'resume.json',
@@ -65,10 +65,43 @@ class PortfolioController extends AbstractController
             );
             $this->logger->info("portfolio.json poussé sur GitHub");
 
+            // Étape 3 : Pousser les images sur GitHub
+            // Upload de la photo de profil de l'utilisateur
+            $userPhotoPath = $this->getParameter('kernel.project_dir') . '/uploads/user/photo.jpg';
+            if (file_exists($userPhotoPath)) {
+                $this->gitHubService->uploadImage(
+                    'public/profile-photo.jpg',
+                    $userPhotoPath,
+                    'Mise à jour de la photo de profil'
+                );
+                $this->logger->info("Photo de profil poussée sur GitHub");
+            }
+
+            // Upload des images des projets
+            $projectImagesDir = $this->getParameter('kernel.project_dir') . '/public/uploads/projects/';
+            $projectImages = scandir($projectImagesDir);
+
+            foreach ($projectImages as $image) {
+                if (in_array($image, ['.', '..'])) continue;
+
+                $localPath = $projectImagesDir . $image;
+                $repoPath = 'public/projects/' . $image;
+
+                $this->gitHubService->uploadImage(
+                    $repoPath,
+                    $localPath,
+                    "Mise à jour de l'image du projet $image"
+                );
+                $this->logger->info("Image du projet poussée sur GitHub : $image");
+            }
+
+
             return new JsonResponse([
                 'status' => 'success',
                 'message' => 'Mise à jour du repository réussie',
             ], Response::HTTP_OK);
+
+        
 
         } catch (\Exception $e) {
             $this->logger->error("Erreur dans la mise à jour du repository : " . $e->getMessage());

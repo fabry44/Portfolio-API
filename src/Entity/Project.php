@@ -25,41 +25,13 @@ class Project
     #[Groups(["api.portfolio"])]
     private ?string $description = null;
 
-    #[ORM\Column(type: "json")]
-    #[Groups(["api.portfolio"])]
-    private array $highlights = [];
-
-    // #[ORM\Column(type: "json")]
-    // #[Groups(["api.portfolio"])]
-    // private array $keywords = [];
-
     #[ORM\ManyToMany(targetEntity: Technology::class, inversedBy: 'projects')]
     #[Groups(['api.portfolio'])]
     private Collection $technology;
 
     #[ORM\Column(type: "date", nullable: true)]
     #[Groups(["api.portfolio"])]
-    private ?\DateTimeInterface $startDate = null;
-
-    #[ORM\Column(type: "date", nullable: true)]
-    #[Groups(["api.portfolio"])]
-    private ?\DateTimeInterface $endDate = null;
-
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
-    #[Groups(["api.portfolio"])]
-    private ?string $url = null;
-
-    #[ORM\Column(type: "json")]
-    #[Groups(["api.portfolio"])]
-    private array $roles = [];
-
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
-    #[Groups(["api.portfolio"])]
-    private ?string $entity = null;
-
-    #[ORM\Column(type: "string", length: 100)]
-    #[Groups(["api.portfolio"])]
-    private ?string $type = null;
+    private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $link = null;
@@ -67,9 +39,13 @@ class Project
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $github = null;
 
+    #[ORM\OneToMany(targetEntity: ProjectPhoto::class, mappedBy: "project", cascade: ["persist", "remove"])]
+    private Collection $photos;
+
     public function __construct()
     {
-        $this->technology = new ArrayCollection(); // ✅ Initialisation obligatoire
+        $this->technology = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     // Getters et Setters
@@ -86,6 +62,7 @@ class Project
         $this->name = $name;
         return $this;
     }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -93,15 +70,6 @@ class Project
     public function setDescription(string $description): self
     {
         $this->description = $description;
-        return $this;
-    }
-    public function getHighlights(): array
-    {
-        return $this->highlights;
-    }
-    public function setHighlights(array $highlights): self
-    {
-        $this->highlights = $highlights;
         return $this;
     }
     
@@ -129,70 +97,13 @@ class Project
     }
 
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->startDate;
+        return $this->date;
     }
-    public function setStartDate(\DateTimeInterface $startDate): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->startDate = $startDate;
-        return $this;
-    }
-    public function getEndDate(): ?\DateTimeInterface
-    {
-        return $this->endDate;
-    }
-    public function setEndDate(?\DateTimeInterface $endDate): self
-    {
-        $this->endDate = $endDate;
-        return $this;
-    }
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(?string $url): self
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    public function getRoles(): array
-    {
-        return $this->roles;
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    public function getEntity(): ?string
-    {
-        return $this->entity;
-    }
-
-    public function setEntity(?string $entity): self
-    {
-        $this->entity = $entity;
-
-        return $this;
-    }
-    
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
+        $this->date = $date;
         return $this;
     }
 
@@ -217,6 +128,30 @@ class Project
     {
         $this->github = $github;
 
+        return $this;
+    }
+
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function addPhoto(ProjectPhoto $photo): self
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+            $photo->setProject($this);
+        }
+        return $this;
+    }
+
+    public function removePhoto(ProjectPhoto $photo): self
+    {
+        if ($this->photos->removeElement($photo)) {
+            if ($photo->getProject() === $this) {
+                $photo->setProject(null);
+            }
+        }
         return $this;
     }
 }

@@ -172,6 +172,17 @@ class ImportDataCommand extends Command
             $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $dataPortfolio['basics']['email']]);
             if ($existingUser) {
                 $io->warning("⚠️ Utilisateur avec l'email " . $dataPortfolio['basics']['email'] . " existe déjà.");
+                $user = $existingUser;
+                $user->setName($dataPortfolio['basics']['name'])
+                    ->setBirth(new \DateTimeImmutable($dataPortfolio['basics']['birthdate']))
+                    ->setLabel($dataPortfolio['basics']['label'])
+                    ->setEmail($dataPortfolio['basics']['email'])
+                    ->setPhone($dataPortfolio['basics']['phone'])
+                    ->setStatus($dataPortfolio['basics']['status'])
+                    ->setPassword(password_hash($dataPortfolio['basics']['password'], PASSWORD_BCRYPT))
+                    ->setSummary($dataPortfolio['basics']['summary']);
+                $this->entityManager->persist($user);
+                $io->success("✅ Utilisateur à été mis à jours.");
             } else {
                 $user = new User();
                 $user->setName($dataPortfolio['basics']['name'])
@@ -230,10 +241,7 @@ class ImportDataCommand extends Command
                     $project->addTechnology($technology);
                 }
                 $project->setName($projectData['name'])
-                    ->setDescription($projectData['description'])
-                    
-                    ->setUrl($projectData['url'])
-                    ->setType($projectData['type']);
+                    ->setDescription($projectData['description']);
                 $this->entityManager->persist($project);
             }
             $io->success("✅ Projets ajoutés.");

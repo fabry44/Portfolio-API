@@ -3,21 +3,24 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ContactRequest;
-use App\Entity\Experience;
-use App\Entity\Formation;
+use App\Entity\Education;
+use App\Entity\Interest;
+use App\Entity\Language;
+use App\Entity\Location;
+use App\Entity\PortfolioReference;
+use App\Entity\Profile;
 use App\Entity\Project;
+use App\Entity\ProjectPhoto;
+use App\Entity\Skill;
 use App\Entity\Technology;
 use App\Entity\User;
-use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use App\Entity\Work;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Locale as ConfigLocale;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use EasyCorp\Bundle\EasyAdminBundle\Dto\LocaleDto;
-use Locale;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 
@@ -105,14 +108,29 @@ class MyDashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Portfolio', 'fa fa-image');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
-        yield MenuItem::linkToCrud('Contact', 'fa fa-envelope', ContactRequest::class);
-        yield MenuItem::linkToCrud('Gestion des utilisateurs', 'fa fa-user', User::class);
-        yield MenuItem::linkToCrud('Expériences', 'fa fa-briefcase', Experience::class);
-        yield MenuItem::linkToCrud('Formations', 'fa fa-graduation-cap', Formation::class);
-        yield MenuItem::linkToCrud('Projets', 'fa fa-project-diagram', Project::class);
-        yield MenuItem::linkToCrud('Technologies', 'fa fa-laptop-code', Technology::class);
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+
+        yield MenuItem::subMenu('Portfolio', 'fa fa-image')->setSubItems([
+            MenuItem::linkToCrud('Contact', 'fa fa-envelope', ContactRequest::class),   
+            MenuItem::linkToCrud('Technologies', 'fa fa-laptop-code', Technology::class),
+            MenuItem::linkToCrud('Projets', 'fa fa-project-diagram', Project::class),
+            MenuItem::linkToCrud('Projets Photos', 'fa fa-images', ProjectPhoto::class),                      
+        ]);
+
+        yield MenuItem::subMenu('Utilisateurs', 'fa fa-users')->setSubItems([
+            MenuItem::linkToCrud('Gestion des utilisateurs', 'fa fa-user', User::class),
+            MenuItem::linkToCrud('Localisation', 'fa fa-map-marker-alt', Location::class),
+            MenuItem::linkToCrud('Profils', 'fa fa-user-cog', Profile::class),
+        ]);
+
+        yield MenuItem::subMenu('Informations', 'fa fa-info-circle')->setSubItems([                       
+            MenuItem::linkToCrud('Expériences', 'fa fa-briefcase', Work::class),
+            MenuItem::linkToCrud('Formations', 'fa fa-graduation-cap', Education::class),
+            MenuItem::linkToCrud('Skills', 'fa fa-laptop-code', Skill::class),            
+            MenuItem::linkToCrud('Intérets', 'fa fa-heart', Interest::class),
+            MenuItem::linkToCrud('Langues', 'fa fa-language', Language::class),
+            MenuItem::linkToCrud('Références', 'fa fa-star', PortfolioReference::class),
+        ]);
     }
 
     public function configureUserMenu(UserInterface $user): UserMenu

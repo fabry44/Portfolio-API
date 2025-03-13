@@ -23,10 +23,6 @@ class Work
     #[Groups(["api.portfolio"])]
     private ?string $location = null;
 
-    #[ORM\Column(type: "text", nullable: true)]
-    #[Groups(["api.portfolio"])]
-    private ?string $description = null;
-
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     #[Groups(["api.portfolio"])]
     private ?string $position = null;
@@ -72,15 +68,6 @@ class Work
     public function setLocation(?string $location): self
     {
         $this->location = $location;
-        return $this;
-    }
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
         return $this;
     }
     public function getPosition(): ?string

@@ -1,0 +1,9 @@
+{% if field.value is iterable and field.value is not empty %}
+    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        {% for photo in field.value %}
+            <img src="{{ asset('/uploads/projects/' ~ photo.imageName) }}" alt="Photo du projet" style="width: 100px; height: auto; border-radius: 5px;">
+        {% endfor %}
+    </div>
+{% else %}
+    <span>Aucune photo disponible</span>
+{% endif %}

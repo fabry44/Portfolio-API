@@ -94,7 +94,7 @@ class ResumeDataService
                 ], $profiles),
             ],
             "work" => array_map(fn($work) => [
-                "name" => $work->getName(),
+                "name" => $work->getCompany(),
                 "location" => $work->getLocation(),
                 "position" => $work->getPosition(),
                 "startDate" => $work->getStartDate()->format('Y-m-d'),
@@ -115,14 +115,8 @@ class ResumeDataService
             "project" => array_map(fn($project) => [
                 "name" => $project->getName(),
                 "description" => $project->getDescription(),
-                "highlights" => $project->getHighlights(),
                 "keywords" => $project->getTechnology()->map(fn($technology) => $technology->getName())->toArray(),
-                "startDate" => $project->getStartDate() ? $project->getStartDate()->format('Y-m-d') : null,
-                "endDate" => $project->getEndDate() ? $project->getEndDate()->format('Y-m-d') : null,
-                "url" => $project->getUrl(),
-                "roles" => $project->getRoles(),
-                "entity" => $project->getEntity(),
-                "type" => $project->getType()
+                "date" => $project->getDate() ? $project->getDate()->format('Y-m-d') : null
             ], $projects),
             "skills" => array_map(fn($skill) => [
                 "name" => $skill->getName(),

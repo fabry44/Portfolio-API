@@ -3,38 +3,50 @@
         "email": "fabienroy2@gmail.com",
         "name": "Roy Fabien",
         "phone": "0650262098",
-        "birth": "1984-09-16T00:00:00+00:00",
+        "birth": "1984-09-16T00:00:00+02:00",
         "address": "22 rue des Renardi\u00e8res 44100 Nantes",
-        "linkedin": null,
-        "github": null,
+        "linkedin": [],
+        "github": [],
         "status": "Open to work",
         "about": "Apr\u00e8s 15 ans d\u2019exp\u00e9rience dans les r\u00e9seaux fibre optique, dont 6 ans en tant que conducteur de travaux, j\u2019ai d\u00e9cid\u00e9 de relever un nouveau d\u00e9fi en me reconvertissant dans le d\u00e9veloppement web et mobile. Passionn\u00e9 par la programmation depuis toujours, je me sp\u00e9cialise aujourd\u2019hui en Symfony tout en explorant Node.js et Python.",
         "function": "D\u00e9veloppeur Web et Web Mobile",
-        "age": 40
+        "age": 40,
+        "languages": [
+            "Fran\u00e7ais",
+            "Anglais",
+            "Espagnole"
+        ],
+        "interests": []
     },
     "formations": [
         {
             "degree": "Certificat d'\u00c9tat niveau 5",
             "institution": "\u00c9cole Studi",
-            "date": "2025-01-01T00:00:00+00:00",
+            "date": "2025-01-01T00:00:00+01:00",
             "description": "D\u00e9veloppement Web et Web Mobile"
         },
         {
             "degree": "BTS G\u00e9nie Optique option Photonique",
             "institution": "Lyc\u00e9e F\u00e9lix le Dantec \u00e0 Lannion",
-            "date": "2010-06-01T00:00:00+00:00",
+            "date": "2010-06-01T00:00:00+02:00",
             "description": "Optique physique, g\u00e9om\u00e9trique et photonique"
         },
         {
             "degree": "Bac Scientifique",
             "institution": "Lyc\u00e9e Chateaubriand \u00e0 Combourg",
-            "date": "2008-06-01T00:00:00+00:00",
+            "date": "2008-06-01T00:00:00+02:00",
             "description": "Math\u00e9matiques"
         }
     ],
     "projects": [
         {
             "title": "Site web pour un zoo (Arcadia)",
+            "img": "zooaracadia1-67d0367072ced161776008.jpg",
+            "Allimg": [
+                "zooaracadia1-67d0367072ced161776008.jpg",
+                "zooaracadia2-67d03678808e9248702050.jpg",
+                "zooaracadia3-67d0367e98eab890383041.jpg"
+            ],
             "description": "Projet d'\u00e9tude Studi (ECF) : conception d'un site web Zoo-Arcadia",
             "link": null,
             "github": null,
@@ -79,6 +91,10 @@
         },
         {
             "title": "SOS PRO, Site vitrine pour une auto-entreprise",
+            "img": "sospro1-67d04ed97f3b9360902221.jpg",
+            "Allimg": [
+                "sospro1-67d04ed97f3b9360902221.jpg"
+            ],
             "description": "Site vitrine pour une auto-entreprise de services \u00e0 la personne avec Symfony 7.2, Bootstrap 5, JQuery et MariaDB",
             "link": null,
             "github": null,
@@ -124,6 +140,103 @@
                     "icon": "Maria",
                     "class": "bg-[#003545] text-white",
                     "style": "background-color: #003545; color: #fff;"
+                }
+            ]
+        },
+        {
+            "title": "Portfolio-API",
+            "img": "portfolio-api1-67d0d2fa03641441968175.jpg",
+            "Allimg": [
+                "portfolio-api1-67d0d2fa03641441968175.jpg"
+            ],
+            "description": "<div><strong>Portfolio Backend<\/strong> est une API d\u00e9velopp\u00e9e avec <strong>Symfony 7<\/strong> et administr\u00e9e via <strong>EasyAdmin<\/strong>. Elle permet de g\u00e9rer dynamiquement les projets, exp\u00e9riences et comp\u00e9tences affich\u00e9s sur mon portfolio. L'API est consomm\u00e9e par le <strong>frontend Astro<\/strong> et s\u00e9curis\u00e9e avec <strong>OAuth 2 (Client Credentials)<\/strong>.<br><br><\/div><div>Les mises \u00e0 jour du backend sont <strong>push\u00e9es manuellement sur GitHub<\/strong>, et le <strong>rebuild du frontend sur Netlify<\/strong> est \u00e9galement d\u00e9clench\u00e9 manuellement via un <strong>hook<\/strong>, ex\u00e9cutant un npm run build. L'API est aussi utilis\u00e9e pour la soumission de formulaires, garantissant une communication s\u00e9curis\u00e9e et fluide entre le front et le back.<br><br><\/div>",
+            "link": null,
+            "github": "https:\/\/github.com\/fabry44\/Portfolio-API.git",
+            "technology": [
+                {
+                    "name": "HTML",
+                    "icon": "Html",
+                    "class": "bg-[#963419] text-white",
+                    "style": "background-color: #963419; color: #fff;"
+                },
+                {
+                    "name": "CSS",
+                    "icon": "Css",
+                    "class": "bg-[#07436b] text-white",
+                    "style": "background-color: #07436b; color: #fff;"
+                },
+                {
+                    "name": "JavaScript",
+                    "icon": "Js",
+                    "class": "bg-[#a39535] text-white",
+                    "style": "background-color: #a39535; color: #fff;"
+                },
+                {
+                    "name": "PHP",
+                    "icon": "Php",
+                    "class": "bg-[#4F5D95] text-white",
+                    "style": "background-color: #4F5D95; color: #fff;"
+                },
+                {
+                    "name": "Symfony",
+                    "icon": "Symfony",
+                    "class": "bg-[#000000] text-white",
+                    "style": "background-color: #000000; color: #fff;"
+                },
+                {
+                    "name": "MariaDB",
+                    "icon": "Maria",
+                    "class": "bg-[#003545] text-white",
+                    "style": "background-color: #003545; color: #fff;"
+                }
+            ]
+        },
+        {
+            "title": "Portfolio-Astro",
+            "img": "portfolio-astro1-67d0d5b357916785843358.jpg",
+            "Allimg": [
+                "portfolio-astro1-67d0d5b357916785843358.jpg",
+                "portfolio-astro2-67d0d5be4b231609193910.jpg"
+            ],
+            "description": "<div><strong>Portfolio-Astro<\/strong> est l\u2019interface frontend de mon portfolio, d\u00e9velopp\u00e9 avec <strong>Astro<\/strong>, un framework moderne optimis\u00e9 pour le <strong>rendement et la rapidit\u00e9<\/strong>. Con\u00e7u pour g\u00e9n\u00e9rer un site statique ultra-performant, <strong>Astro<\/strong> permet d\u2019envoyer uniquement du HTML\/CSS aux utilisateurs et de charger dynamiquement du JavaScript <strong>l\u00e0 o\u00f9 c\u2019est n\u00e9cessaire<\/strong>. Cela garantit un <strong>temps de chargement minimal<\/strong> et un excellent score <strong>Lighthouse<\/strong> en SEO, accessibilit\u00e9 et performances.<br><br><\/div><div>Le site int\u00e8gre des <strong>composants React<\/strong>, notamment pour le formulaire de contact, qui communique avec mon <strong>Portfolio-API<\/strong> via une requ\u00eate s\u00e9curis\u00e9e. Il g\u00e8re \u00e9galement des <strong>animations fluides et interactives<\/strong> pour am\u00e9liorer l\u2019exp\u00e9rience utilisateur, tout en conservant une <strong>empreinte l\u00e9g\u00e8re<\/strong>.<br><br><\/div><div>Chaque mise \u00e0 jour du contenu (projets, exp\u00e9riences, comp\u00e9tences) est automatiquement int\u00e9gr\u00e9e en d\u00e9clenchant un <strong>rebuild manuel<\/strong> via un hook <strong>Netlify<\/strong>, assurant ainsi que le portfolio reste toujours \u00e0 jour et optimis\u00e9.<br><br><\/div>",
+            "link": "https:\/\/fabien-roy.netlify.app\/",
+            "github": "https:\/\/github.com\/fabry44\/portfolio-astro.git",
+            "technology": [
+                {
+                    "name": "HTML",
+                    "icon": "Html",
+                    "class": "bg-[#963419] text-white",
+                    "style": "background-color: #963419; color: #fff;"
+                },
+                {
+                    "name": "CSS",
+                    "icon": "Css",
+                    "class": "bg-[#07436b] text-white",
+                    "style": "background-color: #07436b; color: #fff;"
+                },
+                {
+                    "name": "JavaScript",
+                    "icon": "Js",
+                    "class": "bg-[#a39535] text-white",
+                    "style": "background-color: #a39535; color: #fff;"
+                },
+                {
+                    "name": "Astro",
+                    "icon": "AstroIcon",
+                    "class": "bg-[#FF5A1F] text-white",
+                    "style": "background-color: #FF5A1F; color: #fff;"
+                },
+                {
+                    "name": "Tailwind CSS",
+                    "icon": "Tailwind",
+                    "class": "bg-[#06B6D4] text-white",
+                    "style": "background-color: #06B6D4; color: #fff;"
+                },
+                {
+                    "name": "React",
+                    "icon": "React",
+                    "class": "bg-[#1c7777] text-white",
+                    "style": "background-color: #1c7777; color: #fff;"
                 }
             ]
         }
@@ -224,103 +337,7 @@
             "icon": "Mysql",
             "class": "bg-[#00758F] text-white",
             "style": "background-color: #00758F; color: #fff;"
-        },
-        {
-            "name": "HTML",
-            "icon": "Html",
-            "class": "bg-[#963419] text-white",
-            "style": "background-color: #963419; color: #fff;"
-        },
-        {
-            "name": "CSS",
-            "icon": "Css",
-            "class": "bg-[#07436b] text-white",
-            "style": "background-color: #07436b; color: #fff;"
-        },
-        {
-            "name": "JavaScript",
-            "icon": "Js",
-            "class": "bg-[#a39535] text-white",
-            "style": "background-color: #a39535; color: #fff;"
-        },
-        {
-            "name": "Python",
-            "icon": "Python",
-            "class": "bg-[#306998] text-white",
-            "style": "background-color: #306998; color: #fff;"
-        },
-        {
-            "name": "PHP",
-            "icon": "Php",
-            "class": "bg-[#4F5D95] text-white",
-            "style": "background-color: #4F5D95; color: #fff;"
-        },
-        {
-            "name": "Astro",
-            "icon": "AstroIcon",
-            "class": "bg-[#FF5A1F] text-white",
-            "style": "background-color: #FF5A1F; color: #fff;"
-        },
-        {
-            "name": "Tailwind CSS",
-            "icon": "Tailwind",
-            "class": "bg-[#06B6D4] text-white",
-            "style": "background-color: #06B6D4; color: #fff;"
-        },
-        {
-            "name": "Symfony",
-            "icon": "Symfony",
-            "class": "bg-[#000000] text-white",
-            "style": "background-color: #000000; color: #fff;"
-        },
-        {
-            "name": "Bootstrap",
-            "icon": "Bootstrap",
-            "class": "bg-[#563D7C] text-white",
-            "style": "background-color: #563D7C; color: #fff;"
-        },
-        {
-            "name": "React",
-            "icon": "React",
-            "class": "bg-[#1c7777] text-white",
-            "style": "background-color: #1c7777; color: #fff;"
-        },
-        {
-            "name": "Django",
-            "icon": "Django",
-            "class": "bg-[#092E20] text-white",
-            "style": "background-color: #092E20; color: #fff;"
-        },
-        {
-            "name": "jQuery",
-            "icon": "Jquery",
-            "class": "bg-[#0769AD] text-white",
-            "style": "background-color: #0769AD; color: #fff;"
-        },
-        {
-            "name": "MongoDB",
-            "icon": "Mongo",
-            "class": "bg-[#47A248] text-white",
-            "style": "background-color: #47A248; color: #fff;"
-        },
-        {
-            "name": "MariaDB",
-            "icon": "Maria",
-            "class": "bg-[#003545] text-white",
-            "style": "background-color: #003545; color: #fff;"
-        },
-        {
-            "name": "SQLite",
-            "icon": "Sqlite",
-            "class": "bg-[#003B57] text-white",
-            "style": "background-color: #003B57; color: #fff;"
-        },
-        {
-            "name": "MySQL",
-            "icon": "Mysql",
-            "class": "bg-[#00758F] text-white",
-            "style": "background-color: #00758F; color: #fff;"
         }
     ],
-    "updated_at": "2025-03-03 15:16:55"
+    "updated_at": "2025-03-12 20:44:09"
 }

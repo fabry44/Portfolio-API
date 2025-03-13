@@ -89,13 +89,15 @@ class PortfolioDataService
                 "name" => $user->getName(),
                 "phone" => $user->getPhone(),
                 "birth" => $birthdate ? $birthdate->format(\DateTime::ATOM) : null,
-                "address" => $location ? $location->getAddress() : "",
+                "address" => $location ? $location->getAddress()." ".$location->getPostalCode()." ".$location->getCity() : null,
                 "linkedin" => $linkedin,
                 "github" => $github,
                 "status" => $user->getStatus(),
                 "about" => $user->getSummary(),
                 "function" => $user->getLabel(),
-                "age" => $age
+                "age" => $age,
+                "languages" => array_map(fn ($lang) => $lang->getLanguage(), $languages),
+                "interests" => array_map(fn ($interest) => $interest->getName(), $interests),
             ],
             "formations" => array_map(fn ($edu) => [
                 "degree" => $edu->getStudyType(),
@@ -105,6 +107,8 @@ class PortfolioDataService
             ], $education),
             "projects" => array_map(fn ($project) => [
                 "title" => $project->getName(),
+                "img" => $project->getPhotos()->first()?->getImageName(), // Récupère la première photo du projet
+                "Allimg" => array_map(fn ($photo) => $photo->getImageName(), $project->getPhotos()->toArray()), // Récupère toutes les photos du projet
                 "description" => $project->getDescription(),
                 "link" => $project->getLink(),
                 "github" => $project->getGithub(),

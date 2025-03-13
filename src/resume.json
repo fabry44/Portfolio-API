@@ -7,15 +7,104 @@
         "phone": "0650262098",
         "summary": "Apr\u00e8s 15 ans d\u2019exp\u00e9rience dans les r\u00e9seaux fibre optique, dont 6 ans en tant que conducteur de travaux, j\u2019ai d\u00e9cid\u00e9 de relever un nouveau d\u00e9fi en me reconvertissant dans le d\u00e9veloppement web et mobile. Passionn\u00e9 par la programmation depuis toujours, je me sp\u00e9cialise aujourd\u2019hui en Symfony tout en explorant Node.js et Python.",
         "location": {
-            "address": "22 rue des Renardi\u00e8res 44100 Nantes",
+            "address": "22 rue des Renardi\u00e8res",
             "postalCode": "44100",
             "city": "Nantes",
-            "countryCode": "FR",
-            "region": "Pays de la Loire"
+            "countryCode": "France",
+            "region": "Loire Atlantique"
         },
-        "profiles": []
+        "profiles": [
+            {
+                "network": "Linkedin",
+                "username": null,
+                "url": "www.linkedin.com\/in\/roy-fabien-13982a157"
+            },
+            {
+                "network": "Github",
+                "username": "fabry44",
+                "url": "https:\/\/github.com\/fabry44"
+            }
+        ]
     },
-    "work": [],
+    "work": [
+        {
+            "name": "Soci\u00e9t\u00e9 ERT Technologies",
+            "location": "44 \u2013 Nantes",
+            "position": "Monteur C\u00e2bleur FIBRE OPTIQUE",
+            "startDate": "2007-08-01",
+            "endDate": "2011-04-01",
+            "summary": null,
+            "highlights": [
+                "Num\u00e9ricable (FTTX et FTTLA)",
+                "D\u00e9ploiement Boucle locale fibre optique 17 num\u00e9rique",
+                "Completel",
+                "Aircom Orange (adduction fibre optique Antenne GSM)"
+            ]
+        },
+        {
+            "name": "La Signalisation de Bretagne",
+            "location": "Anetz - 44",
+            "position": "TECHNICIEN FIBRE OPTIQUE FTTH",
+            "startDate": "2011-04-01",
+            "endDate": "2012-09-01",
+            "summary": null,
+            "highlights": [
+                "Projet Pilote FTTH Laval"
+            ]
+        },
+        {
+            "name": "Groupe Circet",
+            "location": "44-St Herblain",
+            "position": "Technicien fibre optique",
+            "startDate": "2012-09-01",
+            "endDate": "2013-02-01",
+            "summary": null,
+            "highlights": [
+                "Gigalis",
+                "RTE backbones Fibre",
+                "Maintenances et Op\u00e9ration de nuit"
+            ]
+        },
+        {
+            "name": "Free infrastructure",
+            "location": "Paris, 8\u00e8me",
+            "position": "Technicien Telecom",
+            "startDate": "2013-03-01",
+            "endDate": "2013-11-01",
+            "summary": null,
+            "highlights": [
+                "Backup raccordement verticalit\u00e9",
+                "SAV"
+            ]
+        },
+        {
+            "name": "Groupe Circet",
+            "location": "44-carquefou",
+            "position": "Chef de chantier puis Conducteur de travaux",
+            "startDate": "2013-11-01",
+            "endDate": "2019-04-01",
+            "summary": null,
+            "highlights": [
+                "Free (FTTH)",
+                "Free Boucle locale Free et Aircom GSM",
+                "RTE"
+            ]
+        },
+        {
+            "name": "CDH",
+            "location": "44-Gu\u00e9m\u00e9n\u00e9-Penfao",
+            "position": "Conducteur de travaux Tirage et raccordement Fibre Optique",
+            "startDate": "2019-04-01",
+            "endDate": null,
+            "summary": null,
+            "highlights": [
+                "Boucle locale Orange",
+                "FTTH Bouygue",
+                "M\u00e9galis D1 D2 (FTTH)",
+                "Covage"
+            ]
+        }
+    ],
     "education": [
         {
             "institution": "\u00c9cole Studi",
@@ -42,7 +131,7 @@
             "url": "",
             "area": "Math\u00e9matiques",
             "studyType": "Bac Scientifique",
-            "startDate": "2025-03-02",
+            "startDate": "2025-03-11",
             "endDate": "2008-06-01",
             "score": null,
             "courses": []
@@ -52,7 +141,6 @@
         {
             "name": "Site web pour un zoo (Arcadia)",
             "description": "Projet d'\u00e9tude Studi (ECF) : conception d'un site web Zoo-Arcadia",
-            "highlights": [],
             "keywords": [
                 "HTML",
                 "CSS",
@@ -61,17 +149,11 @@
                 "Symfony",
                 "Bootstrap"
             ],
-            "startDate": null,
-            "endDate": null,
-            "url": "#",
-            "roles": [],
-            "entity": null,
-            "type": "application"
+            "date": null
         },
         {
             "name": "SOS PRO, Site vitrine pour une auto-entreprise",
             "description": "Site vitrine pour une auto-entreprise de services \u00e0 la personne avec Symfony 7.2, Bootstrap 5, JQuery et MariaDB",
-            "highlights": [],
             "keywords": [
                 "HTML",
                 "CSS",
@@ -81,18 +163,39 @@
                 "Bootstrap",
                 "MariaDB"
             ],
-            "startDate": null,
-            "endDate": null,
-            "url": "#",
-            "roles": [],
-            "entity": null,
-            "type": "application"
+            "date": null
+        },
+        {
+            "name": "Portfolio-API",
+            "description": "<div><strong>Portfolio Backend<\/strong> est une API d\u00e9velopp\u00e9e avec <strong>Symfony 7<\/strong> et administr\u00e9e via <strong>EasyAdmin<\/strong>. Elle permet de g\u00e9rer dynamiquement les projets, exp\u00e9riences et comp\u00e9tences affich\u00e9s sur mon portfolio. L'API est consomm\u00e9e par le <strong>frontend Astro<\/strong> et s\u00e9curis\u00e9e avec <strong>OAuth 2 (Client Credentials)<\/strong>.<br><br><\/div><div>Les mises \u00e0 jour du backend sont <strong>push\u00e9es manuellement sur GitHub<\/strong>, et le <strong>rebuild du frontend sur Netlify<\/strong> est \u00e9galement d\u00e9clench\u00e9 manuellement via un <strong>hook<\/strong>, ex\u00e9cutant un npm run build. L'API est aussi utilis\u00e9e pour la soumission de formulaires, garantissant une communication s\u00e9curis\u00e9e et fluide entre le front et le back.<br><br><\/div>",
+            "keywords": [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "PHP",
+                "Symfony",
+                "MariaDB"
+            ],
+            "date": "2025-03-12"
+        },
+        {
+            "name": "Portfolio-Astro",
+            "description": "<div><strong>Portfolio-Astro<\/strong> est l\u2019interface frontend de mon portfolio, d\u00e9velopp\u00e9 avec <strong>Astro<\/strong>, un framework moderne optimis\u00e9 pour le <strong>rendement et la rapidit\u00e9<\/strong>. Con\u00e7u pour g\u00e9n\u00e9rer un site statique ultra-performant, <strong>Astro<\/strong> permet d\u2019envoyer uniquement du HTML\/CSS aux utilisateurs et de charger dynamiquement du JavaScript <strong>l\u00e0 o\u00f9 c\u2019est n\u00e9cessaire<\/strong>. Cela garantit un <strong>temps de chargement minimal<\/strong> et un excellent score <strong>Lighthouse<\/strong> en SEO, accessibilit\u00e9 et performances.<br><br><\/div><div>Le site int\u00e8gre des <strong>composants React<\/strong>, notamment pour le formulaire de contact, qui communique avec mon <strong>Portfolio-API<\/strong> via une requ\u00eate s\u00e9curis\u00e9e. Il g\u00e8re \u00e9galement des <strong>animations fluides et interactives<\/strong> pour am\u00e9liorer l\u2019exp\u00e9rience utilisateur, tout en conservant une <strong>empreinte l\u00e9g\u00e8re<\/strong>.<br><br><\/div><div>Chaque mise \u00e0 jour du contenu (projets, exp\u00e9riences, comp\u00e9tences) est automatiquement int\u00e9gr\u00e9e en d\u00e9clenchant un <strong>rebuild manuel<\/strong> via un hook <strong>Netlify<\/strong>, assurant ainsi que le portfolio reste toujours \u00e0 jour et optimis\u00e9.<br><br><\/div>",
+            "keywords": [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Astro",
+                "Tailwind CSS",
+                "React"
+            ],
+            "date": "2025-03-12"
         }
     ],
     "skills": [
         {
             "name": "Languages",
-            "level": null,
+            "level": "beginner",
             "keywords": [
                 "HTML",
                 "CSS",
@@ -104,7 +207,7 @@
         },
         {
             "name": "Frameworks et Librairies",
-            "level": null,
+            "level": "intermediate",
             "keywords": [
                 "Symfony",
                 "Astro",
@@ -117,7 +220,7 @@
         },
         {
             "name": "Bases de Donn\u00e9es",
-            "level": null,
+            "level": "beginner",
             "keywords": [
                 "MongoDB",
                 "MySQL"
@@ -125,7 +228,7 @@
         },
         {
             "name": "Outils Additionnels",
-            "level": null,
+            "level": "intermediate",
             "keywords": [
                 "Figma",
                 "Git",
@@ -134,11 +237,24 @@
             ]
         }
     ],
-    "languages": [],
+    "languages": [
+        {
+            "language": "Fran\u00e7ais",
+            "fluency": "Langue maternelle"
+        },
+        {
+            "language": "Anglais",
+            "fluency": "Interm\u00e9diaire"
+        },
+        {
+            "language": "Espagnole",
+            "fluency": "D\u00e9butant"
+        }
+    ],
     "interests": [],
     "references": [],
     "meta": {
         "version": "v1.0.0",
-        "lastModified": "2025-03-03T15:16:55+00:00"
+        "lastModified": "2025-03-12T20:44:09+01:00"
     }
 }

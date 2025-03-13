@@ -2,17 +2,17 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Experience;
+use Vich\UploaderBundle\Entity\File;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class ExperienceCrudController extends AbstractCrudController
+class FileCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Experience::class;
+        return File::class;
     }
 
     /*

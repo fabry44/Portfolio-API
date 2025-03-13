@@ -72,4 +72,9 @@ class Profile
         $this->url = $url;
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->network . ' ' . $this->username . ' ' . $this->url . ' ' . $this->user;
+    }
 }

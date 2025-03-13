@@ -99,4 +99,9 @@ class Location
         $this->region = $region;
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->address . ' ' . $this->postalCode . ' ' . $this->city . ' ' . $this->region . ' ' . $this->countryCode;
+    }
 }
