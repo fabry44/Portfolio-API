@@ -58,3 +58,11 @@ services:
     Symfony\Contracts\HttpClient\HttpClientInterface: '@http_client'
     Psr\Log\LoggerInterface: '@logger'
     Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface: '@parameter_bag'
+
+    League\Bundle\OAuth2ServerBundle\Security\Authenticator\OAuth2Authenticator:
+        arguments:
+            Symfony\Component\Security\Core\User\UserProviderInterface: '@security.user.provider.concrete.oauth2_provider'
+            $rolePrefix: 'ROLE_OAUTH2_'
+
+    Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface:
+        alias: 'league.oauth2_server.factory.psr_http'

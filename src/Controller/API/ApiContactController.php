@@ -12,10 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ApiContactController extends AbstractController
 {
     #[Route('/api/contact', name: 'api_contact', methods: ['POST'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function submitContact(
         Request $request,
         EntityManagerInterface $entityManager,

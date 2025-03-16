@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity]
 #[ORM\Table(name: "users")]
@@ -54,14 +55,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(["api.portfolio"])]
     private ?string $phone = null;
 
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
-    #[Groups(["api.portfolio"])]
-    private ?string $website = null;
-
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
-    #[Groups(["api.portfolio"])]
-    private ?string $url = null;
-
     #[ORM\OneToOne(mappedBy: "user", targetEntity: Location::class, cascade: ["persist", "remove"])]
     #[Groups(["api.portfolio"])]
     private ?Location $location = null;
@@ -77,6 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $photo = null;
 
     #[Vich\UploadableField(mapping: 'user_photos', fileNameProperty: 'photo')]
+    #[Ignore] // ⬅️ Ignore la sérialisation pour éviter l'erreur
     private ?File $photoFile = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
@@ -85,6 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->profiles = new ArrayCollection();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     // Getters et Setters
@@ -210,24 +205,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->phone = $phone;
         return $this;
     }
-    public function getWebsite(): ?string
-    {
-        return $this->website;
-    }
-    public function setWebsite(?string $website): self
-    {
-        $this->website = $website;
-        return $this;
-    }
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-    public function setUrl(?string $url): self
-    {
-        $this->url = $url;
-        return $this;
-    }
+
     public function getLocation(): ?Location
     {
         return $this->location;
@@ -237,6 +215,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->location = $location;
         return $this;
     }
+    
     public function getProfiles(): Collection
     {
         return $this->profiles;
@@ -281,6 +260,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
     
 

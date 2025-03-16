@@ -6,6 +6,7 @@ use App\Service\NetlifyService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class NetlifyController extends AbstractController
 {
@@ -16,7 +17,8 @@ class NetlifyController extends AbstractController
         $this->netlifyService = $netlifyService;
     }
 
-    #[Route('/api/netlify-build', name: 'api_netlify_build', methods: ['GET'])]
+    #[Route('/api-netlify-build', name: 'api_netlify_build', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function triggerBuild(): JsonResponse
     {
         $this->netlifyService->triggerBuild();

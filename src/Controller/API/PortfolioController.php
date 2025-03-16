@@ -2,6 +2,8 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Service\ResumeDataService;
 use App\Service\GitHubService;
 use App\Service\PortfolioDataService;
@@ -11,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class PortfolioController extends AbstractController
 {
@@ -19,24 +21,28 @@ class PortfolioController extends AbstractController
     private PortfolioDataService $portfolioDataService;
     private GitHubService $gitHubService;
     private LoggerInterface $logger;
+    private UserRepository $userRepository;
 
     public function __construct(
         ResumeDataService $resumeDataService,
         PortfolioDataService $portfolioDataService,
         GitHubService $gitHubService,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        UserRepository $userRepository
 
     ) {
         $this->resumeDataService = $resumeDataService;
         $this->portfolioDataService = $portfolioDataService;
         $this->gitHubService = $gitHubService;
         $this->logger = $logger;
+        $this->userRepository = $userRepository;
     }
 
     /**
      * @Route("/api/update-portfolio", name="update_portfolio", methods={"POST"})
      */
-    #[Route('/api/update-portfolio', name: 'api_update_portfolio')]
+    #[Route('/api-update-portfolio', name: 'api_update_portfolio')]
+    #[IsGranted('ROLE_ADMIN')]
     public function updatePortfolio(): JsonResponse
     {
         try {
@@ -66,16 +72,45 @@ class PortfolioController extends AbstractController
             $this->logger->info("portfolio.json poussé sur GitHub");
 
             // Étape 3 : Pousser les images sur GitHub
-            // Upload de la photo de profil de l'utilisateur
-            $userPhotoPath = $this->getParameter('kernel.project_dir') . '/uploads/user/photo.jpg';
-            if (file_exists($userPhotoPath)) {
-                $this->gitHubService->uploadImage(
-                    'public/profile-photo.jpg',
-                    $userPhotoPath,
-                    'Mise à jour de la photo de profil'
-                );
-                $this->logger->info("Photo de profil poussée sur GitHub");
+            
+            // Récupérer l'administrateur
+            $admin = $this->userRepository->findOneAdmin();
+
+            if (!$admin) {
+                $this->logger->warning("Aucun utilisateur avec ROLE_ADMIN trouvé.");
+                return new JsonResponse([
+                    'status' => 'error',
+                    'message' => 'Admin introuvable'
+                ], Response::HTTP_NOT_FOUND);
             }
+
+            // Vérifier que la photo existe
+            $userPhoto = $admin->getPhoto();
+            if (!$userPhoto) {
+                $this->logger->warning("L'admin n'a pas de photo enregistrée.");
+                return new JsonResponse([
+                    'status' => 'error',
+                    'message' => 'Photo de profil introuvable'
+                ], Response::HTTP_NOT_FOUND);
+            }
+
+            // Vérifier le chemin complet
+            $userPhotoPath = $this->getParameter('kernel.project_dir') . '/public/uploads/users/' . $userPhoto;
+            if (!file_exists($userPhotoPath)) {
+                $this->logger->warning("Le fichier photo n'existe pas : " . $userPhotoPath);
+                return new JsonResponse([
+                    'status' => 'error',
+                    'message' => 'Le fichier photo n\'existe pas'
+                ], Response::HTTP_NOT_FOUND);
+            }
+
+            // Upload sur GitHub
+            $this->gitHubService->uploadImage(
+                'public/' . $userPhoto,
+                $userPhotoPath,
+                'Mise à jour de la photo de profil'
+            );
+            $this->logger->info("Photo de profil poussée sur GitHub : " . $userPhoto);
 
             // Upload des images des projets
             $projectImagesDir = $this->getParameter('kernel.project_dir') . '/public/uploads/projects/';

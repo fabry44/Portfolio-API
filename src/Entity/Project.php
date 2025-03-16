@@ -25,6 +25,10 @@ class Project
     #[Groups(["api.portfolio"])]
     private ?string $description = null;
 
+    #[ORM\Column(type: "json", nullable: true)]
+    #[Groups(["api.portfolio"])]
+    private ?array $highlights = [];
+
     #[ORM\ManyToMany(targetEntity: Technology::class, inversedBy: 'projects')]
     #[Groups(['api.portfolio'])]
     private Collection $technology;
@@ -38,6 +42,8 @@ class Project
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $github = null;
+
+    
 
     #[ORM\OneToMany(targetEntity: ProjectPhoto::class, mappedBy: "project", cascade: ["persist", "remove"])]
     private Collection $photos;
@@ -70,6 +76,16 @@ class Project
     public function setDescription(string $description): self
     {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getHighlights(): ?array
+    {
+        return $this->highlights;
+    }
+    public function setHighlights(?array $highlights): self
+    {
+        $this->highlights = $highlights;
         return $this;
     }
     
@@ -111,7 +127,6 @@ class Project
     {
         return $this->link;
     }
-
     public function setLink(?string $link): static
     {
         $this->link = $link;
@@ -123,7 +138,6 @@ class Project
     {
         return $this->github;
     }
-
     public function setGithub(?string $github): static
     {
         $this->github = $github;
@@ -135,7 +149,6 @@ class Project
     {
         return $this->photos;
     }
-
     public function addPhoto(ProjectPhoto $photo): self
     {
         if (!$this->photos->contains($photo)) {
@@ -144,7 +157,6 @@ class Project
         }
         return $this;
     }
-
     public function removePhoto(ProjectPhoto $photo): self
     {
         if ($this->photos->removeElement($photo)) {

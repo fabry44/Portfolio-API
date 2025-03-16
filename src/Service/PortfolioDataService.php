@@ -80,8 +80,8 @@ class PortfolioDataService
         // Calcul de l'âge
         $birthdate = $user->getBirth();
         $age = $birthdate ? (new \DateTime())->diff($birthdate)->y : null;
-        $linkedin = $profiles ? array_filter($profiles, fn ($profile) => $profile->getNetwork() === 'linkedin') : null;
-        $github = $profiles ? array_filter($profiles, fn ($profile) => $profile->getNetwork() === 'github') : null;
+        $linkedin = $profiles ? array_values(array_filter($profiles, fn ($profile) => $profile->getNetwork() === 'Linkedin'))[0] ?? null : null;
+        $github = $profiles ? array_values(array_filter($profiles, fn ($profile) => $profile->getNetwork() === 'Github'))[0] ?? null : null;
 
         $data = [
             "user" => [
@@ -98,6 +98,7 @@ class PortfolioDataService
                 "age" => $age,
                 "languages" => array_map(fn ($lang) => $lang->getLanguage(), $languages),
                 "interests" => array_map(fn ($interest) => $interest->getName(), $interests),
+                "img" => $user->getPhoto()
             ],
             "formations" => array_map(fn ($edu) => [
                 "degree" => $edu->getStudyType(),
@@ -110,6 +111,7 @@ class PortfolioDataService
                 "img" => $project->getPhotos()->first()?->getImageName(), // Récupère la première photo du projet
                 "Allimg" => array_map(fn ($photo) => $photo->getImageName(), $project->getPhotos()->toArray()), // Récupère toutes les photos du projet
                 "description" => $project->getDescription(),
+                "highlights" => $project->getHighlights(),
                 "link" => $project->getLink(),
                 "github" => $project->getGithub(),
                 "technology" => array_map(fn ($tech) => [

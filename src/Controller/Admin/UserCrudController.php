@@ -36,16 +36,12 @@ class UserCrudController extends AbstractCrudController
             //     'mapped' => false,
             // ])->onlyWhenUpdating(),
             TextField::new('phone')->setLabel('Téléphone')->setRequired(true),
-            TextField::new('website')->setLabel('Site web')->setRequired(true),
             TextEditorField::new('summary')->setLabel('Résumé')->setRequired(true),
             TextField::new('status')->setLabel('Statut')->setRequired(true),
             TextField::new('label')->setLabel('Fonction')->setRequired(true),
-            TextField::new('url')->setLabel('URL')->setRequired(true),
-            TextField::new('photo')->setLabel('Photo')->setRequired(false),
             TextField::new('photoFile')
                 ->setLabel('Uploader une photo')
                 ->setFormType(VichImageType::class)
-                ->setRequired(true)
                 ->onlyOnForms(),
             
             ImageField::new('photo')

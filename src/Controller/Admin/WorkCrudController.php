@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Work;
+use Dom\Text;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -25,6 +26,7 @@ class WorkCrudController extends AbstractCrudController
 
             TextField::new('company', 'Company')->setRequired(true),
             TextField::new('location', 'Location')->setRequired(false),
+            TextEditorField::new('description', 'Description')->setRequired(false),
 
             // Utilisation de TextEditorField si HTML autorisé, sinon TextareaField
             

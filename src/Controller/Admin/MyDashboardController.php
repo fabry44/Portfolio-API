@@ -15,6 +15,7 @@ use App\Entity\Skill;
 use App\Entity\Technology;
 use App\Entity\User;
 use App\Entity\Work;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
@@ -150,7 +151,7 @@ class MyDashboardController extends AbstractDashboardController
             ->displayUserAvatar(false)
             // you can also pass an email address to use gravatar's service
             // ->setGravatarEmail($user->getUserName())
-
+            
             // you can use any type of menu item, except submenus
             ->addMenuItems([
                 // MenuItem::linkToRoute('app_login', 'fa fa-id-card', '...', ['...' => '...']), //test
@@ -161,5 +162,13 @@ class MyDashboardController extends AbstractDashboardController
 
 
             ]);
+    }
+
+    public function configureAssets(): Assets
+    {   
+        // $link = $this->getParameter('kernel.project_dir') . '/public/images/
+        return Assets::new()->addCssFile('styles/app.css');
+            
+            
     }
 }

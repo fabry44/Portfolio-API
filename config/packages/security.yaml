@@ -11,11 +11,32 @@ security:
                 class: App\Entity\User
                 property: email 
         
+        oauth2_provider:
+            entity:
+                class: App\Entity\Client
+                property: identifier  # Utilise l'identifiant client
+        
+    role_hierarchy:
+        ROLE_OAUTH2_portfolio: [ROLE_OAUTH2_DEFAULT]
+
+        
     firewalls:
         
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        
+        api_token:
+            pattern: ^/token$
+            security: false
+
+        api:
+            pattern: ^/api/
+            provider: oauth2_provider
+            # custom_authenticator: App\Security\APIAuthenticator
+            custom_authenticator: League\Bundle\OAuth2ServerBundle\Security\Authenticator\OAuth2Authenticator
+            stateless: true
+            lazy: true
     
         main:
             lazy: true
@@ -38,7 +59,11 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: PUBLIC_ACCESS }
+        - { path: ^/token, roles: PUBLIC_ACCESS }    
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: /api-update-portfolio, roles: ROLE_ADMIN }
+        - { path: /api-netlify-build, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
 
         
         # - { path: ^/profile, roles: ROLE_USER }

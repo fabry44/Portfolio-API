@@ -23,6 +23,10 @@ class Work
     #[Groups(["api.portfolio"])]
     private ?string $location = null;
 
+    #[ORM\Column(type: "text", nullable: true)]
+    #[Groups(["api.portfolio"])]
+    private ?string $description = null;
+
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     #[Groups(["api.portfolio"])]
     private ?string $position = null;
@@ -52,6 +56,7 @@ class Work
     {
         return $this->id;
     }
+    
     public function getCompany(): ?string
     {
         return $this->company;
@@ -61,6 +66,7 @@ class Work
         $this->company = $company;
         return $this;
     }
+
     public function getLocation(): ?string
     {
         return $this->location;
@@ -70,6 +76,17 @@ class Work
         $this->location = $location;
         return $this;
     }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+        return $this;
+    }
+
     public function getPosition(): ?string
     {
         return $this->position;
@@ -79,6 +96,7 @@ class Work
         $this->position = $position;
         return $this;
     }
+
     public function getUrl(): ?string
     {
         return $this->url;
@@ -88,6 +106,7 @@ class Work
         $this->url = $url;
         return $this;
     }
+
     public function getStartDate(): ?\DateTimeInterface
     {
         return $this->startDate;
@@ -97,6 +116,7 @@ class Work
         $this->startDate = $startDate;
         return $this;
     }
+
     public function getEndDate(): ?\DateTimeInterface
     {
         return $this->endDate;
@@ -106,15 +126,17 @@ class Work
         $this->endDate = $endDate;
         return $this;
     }
+
     public function getSummary(): ?string
     {
         return $this->summary;
-    }
+    } 
     public function setSummary(?string $summary): self
     {
         $this->summary = $summary;
         return $this;
     }
+
     public function getHighlights(): ?array
     {
         return $this->highlights;

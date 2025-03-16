@@ -77,6 +77,7 @@ class ResumeDataService
             "basics" => [
                 "name" => $user->getName(),
                 "label" => $user->getLabel(),
+                "image" => $user->getPhoto(),
                 "email" => $user->getEmail(),
                 "phone" => $user->getPhone(),
                 "summary" => $user->getSummary(),
@@ -96,6 +97,7 @@ class ResumeDataService
             "work" => array_map(fn($work) => [
                 "name" => $work->getCompany(),
                 "location" => $work->getLocation(),
+                "description" => $work->getDescription(),
                 "position" => $work->getPosition(),
                 "startDate" => $work->getStartDate()->format('Y-m-d'),
                 "endDate" => $work->getEndDate() ? $work->getEndDate()->format('Y-m-d') : null,
@@ -115,13 +117,19 @@ class ResumeDataService
             "project" => array_map(fn($project) => [
                 "name" => $project->getName(),
                 "description" => $project->getDescription(),
+                "highlights" => $project->getHighlights(),
                 "keywords" => $project->getTechnology()->map(fn($technology) => $technology->getName())->toArray(),
-                "date" => $project->getDate() ? $project->getDate()->format('Y-m-d') : null
+                "endDate" => $project->getDate() ? $project->getDate()->format('Y-m-d') : null,
+                "url" => $project->getLink(),
+                // "roles" => $project->getRoles(),
+                // "entity" => $project->getEntity(),
+                // "type" => $project->getType(),
             ], $projects),
             "skills" => array_map(fn($skill) => [
                 "name" => $skill->getName(),
                 "level" => $skill->getLevel(),
-                "keywords" => $skill->getKeywords()
+                "keywords" => $skill->getKeywords(),
+
             ], $skills),
             "languages" => array_map(fn($language) => [
                 "language" => $language->getLanguage(),

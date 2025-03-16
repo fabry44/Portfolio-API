@@ -8,16 +8,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use Vich\UploaderBundle\Form\Type\VichImageType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ProjectCrudController extends AbstractCrudController
 {
@@ -31,6 +26,8 @@ class ProjectCrudController extends AbstractCrudController
         yield IdField::new('id')->onlyOnIndex();
         yield TextField::new('name')->setLabel('Nom du projet')->setRequired(true);
         yield TextEditorField::new('description')->setLabel('Description du projet')->setRequired(true);
+        // Utilisation de ArrayField pour highlights car c'est un champ JSON
+        yield ArrayField::new('highlights', 'Highlights')->setRequired(false);
         yield TextField::new('link')->setLabel('Lien du site')->setRequired(false);
         yield TextField::new('github')->setLabel('Lien GitHub')->setRequired(false);
         yield DateField::new('date')->setLabel('Date')->setRequired(false);
