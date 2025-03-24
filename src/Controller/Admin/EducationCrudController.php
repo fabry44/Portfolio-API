@@ -4,14 +4,17 @@ namespace App\Controller\Admin;
 
 use App\Entity\Education;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class EducationCrudController extends AbstractCrudController
 {
@@ -27,13 +30,20 @@ class EducationCrudController extends AbstractCrudController
         $fields = [
             IdField::new('id')->setLabel('ID')->onlyOnIndex(),
             TextField::new('institution')->setLabel('Institution')->setRequired(true),
-            TextField::new('url')->setLabel('URL')->setRequired(true),
+            TextField::new('url')->setLabel('URL')->setRequired(false),
             TextField::new('area')->setLabel('Area')->setRequired(true),
-            TextField::new('studyType')->setLabel('Study Type')->setRequired(true),
-            DateField::new('startDate')->setLabel('Start Date')->setRequired(true),
-            DateField::new('endDate')->setLabel('End Date')->setRequired(true),
-            TextField::new('score')->setLabel('Score')->setRequired(true),
-            TextEditorField::new('courses')->setLabel('Courses')->setRequired(true)
+            TextField::new('studyType')->setLabel('Study Type')->setRequired(false),
+            DateField::new('startDate')->setLabel('Start Date')
+                ->setRequired(false)
+                ->setFormType(DateType::class)
+                ->setFormTypeOptions([
+                    'widget' => 'single_text',
+                    'required' => false,
+                    'empty_data' => null,
+                ]),
+            DateField::new('endDate')->setLabel('End Date')->setRequired(true)->setEmptyData(null),
+            TextField::new('score')->setLabel('Score')->setRequired(false),
+            ArrayField::new('courses')->setLabel('Courses')->setRequired(false)
         ];
 
 
@@ -56,9 +66,15 @@ class EducationCrudController extends AbstractCrudController
         // Configuration du CRUD
         return $crud
             ->setPageTitle('index', 'Gestion de mes Educations')
-            ->setPageTitle('edit', 'Edition de la Education')
+            ->setPageTitle('edit', 'Edition education')
             ->setPageTitle('new', 'Ajout d\'une Education')
-            ->setPageTitle('detail', 'Détail de la Education');
+            ->setPageTitle('detail', 'Détail de l\'éducation');
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $entityInstance->setStartDate(NULL);
+        parent::persistEntity($entityManager, $entityInstance);
     }
 }
 

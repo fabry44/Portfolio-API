@@ -25,12 +25,9 @@ class LanguageCrudController extends AbstractCrudController
         yield ChoiceField::new('fluency')
             ->setLabel('Niveau de maîtrise')
             ->setChoices([
-                'Débutant' => 'Débutant',
-                'Intermédiaire' => 'Intermédiaire',
-                'Avancé' => 'Avancé',
-                'Courant' => 'Courant',
-                'Bilingue' => 'Bilingue',
-                'Langue maternelle' => 'Langue maternelle'
+                'Débutant' => 'beginner',
+                'Intermédiaire' => 'advanced',
+                'Avancé' => 'master'
             ])
             ->setRequired(true);
     }

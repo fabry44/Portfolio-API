@@ -55,6 +55,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(["api.portfolio"])]
     private ?string $phone = null;
 
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    #[Groups(["api.portfolio"])]
+    private ?string $webSite = null; 
+
     #[ORM\OneToOne(mappedBy: "user", targetEntity: Location::class, cascade: ["persist", "remove"])]
     #[Groups(["api.portfolio"])]
     private ?Location $location = null;
@@ -203,6 +207,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
+        return $this;
+    }
+
+    public function getWebSite(): ?string
+    {
+        return $this->webSite;
+    }
+
+    public function setWebSite(?string $webSite): self
+    {
+        $this->webSite = $webSite;
         return $this;
     }
 
