@@ -1,0 +1,103 @@
+{
+    "$schema": "https:\/\/raw.githubusercontent.com\/jsonresume\/resume-schema\/v1.0.0\/schema.json",
+    "basics": {
+        "name": "Roy Fabien",
+        "label": "D\u00e9veloppeur Web et Web Mobile",
+        "email": "fabienroy2@gmail.com",
+        "phone": "0650262098",
+        "summary": "Apr\u00e8s 15 ans d\u2019exp\u00e9rience dans les r\u00e9seaux fibre optique, dont 6 ans en tant que conducteur de travaux, j\u2019ai d\u00e9cid\u00e9 de relever un nouveau d\u00e9fi en me reconvertissant dans le d\u00e9veloppement web et mobile. Passionn\u00e9 par la programmation depuis toujours, je me sp\u00e9cialise aujourd\u2019hui en Symfony tout en explorant Node.js et Python.",
+        "location": {
+            "address": "22 rue des Renardi\u00e8res 44100 Nantes",
+            "postalCode": "44100",
+            "city": "Nantes",
+            "countryCode": "FR",
+            "region": "Pays de la Loire"
+        },
+        "profiles": []
+    },
+    "work": [],
+    "education": [
+        {
+            "institution": "\u00c9cole Studi",
+            "url": "",
+            "area": "D\u00e9veloppement Web et Web Mobile",
+            "studyType": "Certificat d'\u00c9tat niveau 5",
+            "startDate": "2023-07-20",
+            "endDate": "2025-01-01",
+            "score": null,
+            "courses": []
+        },
+        {
+            "institution": "Lyc\u00e9e F\u00e9lix le Dantec \u00e0 Lannion",
+            "url": "",
+            "area": "Optique physique, g\u00e9om\u00e9trique et photonique",
+            "studyType": "BTS G\u00e9nie Optique option Photonique",
+            "startDate": "2010-09-01",
+            "endDate": "2010-06-01",
+            "score": null,
+            "courses": []
+        },
+        {
+            "institution": "Lyc\u00e9e Chateaubriand \u00e0 Combourg",
+            "url": "",
+            "area": "Math\u00e9matiques",
+            "studyType": "Bac Scientifique",
+            "startDate": "2025-02-28",
+            "endDate": "2008-06-01",
+            "score": null,
+            "courses": []
+        }
+    ],
+    "skills": [
+        {
+            "name": "Languages",
+            "level": null,
+            "keywords": [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "PHP",
+                "Rust",
+                "Python"
+            ]
+        },
+        {
+            "name": "Frameworks et Librairies",
+            "level": null,
+            "keywords": [
+                "Symfony",
+                "Astro",
+                "React",
+                "Symfony",
+                "Bootstrap",
+                "Tailwind CSS",
+                "Node.js"
+            ]
+        },
+        {
+            "name": "Bases de Donn\u00e9es",
+            "level": null,
+            "keywords": [
+                "MongoDB",
+                "MySQL"
+            ]
+        },
+        {
+            "name": "Outils Additionnels",
+            "level": null,
+            "keywords": [
+                "Figma",
+                "Git",
+                "GitHub",
+                "Netlify"
+            ]
+        }
+    ],
+    "languages": [],
+    "interests": [],
+    "references": [],
+    "meta": {
+        "version": "v1.0.0",
+        "lastModified": "2025-02-28T21:41:36+00:00"
+    }
+}

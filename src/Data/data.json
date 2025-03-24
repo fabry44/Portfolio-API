@@ -1,0 +1,505 @@
+{
+    "user": {
+        "email": "fabienroy2@gmail.com",
+        "name": "Roy Fabien",
+        "phone": "0650262098",
+        "birth": "1984-09-16T00:00:00+00:00",
+        "address": "22 rue des Renardi\u00e8res 44100 Nantes",
+        "linkedin": "https:\/\/www.linkedin.com\/in\/roy-fabien-13982a157",
+        "github": "https:\/\/github.com\/fabry44",
+        "status": "EN RECHERCHE ACTIVE",
+        "about": "<div>Je m'appelle <strong>Fabien Roy<\/strong>. Apr\u00e8s 15 ans d'exp\u00e9rience dans les r\u00e9seaux fibre optique, dont 6 ann\u00e9es en tant que conducteur de travaux sp\u00e9cialis\u00e9 dans le d\u00e9ploiement de la fibre optique, j\u2019ai d\u00e9cid\u00e9 d'entamer une reconversion vers le <strong>d\u00e9veloppement web et mobile<\/strong>.<br>J'ai obtenu un <strong>certificat d'\u00c9tat niveau 5 en D\u00e9veloppement Web et Web Mobile (DWWM)<\/strong> \u00e0 l'\u00e9cole Studi en candidat libre, tout en travaillant \u00e0 plein temps. Cette exp\u00e9rience a renforc\u00e9 ma pers\u00e9v\u00e9rance et ma capacit\u00e9 \u00e0 m\u2019adapter \u00e0 des d\u00e9fis exigeants.<br>Avant m\u00eame cette reconversion, ma passion pour la programmation \u00e9tait d\u00e9j\u00e0 pr\u00e9sente. Dans mon ancien m\u00e9tier, j\u2019utilisais des scripts en <strong>VBA <\/strong>pour automatiser des t\u00e2ches r\u00e9p\u00e9titives, optimisant ainsi mon temps et la qualit\u00e9 des r\u00e9sultats. Aujourd\u2019hui, cette aptitude \u00e0 rechercher des solutions innovantes s\u2019applique pleinement \u00e0 mes projets de d\u00e9veloppement.<\/div>",
+        "function": "D\u00e9veloppeur Web et Web Mobile",
+        "age": 40,
+        "languages": [
+            "Fran\u00e7ais",
+            "Anglais",
+            "Espagnole"
+        ],
+        "interests": [],
+        "img": "identity-67d4520136cf3358299333-min-67d99ab154c1a780951172.webp"
+    },
+    "formations": [
+        {
+            "degree": "Certificat d'\u00c9tat niveau 5",
+            "institution": "\u00c9cole Studi",
+            "date": "2024-12-11T00:00:00+00:00",
+            "description": "D\u00e9veloppement Web et Web Mobile"
+        },
+        {
+            "degree": "BTS G\u00e9nie Optique option Photonique",
+            "institution": "Lyc\u00e9e F\u00e9lix le Dantec \u00e0 Lannion",
+            "date": "2010-06-01T00:00:00+00:00",
+            "description": "Optique physique, g\u00e9om\u00e9trique et photonique"
+        },
+        {
+            "degree": "Bac Scientifique",
+            "institution": "Lyc\u00e9e Chateaubriand \u00e0 Combourg",
+            "date": "2008-06-01T00:00:00+00:00",
+            "description": "Bac Scientifique sp\u00e9cialit\u00e9 Math\u00e9matiques"
+        }
+    ],
+    "projects": [
+        {
+            "title": "Site web pour un zoo (Arcadia)",
+            "img": "zooaracadia1-67d0367072ced161776008.jpg",
+            "Allimg": [
+                "zooaracadia1-67d0367072ced161776008.jpg",
+                "zooaracadia2-67d03678808e9248702050.jpg",
+                "zooaracadia3-67d0367e98eab890383041.jpg"
+            ],
+            "description": "<div><strong>Projet d'\u00e9tude Studi (ECF) : conception d'un site web Zoo-Arcadia:<br><\/strong><br>Ce projet a \u00e9t\u00e9 r\u00e9alis\u00e9 dans le cadre de l\u2019\u00e9valuation de certification et visait \u00e0 mettre en place un syst\u00e8me de gestion pour un zoo.<br><br><\/div><div>Le site est structur\u00e9 avec trois r\u00f4les distincts : <strong>administrateurs, v\u00e9t\u00e9rinaires et employ\u00e9s<\/strong>, chacun ayant des droits sp\u00e9cifiques via <strong>Symfony Security et Voters<\/strong>. La base de donn\u00e9es repose sur <strong>PostgreSQL<\/strong> pour stocker les informations des animaux et habitats.<br><br><\/div><div>L'interface a \u00e9t\u00e9 enrichie avec des fonctionnalit\u00e9s interactives :<br><br><\/div><ul><li><strong>Affichage des habitats et animaux<\/strong> avec <strong>Stimulus et Bootstrap<\/strong>.<\/li><li><strong>Suivi des clics des visiteurs<\/strong> sur les fiches des animaux avec <strong>MongoDB<\/strong>.<\/li><li><strong>Notation et avis des visiteurs<\/strong> int\u00e9gr\u00e9s pour recueillir des feedbacks.<\/li><\/ul><div>Le projet est administr\u00e9 via <strong>EasyAdmin v4<\/strong>, garantissant une gestion efficace des donn\u00e9es.<br><br><\/div>",
+            "highlights": {
+                "11": "Symfony Security + Voters pour restreindre l\u2019acc\u00e8s aux administrateurs, v\u00e9t\u00e9rinaires et employ\u00e9s.",
+                "12": "Acc\u00e8s s\u00e9curis\u00e9 aux donn\u00e9es sensibles avec EasyAdmin v4.",
+                "13": "CRUD administrable pour g\u00e9rer les animaux, habitats et soins en fonction du r\u00f4le de l'utilisateur",
+                "14": "Stockage des donn\u00e9es dans PostgreSQL.",
+                "15": "MongoDB utilis\u00e9 pour suivre les interactions des visiteurs sur les fiches animaux.",
+                "16": "Stimulus JS pour capturer et analyser les clics des utilisateurs.",
+                "17": "S\u00e9lection dynamique des habitats et animaux avec Stimulus et Bootstrap.",
+                "18": "Syst\u00e8me de notation avec \u00e9toiles et commentaires des visiteurs.",
+                "19": "D\u00e9velopp\u00e9 sous Symfony 7"
+            },
+            "link": "https:\/\/project-zoo-arcadia-c0cc1a69ef90.herokuapp.com\/",
+            "github": "https:\/\/github.com\/fabry44\/Studi_project_Zoo_Arcadia.git",
+            "technology": [
+                {
+                    "name": "HTML",
+                    "icon": "Html",
+                    "class": "bg-[#963419] text-white",
+                    "style": "background-color: #963419; color: #fff;"
+                },
+                {
+                    "name": "CSS",
+                    "icon": "Css",
+                    "class": "bg-[#07436b] text-white",
+                    "style": "background-color: #07436b; color: #fff;"
+                },
+                {
+                    "name": "JavaScript",
+                    "icon": "Js",
+                    "class": "bg-[#a39535] text-white",
+                    "style": "background-color: #a39535; color: #fff;"
+                },
+                {
+                    "name": "PHP",
+                    "icon": "Php",
+                    "class": "bg-[#4F5D95] text-white",
+                    "style": "background-color: #4F5D95; color: #fff;"
+                },
+                {
+                    "name": "Symfony",
+                    "icon": "Symfony",
+                    "class": "bg-[#000000] text-white",
+                    "style": "background-color: #000000; color: #fff;"
+                },
+                {
+                    "name": "Bootstrap",
+                    "icon": "Bootstrap",
+                    "class": "bg-[#563D7C] text-white",
+                    "style": "background-color: #563D7C; color: #fff;"
+                },
+                {
+                    "name": "MongoDB",
+                    "icon": "Mongo",
+                    "class": "bg-[#47A248] text-white",
+                    "style": "background-color: #47A248; color: #fff;"
+                },
+                {
+                    "name": "Postrgresql",
+                    "icon": "Postgres",
+                    "class": "bg-[#336791] text-white",
+                    "style": "background-color: #336791; color: white;"
+                },
+                {
+                    "name": "Heroku",
+                    "icon": "Heroku",
+                    "class": "bg-[#409] text-white",
+                    "style": "background-color: #409; color: white;"
+                },
+                {
+                    "name": "Docker",
+                    "icon": "Docker",
+                    "class": "bg-[#2396ed] text-white",
+                    "style": "background-color: #2396ed; color: white;"
+                }
+            ]
+        },
+        {
+            "title": "SOS PRO, Site vitrine de service aux particuliers et aux entreprises",
+            "img": "sospro1-67d04ed97f3b9360902221.jpg",
+            "Allimg": [
+                "sospro1-67d04ed97f3b9360902221.jpg"
+            ],
+            "description": "<div>Le projet <strong>SOSPRO<\/strong> a \u00e9t\u00e9 con\u00e7u pour g\u00e9rer une entreprise de services \u00e0 domicile et en entreprise. Il permet aux administrateurs de g\u00e9rer les devis, clients, interventions et statistiques depuis une interface s\u00e9curis\u00e9e.<br><br><\/div><div>La solution repose sur <strong>Symfony 7<\/strong> et int\u00e8gre <strong>EasyAdmin v4<\/strong> pour faciliter l'administration. L\u2019un des points cl\u00e9s du projet est la gestion des interventions via un <strong>planning interactif (FullCalendar)<\/strong>, offrant aux clients une vue personnalis\u00e9e de leurs prestations.<br><br><\/div><div>En termes de s\u00e9curit\u00e9, <strong>JWT et UUID<\/strong> sont utilis\u00e9s pour garantir une inscription s\u00e9curis\u00e9e via un syst\u00e8me d\u2019invitations. Le respect du <strong>RGPD<\/strong> a \u00e9galement \u00e9t\u00e9 une priorit\u00e9 avec l\u2019impl\u00e9mentation de <strong>Matomo<\/strong> pour le suivi analytique sans n\u00e9cessiter de consentement.<br><br><\/div><div>L'optimisation UX a \u00e9t\u00e9 r\u00e9alis\u00e9e via <strong>Symfony UX Turbo<\/strong>, permettant une navigation fluide sans rechargement complet des pages. L\u2019int\u00e9gration d\u2019<strong>UX Map<\/strong> permet la g\u00e9olocalisation des clients et la gestion des demandes de devis.<br><br><\/div>",
+            "highlights": {
+                "0": "Int\u00e9gration de FullCalendar avec gestion des \u00e9v\u00e9nements en drag-and-drop.",
+                "1": "Vue personnalis\u00e9e des interventions pour chaque utilisateur.",
+                "2": "CRUD s\u00e9curis\u00e9 pour les utilisateurs, interventions, devis et statistiques.",
+                "3": "Personnalisation des templates pour une meilleure exp\u00e9rience utilisateur.",
+                "4": "Utilisation de JWT et UUID pour une inscription s\u00e9curis\u00e9e via invitations.",
+                "7": "Utilisation de Voters Symfony pour une gestion fine des permissions.",
+                "8": "Respect des normes CNIL avec anonymisation des donn\u00e9es (pas de consentement requis).",
+                "9": "Matomo utilis\u00e9 pour le suivi analytique au lieu de Google Analytics.",
+                "10": "Int\u00e9gration de Symfony UX Turbo pour des pages dynamiques sans rechargement.",
+                "11": "Syst\u00e8me de g\u00e9olocalisation avec UX Map pour afficher les adresses des clients.",
+                "12": "D\u00e9velopp\u00e9 en Symfony 7 avec MariaDB comme base de donn\u00e9es."
+            },
+            "link": "sospro-jalila.fr",
+            "github": "https:\/\/github.com\/fabry44\/SOSPRO.git",
+            "technology": [
+                {
+                    "name": "HTML",
+                    "icon": "Html",
+                    "class": "bg-[#963419] text-white",
+                    "style": "background-color: #963419; color: #fff;"
+                },
+                {
+                    "name": "CSS",
+                    "icon": "Css",
+                    "class": "bg-[#07436b] text-white",
+                    "style": "background-color: #07436b; color: #fff;"
+                },
+                {
+                    "name": "JavaScript",
+                    "icon": "Js",
+                    "class": "bg-[#a39535] text-white",
+                    "style": "background-color: #a39535; color: #fff;"
+                },
+                {
+                    "name": "PHP",
+                    "icon": "Php",
+                    "class": "bg-[#4F5D95] text-white",
+                    "style": "background-color: #4F5D95; color: #fff;"
+                },
+                {
+                    "name": "Symfony",
+                    "icon": "Symfony",
+                    "class": "bg-[#000000] text-white",
+                    "style": "background-color: #000000; color: #fff;"
+                },
+                {
+                    "name": "Bootstrap",
+                    "icon": "Bootstrap",
+                    "class": "bg-[#563D7C] text-white",
+                    "style": "background-color: #563D7C; color: #fff;"
+                },
+                {
+                    "name": "jQuery",
+                    "icon": "Jquery",
+                    "class": "bg-[#0769AD] text-white",
+                    "style": "background-color: #0769AD; color: #fff;"
+                },
+                {
+                    "name": "MariaDB",
+                    "icon": "Maria",
+                    "class": "bg-[#003545] text-white",
+                    "style": "background-color: #003545; color: #fff;"
+                },
+                {
+                    "name": "Docker",
+                    "icon": "Docker",
+                    "class": "bg-[#2396ed] text-white",
+                    "style": "background-color: #2396ed; color: white;"
+                },
+                {
+                    "name": "Matomo",
+                    "icon": "Matomo",
+                    "class": "bg-[#3152a0] text-white",
+                    "style": "background-color: #3152a0; color: white;"
+                }
+            ]
+        },
+        {
+            "title": "Portfolio-API",
+            "img": "portfolio-api1-67d0d2fa03641441968175.jpg",
+            "Allimg": [
+                "portfolio-api1-67d0d2fa03641441968175.jpg"
+            ],
+            "description": "<div><strong>Portfolio Backend<\/strong> est une API d\u00e9velopp\u00e9e avec <strong>Symfony 7<\/strong> et administr\u00e9e via <strong>EasyAdmin<\/strong>. Elle permet de g\u00e9rer dynamiquement les projets, exp\u00e9riences et comp\u00e9tences affich\u00e9s sur mon portfolio. L'API est consomm\u00e9e par le <strong>frontend Astro<\/strong> et s\u00e9curis\u00e9e avec <strong>OAuth 2 (Client Credentials)<\/strong>.<br><br><\/div><div>Les mises \u00e0 jour du backend sont <strong>push\u00e9es manuellement sur GitHub<\/strong>, et le <strong>rebuild du frontend sur Netlify<\/strong> est \u00e9galement d\u00e9clench\u00e9 manuellement via un <strong>hook<\/strong>, ex\u00e9cutant un npm run build. L'API est aussi utilis\u00e9e pour la soumission de formulaires, garantissant une communication s\u00e9curis\u00e9e et fluide entre le front et le back.<br><br><\/div>",
+            "highlights": {
+                "0": "API REST s\u00e9curis\u00e9e avec OAuth2 et JWT (authentification robuste).",
+                "1": "Gestion avanc\u00e9e des permissions et r\u00f4les via le syst\u00e8me de s\u00e9curit\u00e9 Symfony.",
+                "2": "Protection contre les attaques CSRF, XSS et injection SQL avec Symfony et le HTMLSanitizer.",
+                "3": "D\u00e9velopp\u00e9 avec Symfony 7, structur\u00e9 avec Doctrine ORM et MariaDB.",
+                "4": "Stockage optimis\u00e9 : JSON export\u00e9 pour un chargement rapide c\u00f4t\u00e9 frontend (statique avec Astro).",
+                "5": "API stateless, compatible avec CI\/CD et Webhooks.",
+                "6": "EasyAdmin pour une gestion simplifi\u00e9e du contenu (Projets, Exp\u00e9riences, Formations).",
+                "7": "CRUD complet pour modifier dynamiquement les contenus du portfolio.",
+                "9": "Dockeris\u00e9 pour un environnement stable en d\u00e9veloppement et production.",
+                "10": "D\u00e9ploiement automatis\u00e9 via GitHub Actions et Webhook Netlify."
+            },
+            "link": "backoffice.fabien-roy.fr",
+            "github": "https:\/\/github.com\/fabry44\/Portfolio-API.git",
+            "technology": [
+                {
+                    "name": "HTML",
+                    "icon": "Html",
+                    "class": "bg-[#963419] text-white",
+                    "style": "background-color: #963419; color: #fff;"
+                },
+                {
+                    "name": "CSS",
+                    "icon": "Css",
+                    "class": "bg-[#07436b] text-white",
+                    "style": "background-color: #07436b; color: #fff;"
+                },
+                {
+                    "name": "JavaScript",
+                    "icon": "Js",
+                    "class": "bg-[#a39535] text-white",
+                    "style": "background-color: #a39535; color: #fff;"
+                },
+                {
+                    "name": "PHP",
+                    "icon": "Php",
+                    "class": "bg-[#4F5D95] text-white",
+                    "style": "background-color: #4F5D95; color: #fff;"
+                },
+                {
+                    "name": "Symfony",
+                    "icon": "Symfony",
+                    "class": "bg-[#000000] text-white",
+                    "style": "background-color: #000000; color: #fff;"
+                },
+                {
+                    "name": "MariaDB",
+                    "icon": "Maria",
+                    "class": "bg-[#003545] text-white",
+                    "style": "background-color: #003545; color: #fff;"
+                },
+                {
+                    "name": "Docker",
+                    "icon": "Docker",
+                    "class": "bg-[#2396ed] text-white",
+                    "style": "background-color: #2396ed; color: white;"
+                }
+            ]
+        },
+        {
+            "title": "Portfolio-Astro",
+            "img": "portfolio-astro1-67d0d5b357916785843358.jpg",
+            "Allimg": [
+                "portfolio-astro1-67d0d5b357916785843358.jpg",
+                "portfolio-astro2-67d0d5be4b231609193910.jpg"
+            ],
+            "description": "<div><strong>Portfolio-Astro<\/strong> est l\u2019interface frontend de mon portfolio, d\u00e9velopp\u00e9 avec <strong>Astro<\/strong>, un framework moderne optimis\u00e9 pour le <strong>rendement et la rapidit\u00e9<\/strong>. Con\u00e7u pour g\u00e9n\u00e9rer un site statique ultra-performant, <strong>Astro<\/strong> permet d\u2019envoyer uniquement du HTML\/CSS aux utilisateurs et de charger dynamiquement du JavaScript <strong>l\u00e0 o\u00f9 c\u2019est n\u00e9cessaire<\/strong>. Cela garantit un <strong>temps de chargement minimal<\/strong> et un excellent score <strong>Lighthouse<\/strong> en SEO, accessibilit\u00e9 et performances.<br><br><\/div><div>Le site int\u00e8gre des <strong>composants React<\/strong>, notamment pour le formulaire de contact, qui communique avec mon <strong>Portfolio-API<\/strong> via une requ\u00eate s\u00e9curis\u00e9e. Il g\u00e8re \u00e9galement des <strong>animations fluides et interactives<\/strong> pour am\u00e9liorer l\u2019exp\u00e9rience utilisateur, tout en conservant une <strong>empreinte l\u00e9g\u00e8re<\/strong>.<br><br><\/div><div>Chaque mise \u00e0 jour du contenu (projets, exp\u00e9riences, comp\u00e9tences) est automatiquement int\u00e9gr\u00e9e en d\u00e9clenchant un <strong>rebuild manuel<\/strong> via un hook <strong>Netlify<\/strong>, assurant ainsi que le portfolio reste toujours \u00e0 jour et optimis\u00e9.<br><br><\/div>",
+            "highlights": [
+                "Astro.js pour un site statique ultra-rapide (optimisation du rendu).",
+                "Tailwind CSS : un design moderne, \u00e9pur\u00e9 et responsive.",
+                "Composants dynamiques r\u00e9cup\u00e9rant les donn\u00e9es en temps r\u00e9el via l\u2019API Symfony.",
+                "Connexion directe avec Portfolio-API via Fetch API.",
+                "Build automatique sur Netlify d\u00e8s modification du backend.",
+                "Syst\u00e8me de mise \u00e0 jour dynamique sans intervention manuelle.",
+                "Backend Symfony sur un serveur mutualis\u00e9 (optimisation des ressources).",
+                "Frontend Astro sur Netlify pour un h\u00e9bergement rapide et scalable.",
+                "S\u00e9paration nette backend\/frontend, facilitant l\u2019\u00e9volutivit\u00e9."
+            ],
+            "link": "fabien-roy.fr",
+            "github": "https:\/\/github.com\/fabry44\/portfolio-astro.git",
+            "technology": [
+                {
+                    "name": "HTML",
+                    "icon": "Html",
+                    "class": "bg-[#963419] text-white",
+                    "style": "background-color: #963419; color: #fff;"
+                },
+                {
+                    "name": "CSS",
+                    "icon": "Css",
+                    "class": "bg-[#07436b] text-white",
+                    "style": "background-color: #07436b; color: #fff;"
+                },
+                {
+                    "name": "JavaScript",
+                    "icon": "Js",
+                    "class": "bg-[#a39535] text-white",
+                    "style": "background-color: #a39535; color: #fff;"
+                },
+                {
+                    "name": "Astro",
+                    "icon": "AstroIcon",
+                    "class": "bg-[#FF5A1F] text-white",
+                    "style": "background-color: #FF5A1F; color: #fff;"
+                },
+                {
+                    "name": "Tailwind CSS",
+                    "icon": "Tailwind",
+                    "class": "bg-[#06B6D4] text-white",
+                    "style": "background-color: #06B6D4; color: #fff;"
+                },
+                {
+                    "name": "React",
+                    "icon": "React",
+                    "class": "bg-[#1c7777] text-white",
+                    "style": "background-color: #1c7777; color: #fff;"
+                },
+                {
+                    "name": "Docker",
+                    "icon": "Docker",
+                    "class": "bg-[#2396ed] text-white",
+                    "style": "background-color: #2396ed; color: white;"
+                }
+            ]
+        }
+    ],
+    "technologies": [
+        {
+            "name": "HTML",
+            "icon": "Html",
+            "class": "bg-[#963419] text-white",
+            "style": "background-color: #963419; color: #fff;"
+        },
+        {
+            "name": "CSS",
+            "icon": "Css",
+            "class": "bg-[#07436b] text-white",
+            "style": "background-color: #07436b; color: #fff;"
+        },
+        {
+            "name": "JavaScript",
+            "icon": "Js",
+            "class": "bg-[#a39535] text-white",
+            "style": "background-color: #a39535; color: #fff;"
+        },
+        {
+            "name": "Python",
+            "icon": "Python",
+            "class": "bg-[#306998] text-white",
+            "style": "background-color: #306998; color: #fff;"
+        },
+        {
+            "name": "PHP",
+            "icon": "Php",
+            "class": "bg-[#4F5D95] text-white",
+            "style": "background-color: #4F5D95; color: #fff;"
+        },
+        {
+            "name": "Astro",
+            "icon": "AstroIcon",
+            "class": "bg-[#FF5A1F] text-white",
+            "style": "background-color: #FF5A1F; color: #fff;"
+        },
+        {
+            "name": "Tailwind CSS",
+            "icon": "Tailwind",
+            "class": "bg-[#06B6D4] text-white",
+            "style": "background-color: #06B6D4; color: #fff;"
+        },
+        {
+            "name": "Symfony",
+            "icon": "Symfony",
+            "class": "bg-[#000000] text-white",
+            "style": "background-color: #000000; color: #fff;"
+        },
+        {
+            "name": "Bootstrap",
+            "icon": "Bootstrap",
+            "class": "bg-[#563D7C] text-white",
+            "style": "background-color: #563D7C; color: #fff;"
+        },
+        {
+            "name": "React",
+            "icon": "React",
+            "class": "bg-[#1c7777] text-white",
+            "style": "background-color: #1c7777; color: #fff;"
+        },
+        {
+            "name": "Django",
+            "icon": "Django",
+            "class": "bg-[#092E20] text-white",
+            "style": "background-color: #092E20; color: #fff;"
+        },
+        {
+            "name": "jQuery",
+            "icon": "Jquery",
+            "class": "bg-[#0769AD] text-white",
+            "style": "background-color: #0769AD; color: #fff;"
+        },
+        {
+            "name": "MongoDB",
+            "icon": "Mongo",
+            "class": "bg-[#47A248] text-white",
+            "style": "background-color: #47A248; color: #fff;"
+        },
+        {
+            "name": "MariaDB",
+            "icon": "Maria",
+            "class": "bg-[#003545] text-white",
+            "style": "background-color: #003545; color: #fff;"
+        },
+        {
+            "name": "SQLite",
+            "icon": "Sqlite",
+            "class": "bg-[#003B57] text-white",
+            "style": "background-color: #003B57; color: #fff;"
+        },
+        {
+            "name": "MySQL",
+            "icon": "Mysql",
+            "class": "bg-[#00758F] text-white",
+            "style": "background-color: #00758F; color: #fff;"
+        },
+        {
+            "name": "Postrgresql",
+            "icon": "Postgres",
+            "class": "bg-[#336791] text-white",
+            "style": "background-color: #336791; color: white;"
+        },
+        {
+            "name": "MariaDB",
+            "icon": "MariaDB",
+            "class": "bg-[#c49a6c] text-white",
+            "style": "background-color: #c49a6c; color: white;"
+        },
+        {
+            "name": "Symfony",
+            "icon": "Symfony",
+            "class": "bg-[#000000] text-white",
+            "style": "background-color: #000000; color: white;"
+        },
+        {
+            "name": "Heroku",
+            "icon": "Heroku",
+            "class": "bg-[#409] text-white",
+            "style": "background-color: #409; color: white;"
+        },
+        {
+            "name": "JQuery",
+            "icon": "Jquery",
+            "class": "bg-[#0868AC] text-white",
+            "style": "background-color: #0868AC; color: white;"
+        },
+        {
+            "name": "Django",
+            "icon": "Django",
+            "class": "bg-[#2ba977] text-white",
+            "style": "background-color: #2ba977; color: white;"
+        },
+        {
+            "name": "Docker",
+            "icon": "Docker",
+            "class": "bg-[#2396ed] text-white",
+            "style": "background-color: #2396ed; color: white;"
+        },
+        {
+            "name": "SQL",
+            "icon": "Sql",
+            "class": "bg-[#00bcf2] text-white",
+            "style": "background-color: #00bcf2; color: white;"
+        },
+        {
+            "name": "Matomo",
+            "icon": "Matomo",
+            "class": "bg-[#3152a0] text-white",
+            "style": "background-color: #3152a0; color: white;"
+        },
+        {
+            "name": "Github",
+            "icon": "Github",
+            "class": "bg-[#fff] text-white",
+            "style": "background-color: #fff; color: white;"
+        }
+    ],
+    "updated_at": "2025-03-23 23:14:36"
+}

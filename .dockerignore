@@ -1,0 +1,16 @@
+# Ignorer les fichiers inutiles pour Docker
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+node_modules
+npm-debug.log
+# .env
+# .env.local
+.env.prod
+.env.test
+.env.dev
+vendor/
+var/cache/
+var/log/
+composer.lock

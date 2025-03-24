@@ -1,0 +1,79 @@
+services:
+  db:
+    image: mariadb:10.4
+    container_name: portfolio-db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MYSQL_DATABASE: portfolio
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - portfolio-network
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: portfolio-phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db  # Le nom du service MariaDB dans Docker
+      PMA_USER: root
+      PMA_PASSWORD: root
+      UPLOAD_LIMIT: 100M
+    ports:
+      - "8081:80"  # Accès via http://localhost:8081
+    networks:
+      - portfolio-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio-api
+    restart: always
+    environment:
+      APP_ENV: "dev"
+      APP_DEBUG: "1"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:80"
+    networks:
+      - portfolio-network
+
+  frontend:
+    build:
+      # On sort du dossier courant (.), on va dans le dossier "frère" Portfolio-Astro important!
+      context: ../Portfolio-Astro
+      dockerfile: Dockerfile
+    container_name: portfolio-astro
+    restart: always
+    ports:
+      - "4321:4321"
+    # environment:
+    #   - NODE_ENV=production
+    volumes:
+      # Montre le code local du frontend dans /app si tu veux faire du dev
+      - ../Portfolio-Astro:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    driver: bridge
+
+volumes:
+  db_data:

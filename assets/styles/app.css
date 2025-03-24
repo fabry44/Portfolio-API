@@ -1,3 +1,526 @@
-body {
-    background-color: skyblue;
-}
+/* public/css/admin.css */
+/* ============================================================================
+   Redéfinition complète des variables EasyAdmin avec votre palette
+============================================================================ */
+:root {
+    /* Palette */
+    --primary: #618f9e;
+    --secondary: #beb18e;
+    --light: #e5eef0;
+    --dark: #0f181a;
+  
+    /* Gradients */
+    --linearPrimarySecondary: linear-gradient(#618f9e, #beb18e);
+    --linearPrimaryAccent: linear-gradient(#618f9e, #24aac2);
+    --linearSecondaryAccent: linear-gradient(#beb18e, #24aac2);
+    --radialPrimarySecondary: radial-gradient(#618f9e, #beb18e);
+    --radialPrimaryAccent: radial-gradient(#618f9e, #24aac2);
+    --radialSecondaryAccent: radial-gradient(#beb18e, #24aac2);
+  
+    /* Typographie */
+    --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-family-monospace: "JetBrains Mono", monospace;
+    --font-family-base: var(--font-family-sans-serif);
+    --font-size-xs: 12px;
+    --font-size-sm: 13px;
+    --font-size-base: 14px;
+    --font-size-lg: 16px;
+    --font-size-xl: 18px;
+    --font-size-xxl: 24px;
+    --font-size-xxxl: 28px;
+  
+    /* Ombres */
+    --shadow-md: 0 4px 6px -1px rgba(15,24,26,0.1), 0 2px 4px -2px rgba(15,24,26,0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(15,24,26,0.1), 0 4px 6px -4px rgba(15,24,26,0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(15,24,26,0.2), 0 8px 10px -6px rgba(15,24,26,0.2);
+  
+    /* Dimensions */
+    --width-sm: 576px;
+    --width-md: 768px;
+    --width-lg: 992px;
+    --width-xl: 1200px;
+    --width-xxl: 1400px;
+    --body-max-width: 1440px;
+  
+    /* Couleurs principales et fonds */
+    --text-color: var(--dark);
+    --text-color-rgb: 15, 24, 26;
+    --text-on-primary: #fff;
+    --text-muted: var(--secondary);
+    --border-color: var(--light);
+    --border-primary-color: var(--light);
+    --border-secondary-color: var(--secondary);
+    --border-tertiary-color: var(--secondary);
+    --primary-bg: var(--secondary);
+    --secondary-bg: var(--light);
+    --tertiary-bg: var(--light);
+    --body-bg: var(--light);
+  
+    /* Sidebar */
+    --sidebar-bg: var(--light);
+    --sidebar-border-color: var(--secondary);
+    --sidebar-logo-color: var(--dark);
+    --sidebar-menu-color: var(--dark);
+    --sidebar-menu-badge-bg: var(--primary);
+    --sidebar-menu-badge-color: #fff;
+    --sidebar-menu-badge-active-bg: var(--primary);
+    --sidebar-menu-badge-active-color: #fff;
+    --sidebar-menu-submenu-color: var(--dark);
+    --sidebar-menu-header-color: var(--dark);
+    --sidebar-menu-icon-color: var(--dark);
+    --sidebar-menu-active-item-bg: var(--secondary);
+    --sidebar-menu-active-item-color: #fff;
+  
+    /* Contenu */
+    --content-bg: var(--light);
+    --content-top-border-color: var(--secondary);
+    --content-section-border-color: var(--secondary);
+    --content-search-input-bg: var(--light);
+    --content-search-icon-color: var(--dark);
+    --content-search-reset-button-bg: var(--secondary);
+    --content-search-reset-button-color: var(--dark);
+    --content-search-reset-button-hover-bg: var(--primary);
+    --content-search-reset-button-hover-color: #fff;
+  
+    /* Boutons */
+    --button-bg: #fff;
+    --button-color: var(--dark);
+    --button-hover-color: var(--dark);
+    --button-active-color: var(--dark);
+    --button-border-color: var(--secondary);
+    --button-hover-border-color: var(--secondary);
+    --button-primary-bg: var(--primary);
+    --button-primary-color: #fff;
+    --button-secondary-bg: #fff;
+    --button-secondary-color: var(--dark);
+    --button-info-bg: var(--primary);
+    --button-info-color: #fff;
+    --button-success-bg: var(--primary);
+    --button-success-color: #fff;
+    --button-danger-bg: var(--secondary);
+    --button-danger-color: #fff;
+    --button-warning-bg: var(--secondary);
+    --button-warning-color: #fff;
+  
+    /* Alertes */
+    --alert-primary-bg: var(--primary);
+    --alert-primary-color: #fff;
+    --alert-primary-border-color: var(--primary);
+    --alert-secondary-bg: var(--secondary);
+    --alert-secondary-color: #fff;
+    --alert-secondary-border-color: var(--secondary);
+    --alert-success-bg: var(--primary);
+    --alert-success-color: #fff;
+    --alert-success-border-color: var(--primary);
+    --alert-info-bg: var(--primary);
+    --alert-info-color: #fff;
+    --alert-info-border-color: var(--primary);
+    --alert-warning-bg: var(--secondary);
+    --alert-warning-color: #fff;
+    --alert-warning-border-color: var(--secondary);
+    --alert-danger-bg: var(--secondary);
+    --alert-danger-color: #fff;
+    --alert-danger-border-color: var(--secondary);
+    --alert-light-bg: var(--light);
+    --alert-light-color: var(--dark);
+    --alert-light-border-color: var(--secondary);
+    --alert-dark-bg: var(--dark);
+    --alert-dark-color: #fff;
+    --alert-dark-border-color: var(--dark);
+  
+    /* Dropdowns et modals */
+    --dropdown-toggle-bg: #fff;
+    --dropdown-toggle-color: var(--dark);
+    --dropdown-toggle-border-color: var(--secondary);
+    --dropdown-toggle-hover-border-color: var(--primary);
+    --dropdown-bg: var(--light);
+    --dropdown-color: var(--dark);
+    --dropdown-border-color: var(--secondary);
+    --dropdown-link-color: var(--dark);
+    --dropdown-link-hover-bg: var(--secondary);
+    --dropdown-icon-color: var(--dark);
+    --dropdown-settings-icon-color: var(--dark);
+    --dropdown-settings-active-item-bg: var(--primary);
+    --dropdown-settings-active-item-color: #fff;
+    --dropdown-settings-active-item-shadow: inset 0 0 0 1px var(--primary);
+  
+    /* Pagination */
+    --pagination-color: var(--dark);
+    --pagination-hover-border-color: var(--secondary);
+    --pagination-disabled-color: var(--secondary);
+    --pagination-active-bg: var(--primary);
+    --pagination-active-color: #fff;
+  
+    /* Formulaires */
+    --form-label-color: var(--dark);
+    --form-control-bg: #fff;
+    --form-control-disabled-bg: var(--light);
+    --form-control-disabled-color: var(--dark);
+    --form-input-border-color: var(--secondary);
+    --form-input-error-legend-color: var(--secondary);
+    --form-input-error-border-color: var(--secondary);
+    --form-input-hover-border-color: var(--primary);
+    --form-input-shadow: 0 1px 2px 0 var(--light);
+    --form-input-hover-shadow: 0 0 0 4px var(--light);
+    --form-input-error-shadow: 0 0 0 3px rgba(182,2,5,0.2);
+    --form-input-text-color: var(--dark);
+    --form-input-group-text-bg: #fff;
+    --form-input-group-text-border-color: var(--secondary);
+    --form-switch-bg: var(--light);
+    --form-switch-border-color: var(--secondary);
+    --form-switch-checked-bg: var(--primary);
+    --form-type-check-input-border-color: var(--secondary);
+    --form-type-check-input-box-shadow: 0 1px 2px 0 var(--light);
+    --form-type-check-input-checked-bg: var(--primary);
+    --form-type-text-editor-toolbar-bg: #fff;
+    --form-type-text-editor-toolbar-button-color: var(--dark);
+    --form-type-text-editor-toolbar-button-hover-color: var(--secondary);
+    --form-type-text-editor-toolbar-button-active-bg: var(--light);
+    --form-type-text-editor-toolbar-button-active-color: var(--dark);
+    --form-type-text-editor-dialog-bg: #fff;
+    --form-type-text-editor-dialog-box-shadow: 0 4px 12px var(--secondary);
+    --form-type-text-editor-content-pre-bg: var(--light);
+    --form-type-text-editor-content-pre-color: var(--dark);
+    --form-type-collection-item-collapsed-hover-bg: var(--light);
+    --form-type-autocomplete-dropdown-bg: #fff;
+    --form-type-autocomplete-dropdown-input-wrapper-bg: var(--light);
+    --form-type-autocomplete-dropdown-input-border-color: var(--secondary);
+    --form-type-autocomplete-dropdown-active-item-bg: var(--secondary);
+    --form-type-autocomplete-close-button-bg: var(--secondary);
+    --form-type-autocomplete-close-button-hover-bg: var(--primary);
+    --form-type-autocomplete-optgroup-bg: #fff;
+    --form-type-autocomplete-optgroup-color: var(--dark);
+    --form-type-autocomplete-multi-item-bg: var(--light);
+    --form-type-autocomplete-multi-item-border-color: #fff;
+    --form-type-autocomplete-multi-item-remove-button-hover-bg: var(--secondary);
+    --form-global-error-bg: var(--secondary);
+    --form-global-error-color: #fff;
+    --form-global-error-border: 1px solid var(--secondary);
+    --form-help-color: var(--secondary);
+    --form-help-error-color: var(--secondary);
+    --form-help-active-color: var(--secondary);
+    --form-tabs-border-color: var(--secondary);
+    --form-tabs-help-color: var(--secondary);
+    --form-column-header-color: var(--dark);
+    --form-column-help-color: var(--secondary);
+    --form-column-icon-color: var(--secondary);
+    --form-fieldset-header-color: var(--dark);
+    --form-fieldset-help-color: var(--secondary);
+    --form-fieldset-border-color: var(--secondary);
+    --form-fieldset-header-border-color: var(--secondary);
+    --form-fieldset-icon-color: var(--secondary);
+  
+    /* Badges */
+    --badge-border: 0;
+    --badge-boolean-false-bg: var(--light);
+    --badge-boolean-false-box-shadow: inset 0 0 0 1px var(--secondary);
+    --badge-boolean-false-color: var(--dark);
+    --badge-boolean-true-bg: var(--primary);
+    --badge-boolean-true-box-shadow: none;
+    --badge-boolean-true-color: #fff;
+    --badge-success-bg: var(--primary);
+    --badge-success-box-shadow: none;
+    --badge-success-color: #fff;
+    --badge-warning-bg: var(--secondary);
+    --badge-warning-box-shadow: none;
+    --badge-warning-color: #fff;
+    --badge-danger-bg: var(--secondary);
+    --badge-danger-box-shadow: none;
+    --badge-danger-color: #fff;
+    --badge-info-bg: var(--primary);
+    --badge-info-box-shadow: none;
+    --badge-info-color: #fff;
+    --badge-primary-bg: var(--primary);
+    --badge-primary-box-shadow: none;
+    --badge-primary-color: #fff;
+    --badge-secondary-bg: var(--dark);
+    --badge-secondary-box-shadow: none;
+    --badge-secondary-color: var(--light);
+    --badge-light-bg: var(--light);
+    --badge-light-box-shadow: none;
+    --badge-light-color: var(--dark);
+    --badge-dark-bg: var(--dark);
+    --badge-dark-box-shadow: none;
+    --badge-dark-color: var(--light);
+    --badge-outline-box-shadow: inset 0 0 0 1px var(--secondary);
+    --badge-outline-color: var(--dark);
+  
+    /* Code editor */
+    --code-color: #c44c34;
+    --code-editor-string-color: #032f62;
+    --code-editor-keyword-color: #d73a49;
+    --code-editor-comment-color: #22863a;
+    --code-editor-definition-color: #e36209;
+    --code-editor-variable-color: var(--dark);
+    --code-editor-number-color: var(--dark);
+    --code-editor-argument-color: #6f42c1;
+    --code-editor-key-color: #005cc5;
+    --code-editor-attribute-color: #22863a;
+    --code-editor-addition-bg: #e6ffed;
+    --code-editor-deletion-bg: #ffeef0;
+    --code-editor-selection-bg: #d7d7d7;
+  
+    /* Page Login */
+    --page-login-bg: var(--light);
+    --page-login-form-bg: #fff;
+    --page-login-form-control-bg: #fff;
+    --page-login-form-control-border-color: var(--secondary);
+    --page-login-form-control-button-bg: var(--primary);
+  
+    /* Z-index */
+    --zindex-modal-backdrop: 2020;
+    --zindex-700: 777;
+    --zindex-800: 888;
+    --zindex-900: 999;
+    --zindex-1050: 1050;
+  }
+  
+  /* ============================================================================
+     Thème sombre EasyAdmin redéfini avec la palette
+  ============================================================================ */
+  .ea-dark-scheme {
+    /* Palette et gradients identiques */
+    --primary: #618f9e;
+    --secondary: #beb18e;
+    --light: #e5eef0;
+    --dark: #0f181a;
+    --linearPrimarySecondary: linear-gradient(#618f9e, #beb18e);
+    --linearPrimaryAccent: linear-gradient(#618f9e, #24aac2);
+    --linearSecondaryAccent: linear-gradient(#beb18e, #24aac2);
+    --radialPrimarySecondary: radial-gradient(#618f9e, #beb18e);
+    --radialPrimaryAccent: radial-gradient(#618f9e, #24aac2);
+    --radialSecondaryAccent: radial-gradient(#beb18e, #24aac2);
+  
+    /* Inversion pour le thème sombre */
+    --text-color: var(--light);
+    --text-color-rgb: 229,229,229;
+    --text-on-primary: #fff;
+    --text-muted: var(--secondary);
+    --border-color: var(--dark);
+    --border-primary-color: var(--dark);
+    --border-secondary-color: var(--secondary);
+    --border-tertiary-color: var(--secondary);
+    --primary-bg: var(--dark);
+    --secondary-bg: var(--light);
+    --tertiary-bg: var(--light);
+    --body-bg: var(--dark);
+  
+    /* Sidebar */
+    --sidebar-bg: var(--dark);
+    --sidebar-border-color: var(--secondary);
+    --sidebar-logo-color: var(--light);
+    --sidebar-menu-color: var(--light);
+    --sidebar-menu-badge-bg: var(--primary);
+    --sidebar-menu-badge-color: #fff;
+    --sidebar-menu-badge-active-bg: var(--primary);
+    --sidebar-menu-badge-active-color: #fff;
+    --sidebar-menu-submenu-color: var(--light);
+    --sidebar-menu-header-color: var(--light);
+    --sidebar-menu-icon-color: var(--light);
+    --sidebar-menu-active-item-bg: var(--secondary);
+    --sidebar-menu-active-item-color: var(--dark);
+  
+    /* Contenu */
+    --content-bg: var(--dark);
+    --content-top-border-color: var(--secondary);
+    --content-section-border-color: var(--secondary);
+    --content-search-input-bg: var(--dark);
+    --content-search-icon-color: var(--light);
+    --content-search-reset-button-bg: var(--secondary);
+    --content-search-reset-button-color: var(--dark);
+    --content-search-reset-button-hover-bg: var(--primary);
+    --content-search-reset-button-hover-color: #fff;
+  
+    /* Boutons */
+    --button-bg: var(--dark);
+    --button-color: var(--light);
+    --button-hover-color: var(--light);
+    --button-active-color: var(--light);
+    --button-border-color: var(--secondary);
+    --button-hover-border-color: var(--secondary);
+    --button-primary-bg: var(--primary);
+    --button-primary-color: #fff;
+    --button-secondary-bg: var(--dark);
+    --button-secondary-color: var(--light);
+    --button-info-bg: var(--primary);
+    --button-info-color: #fff;
+    --button-success-bg: var(--primary);
+    --button-success-color: #fff;
+    --button-danger-bg: var(--secondary);
+    --button-danger-color: #fff;
+    --button-warning-bg: var(--secondary);
+    --button-warning-color: #fff;
+  
+    /* Alertes */
+    --alert-primary-bg: var(--primary);
+    --alert-primary-color: #fff;
+    --alert-primary-border-color: var(--primary);
+    --alert-secondary-bg: var(--secondary);
+    --alert-secondary-color: #fff;
+    --alert-secondary-border-color: var(--secondary);
+    --alert-success-bg: var(--primary);
+    --alert-success-color: #fff;
+    --alert-success-border-color: var(--primary);
+    --alert-info-bg: var(--primary);
+    --alert-info-color: #fff;
+    --alert-info-border-color: var(--primary);
+    --alert-warning-bg: var(--secondary);
+    --alert-warning-color: #fff;
+    --alert-warning-border-color: var(--secondary);
+    --alert-danger-bg: var(--secondary);
+    --alert-danger-color: #fff;
+    --alert-danger-border-color: var(--secondary);
+    --alert-light-bg: var(--light);
+    --alert-light-color: var(--dark);
+    --alert-light-border-color: var(--secondary);
+    --alert-dark-bg: var(--dark);
+    --alert-dark-color: #fff;
+    --alert-dark-border-color: var(--dark);
+  
+    /* Dropdowns et modals */
+    --dropdown-toggle-bg: var(--dark);
+    --dropdown-toggle-color: var(--light);
+    --dropdown-toggle-border-color: var(--secondary);
+    --dropdown-toggle-hover-border-color: var(--primary);
+    --dropdown-bg: var(--dark);
+    --dropdown-color: var(--light);
+    --dropdown-border-color: var(--secondary);
+    --dropdown-link-color: var(--light);
+    --dropdown-link-hover-bg: var(--secondary);
+    --dropdown-icon-color: var(--light);
+    --dropdown-settings-icon-color: var(--light);
+    --dropdown-settings-active-item-bg: var(--primary);
+    --dropdown-settings-active-item-color: #fff;
+    --dropdown-settings-active-item-shadow: inset 0 0 0 1px var(--primary);
+  
+    /* Pagination */
+    --pagination-color: var(--light);
+    --pagination-hover-border-color: var(--secondary);
+    --pagination-disabled-color: var(--secondary);
+    --pagination-active-bg: var(--primary);
+    --pagination-active-color: #fff;
+  
+    /* Formulaires */
+    --form-label-color: var(--light);
+    --form-control-bg: var(--dark);
+    --form-control-disabled-bg: var(--dark);
+    --form-control-disabled-color: var(--light);
+    --form-input-border-color: var(--secondary);
+    --form-input-error-legend-color: var(--secondary);
+    --form-input-error-border-color: var(--secondary);
+    --form-input-hover-border-color: var(--primary);
+    --form-input-shadow: 0 1px 2px 0 var(--dark);
+    --form-input-hover-shadow: 0 0 0 4px var(--dark);
+    --form-input-error-shadow: 0 0 0 3px rgba(182,2,5,0.2);
+    --form-input-text-color: var(--light);
+    --form-input-group-text-bg: var(--dark);
+    --form-input-group-text-border-color: var(--secondary);
+    --form-switch-bg: var(--dark);
+    --form-switch-border-color: var(--secondary);
+    --form-switch-checked-bg: var(--primary);
+    --form-type-check-input-border-color: var(--secondary);
+    --form-type-check-input-box-shadow: 0 1px 2px 0 var(--dark);
+    --form-type-check-input-checked-bg: var(--primary);
+    --form-type-text-editor-toolbar-bg: var(--dark);
+    --form-type-text-editor-toolbar-button-color: var(--light);
+    --form-type-text-editor-toolbar-button-hover-color: var(--secondary);
+    --form-type-text-editor-toolbar-button-active-bg: var(--dark);
+    --form-type-text-editor-toolbar-button-active-color: var(--light);
+    --form-type-text-editor-dialog-bg: var(--dark);
+    --form-type-text-editor-dialog-box-shadow: 0 4px 12px var(--secondary);
+    --form-type-text-editor-content-pre-bg: var(--dark);
+    --form-type-text-editor-content-pre-color: var(--light);
+    --form-type-collection-item-collapsed-hover-bg: var(--dark);
+    --form-type-autocomplete-dropdown-bg: var(--dark);
+    --form-type-autocomplete-dropdown-input-wrapper-bg: var(--dark);
+    --form-type-autocomplete-dropdown-input-border-color: var(--secondary);
+    --form-type-autocomplete-dropdown-active-item-bg: var(--secondary);
+    --form-type-autocomplete-close-button-bg: var(--secondary);
+    --form-type-autocomplete-close-button-hover-bg: var(--primary);
+    --form-type-autocomplete-optgroup-bg: var(--dark);
+    --form-type-autocomplete-optgroup-color: var(--light);
+    --form-type-autocomplete-multi-item-bg: var(--dark);
+    --form-type-autocomplete-multi-item-border-color: var(--dark);
+    --form-type-autocomplete-multi-item-remove-button-hover-bg: var(--secondary);
+    --form-global-error-bg: var(--secondary);
+    --form-global-error-color: #fff;
+    --form-global-error-border: 1px solid var(--secondary);
+    --form-help-color: var(--secondary);
+    --form-help-error-color: var(--secondary);
+    --form-help-active-color: var(--secondary);
+    --form-tabs-border-color: var(--secondary);
+    --form-tabs-help-color: var(--secondary);
+    --form-column-header-color: var(--light);
+    --form-column-help-color: var(--secondary);
+    --form-column-icon-color: var(--secondary);
+    --form-fieldset-header-color: var(--light);
+    --form-fieldset-help-color: var(--secondary);
+    --form-fieldset-border-color: var(--secondary);
+    --form-fieldset-header-border-color: var(--secondary);
+    --form-fieldset-icon-color: var(--secondary);
+  
+    /* Badges */
+    --badge-border: 0;
+    --badge-boolean-false-bg: var(--dark);
+    --badge-boolean-false-box-shadow: inset 0 0 0 1px var(--secondary);
+    --badge-boolean-false-color: var(--light);
+    --badge-boolean-true-bg: var(--primary);
+    --badge-boolean-true-box-shadow: none;
+    --badge-boolean-true-color: #fff;
+    --badge-success-bg: var(--primary);
+    --badge-success-box-shadow: none;
+    --badge-success-color: #fff;
+    --badge-warning-bg: var(--secondary);
+    --badge-warning-box-shadow: none;
+    --badge-warning-color: #fff;
+    --badge-danger-bg: var(--secondary);
+    --badge-danger-box-shadow: none;
+    --badge-danger-color: #fff;
+    --badge-info-bg: var(--primary);
+    --badge-info-box-shadow: none;
+    --badge-info-color: #fff;
+    --badge-primary-bg: var(--primary);
+    --badge-primary-box-shadow: none;
+    --badge-primary-color: #fff;
+    --badge-secondary-bg: var(--dark);
+    --badge-secondary-box-shadow: none;
+    --badge-secondary-color: var(--light);
+    --badge-light-bg: var(--dark);
+    --badge-light-box-shadow: none;
+    --badge-light-color: var(--light);
+    --badge-dark-bg: var(--light);
+    --badge-dark-box-shadow: none;
+    --badge-dark-color: var(--dark);
+    --badge-outline-box-shadow: inset 0 0 0 1px var(--secondary);
+    --badge-outline-color: var(--light);
+  
+    /* Code editor */
+    --code-color: #c44c34;
+    --code-editor-string-color: #032f62;
+    --code-editor-keyword-color: #d73a49;
+    --code-editor-comment-color: #22863a;
+    --code-editor-definition-color: #e36209;
+    --code-editor-variable-color: var(--light);
+    --code-editor-number-color: var(--light);
+    --code-editor-argument-color: #6f42c1;
+    --code-editor-key-color: #005cc5;
+    --code-editor-attribute-color: #22863a;
+    --code-editor-addition-bg: #e6ffed;
+    --code-editor-deletion-bg: #ffeef0;
+    --code-editor-selection-bg: #d7d7d7;
+  
+    /* Page Login */
+    --page-login-bg: var(--dark);
+    --page-login-form-bg: var(--dark);
+    --page-login-form-control-bg: var(--dark);
+    --page-login-form-control-border-color: var(--secondary);
+    --page-login-form-control-button-bg: var(--primary);
+  
+    /* Z-index */
+    --zindex-modal-backdrop: 2020;
+    --zindex-700: 777;
+    --zindex-800: 888;
+    --zindex-900: 999;
+    --zindex-1050: 1050;
+  }
+  
