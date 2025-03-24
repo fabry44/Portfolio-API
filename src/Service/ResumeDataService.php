@@ -99,7 +99,7 @@ class ResumeDataService
                 "location" => $work->getLocation(),
                 "description" => $work->getDescription(),
                 "position" => $work->getPosition(),
-                "startDate" => $work->getStartDate()->format('Y-m-d'),
+                "startDate" => $work->getStartDate()? $work->getStartDate()->format('Y-m-d') : null,
                 "endDate" => $work->getEndDate() ? $work->getEndDate()->format('Y-m-d') : null,
                 "summary" => $work->getSummary(),
                 "highlights" => $work->getHighlights()
@@ -109,14 +109,14 @@ class ResumeDataService
                 "url" => $edu->getUrl(),
                 "area" => $edu->getArea(),
                 "studyType" => $edu->getStudyType(),
-                "startDate" => $edu->getStartDate()->format('Y-m-d'),
+                "startDate" => $edu->getStartDate()? $edu->getStartDate()->format('Y-m-d') : null,
                 "endDate" => $edu->getEndDate() ? $edu->getEndDate()->format('Y-m-d') : null,
                 "score" => $edu->getScore(),
                 "courses" => $edu->getCourses()
             ], $education),
-            "project" => array_map(fn($project) => [
+            "projects" => array_map(fn($project) => [
                 "name" => $project->getName(),
-                "description" => $project->getDescription(),
+                // "description" => $project->getDescription(),
                 "highlights" => $project->getHighlights(),
                 "keywords" => $project->getTechnology()->map(fn($technology) => $technology->getName())->toArray(),
                 "endDate" => $project->getDate() ? $project->getDate()->format('Y-m-d') : null,

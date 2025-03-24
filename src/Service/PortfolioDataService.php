@@ -80,8 +80,8 @@ class PortfolioDataService
         // Calcul de l'âge
         $birthdate = $user->getBirth();
         $age = $birthdate ? (new \DateTime())->diff($birthdate)->y : null;
-        $linkedin = $profiles ? array_values(array_filter($profiles, fn ($profile) => $profile->getNetwork() === 'Linkedin'))[0] ?? null : null;
-        $github = $profiles ? array_values(array_filter($profiles, fn ($profile) => $profile->getNetwork() === 'Github'))[0] ?? null : null;
+        $linkedin = $profiles ? array_values(array_filter($profiles, fn ($profile) => $profile->getNetwork() === 'Linkedin'))[0]->getUrl() ?? null : null;
+        $github = $profiles ? array_values(array_filter($profiles, fn ($profile) => $profile->getNetwork() === 'Github'))[0]->getUrl() ?? null : null;
 
         $data = [
             "user" => [

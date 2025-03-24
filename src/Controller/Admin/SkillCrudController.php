@@ -31,9 +31,8 @@ class SkillCrudController extends AbstractCrudController
             ChoiceField::new('level', 'Skill Level')
                 ->setChoices([
                     'Débutant' => 'beginner',
-                    'Intermédiaire' => 'intermediate',
-                    'Avancé' => 'advanced',
-                    'Expert' => 'expert',
+                    'Intermédiaire' => 'advanced',
+                    'Avancé' => 'master'
                 ])
                 ->setRequired(false)
                 ->setHelp('Niveau de compétence'),

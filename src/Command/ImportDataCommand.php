@@ -45,208 +45,174 @@ class ImportDataCommand extends Command
         $io->title("📥 Importation des données du portfolio...");
 
         try {
-            // **Données JSON de référence**
-            $dataPortfolio = [
-                "basics" => [
-                    "name" => "Roy Fabien",
-                    "birthdate" => "1984-09-16",
-                    "label" => "Développeur Web et Web Mobile",
-                    "status" => "Open to work",
-                    "image" => "/developpeur.webp",
-                    "email" => "fabienroy2@gmail.com",
-                    "phone" => "0650262098",
-                    "password" => "12345678",
-                    "website" => "",
-                    "url" => "",
-                    "summary" => "Après 15 ans d’expérience dans les réseaux fibre optique, dont 6 ans en tant que conducteur de travaux, j’ai décidé de relever un nouveau défi en me reconvertissant dans le développement web et mobile. Passionné par la programmation depuis toujours, je me spécialise aujourd’hui en Symfony tout en explorant Node.js et Python.",
-                    "location" => [
-                        "address" => "22 rue des Renardières 44100 Nantes",
-                        "postalCode" => "44100",
-                        "city" => "Nantes",
-                        "countryCode" => "FR",
-                        "region" => "Pays de la Loire"
-                    ],
-                    "profiles" => []
+            // **1️⃣ Récupération de l'utilisateur existant ou création**
+            $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['email' => 'fabienroy2@gmail.com']);
+            if ($existingUser) {
+                $user = $existingUser;
+                $user->setName('Roy Fabien')
+                    ->setBirth(new \DateTimeImmutable('1984-09-16'))
+                    ->setLabel('Développeur Web et Web Mobile')
+                    ->setEmail('fabienroy2@gmail.com')
+                    ->setPhone('0650262098')
+                    ->setStatus('Open to work')
+                    ->setSummary('<div>Je m\'appelle <strong>Fabien Roy</strong>. Après 15 ans d\'expérience dans les réseaux fibre optique, dont 6 années en tant que conducteur de travaux spécialisé dans le déploiement de la fibre optique, j’ai décidé d\'entamer une reconversion vers le <strong>développement web et mobile</strong>.<br><br></div><div>J\'ai obtenu un <strong>certificat d\'État niveau 5 en Développement Web et Web Mobile (DWWM)</strong> à l\'école Studi en candidat libre, tout en travaillant à plein temps. Cette expérience a renforcé ma persévérance et ma capacité à m’adapter à des défis exigeants.<br><br></div><div>Avant même cette reconversion, ma passion pour la programmation était déjà présente. Dans mon ancien métier, j’utilisais des scripts en <strong>VBA</strong> pour automatiser des tâches répétitives, optimisant ainsi mon temps et la qualité des résultats. Aujourd’hui, cette aptitude à rechercher des solutions innovantes s’applique pleinement à mes projets de développement.<br><br></div><div>Je me spécialise en <strong>développement backend avec Symfony</strong> et continue d\'explorer d\'autres technologies comme Node.js, Rust et Python. Chaque jour, je cherche à améliorer mes compétences, à travailler sur des projets concrets et à approfondir mes connaissances.<br><br></div>');
+            } else {
+                $user = new User();
+                $user->setName('Roy Fabien')
+                    ->setBirth(new \DateTimeImmutable('1984-09-16'))
+                    ->setLabel('Développeur Web et Web Mobile')
+                    ->setEmail('fabienroy2@gmail.com')
+                    ->setPhone('0650262098')
+                    ->setStatus('Open to work')
+                    ->setPassword(password_hash('12345678', PASSWORD_BCRYPT))
+                    ->setSummary('<div>Je m\'appelle <strong>Fabien Roy</strong>. Après 15 ans d\'expérience dans les réseaux fibre optique, dont 6 années en tant que conducteur de travaux spécialisé dans le déploiement de la fibre optique, j’ai décidé d\'entamer une reconversion vers le <strong>développement web et mobile</strong>.<br><br></div><div>J\'ai obtenu un <strong>certificat d\'État niveau 5 en Développement Web et Web Mobile (DWWM)</strong> à l\'école Studi en candidat libre, tout en travaillant à plein temps. Cette expérience a renforcé ma persévérance et ma capacité à m’adapter à des défis exigeants.<br><br></div><div>Avant même cette reconversion, ma passion pour la programmation était déjà présente. Dans mon ancien métier, j’utilisais des scripts en <strong>VBA</strong> pour automatiser des tâches répétitives, optimisant ainsi mon temps et la qualité des résultats. Aujourd’hui, cette aptitude à rechercher des solutions innovantes s’applique pleinement à mes projets de développement.<br><br></div><div>Je me spécialise en <strong>développement backend avec Symfony</strong> et continue d\'explorer d\'autres technologies comme Node.js, Rust et Python. Chaque jour, je cherche à améliorer mes compétences, à travailler sur des projets concrets et à approfondir mes connaissances.<br><br></div>');
+                $this->entityManager->persist($user);
+            }
+
+            // **2️⃣ Localisation**
+            $location = new Location();
+            $location->setUser($user)
+                ->setAddress('22 rue des Renardières')
+                ->setPostalCode('44100')
+                ->setCity('Nantes')
+                ->setCountryCode('France')
+                ->setRegion('Loire Atlantique');
+            $this->entityManager->persist($location);
+
+            // **3️⃣ Insertion des formations**
+            $educations = [
+                ['École Studi', 'Développement Web et Web Mobile', 'Certificat d\'État niveau 5', '2023-07-20', '2025-01-01'],
+                ['Lycée Félix le Dantec à Lannion', 'Optique physique, géométrique et photonique', 'BTS Génie Optique option Photonique', '2010-09-01', '2010-06-01'],
+                ['Lycée Chateaubriand à Combourg', 'Mathématiques', 'Bac Scientifique', '2025-03-11', '2008-06-01']
+            ];
+            foreach ($educations as $edu) {
+                $education = new Education();
+                $education->setInstitution($edu[0])
+                    ->setArea($edu[1])
+                    ->setStudyType($edu[2])
+                    ->setStartDate(new \DateTime($edu[3]))
+                    ->setEndDate(new \DateTime($edu[4]));
+                $this->entityManager->persist($education);
+            }
+
+            // **4️⃣ Insertion des compétences**
+            $skills = [
+                ['Languages', ['HTML', 'CSS', 'JavaScript', 'PHP', 'Rust', 'Python']],
+                ['Frameworks et Librairies', ['Symfony', 'Astro', 'React', 'Bootstrap', 'Tailwind CSS', 'Node.js']],
+                ['Bases de Données', ['MongoDB', 'MySQL']],
+                ['Outils Additionnels', ['Figma', 'Git', 'GitHub', 'Netlify']]
+            ];
+            foreach ($skills as $skillData) {
+                $skill = new Skill();
+                $skill->setName($skillData[0])
+                    ->setKeywords($skillData[1]);
+                $this->entityManager->persist($skill);
+            }
+
+            // **Ajout des profils**
+            $profiles = [
+                ['network' => 'Linkedin', 'url' => 'www.linkedin.com/in/roy-fabien-13982a157'],
+                ['network' => 'Github', 'url' => 'https://github.com/fabry44']
+            ];
+            foreach ($profiles as $profileData) {
+                $profile = new Profile();
+                $profile->setUser($user)
+                    ->setNetwork($profileData['network'])
+                    ->setUrl($profileData['url']);
+                $this->entityManager->persist($profile);
+            }
+
+            // **Ajout des expériences professionnelles**
+            $workExperiences = [
+                ['company' => 'Société ERT Technologies', 'location' => '44 – Nantes', 'position' => 'Monteur Câbleur FIBRE OPTIQUE', 'startDate' => '2007-08-01', 'endDate' => '2011-04-01'],
+                ['company' => 'La Signalisation de Bretagne', 'location' => 'Anetz - 44', 'position' => 'TECHNICIEN FIBRE OPTIQUE FTTH', 'startDate' => '2011-04-01', 'endDate' => '2012-09-01'],
+                ['company' => 'Groupe Circet', 'location' => '44-St Herblain', 'position' => 'Technicien fibre optique', 'startDate' => '2012-09-01', 'endDate' => '2013-02-01'],
+                ['company' => 'Free infrastructure', 'location' => 'Paris, 8ème', 'position' => 'Technicien Telecom', 'startDate' => '2013-03-01', 'endDate' => '2013-11-01'],
+                ['company' => 'Groupe Circet', 'location' => '44-carquefou', 'position' => 'Chef de chantier puis Conducteur de travaux', 'startDate' => '2013-11-01', 'endDate' => '2019-04-01'],
+                ['company' => 'CDH', 'location' => '44-Guéméné-Penfao', 'position' => 'Conducteur de travaux Tirage et raccordement Fibre Optique', 'startDate' => '2019-04-01', 'endDate' => null]
+            ];
+            foreach ($workExperiences as $workData) {
+                $work = new Work();
+                $work->setCompany($workData['company'])
+                    ->setLocation($workData['location'])
+                    ->setPosition($workData['position'])
+                    ->setStartDate(new \DateTime($workData['startDate']))
+                    ->setEndDate($workData['endDate'] ? new \DateTime($workData['endDate']) : null);
+                $this->entityManager->persist($work);
+            }
+
+            // **Ajout des langues**
+            $languages = [
+                ['language' => 'Français', 'fluency' => 'Langue maternelle'],
+                ['language' => 'Anglais', 'fluency' => 'Intermédiaire'],
+                ['language' => 'Espagnole', 'fluency' => 'Débutant']
+            ];
+            foreach ($languages as $languageData) {
+                $language = new Language();
+                $language->setLanguage($languageData['language'])
+                    ->setFluency($languageData['fluency']);
+                $this->entityManager->persist($language);
+            }
+
+            // **5️⃣ Insertion des projets avec technologies**
+            $projects = [
+                [
+                    'Site web pour un zoo (Arcadia)',
+                    "<div><strong>Projet d'étude Studi (ECF) : conception d'un site web Zoo-Arcadia:<br></strong><br>Ce projet a été réalisé dans le cadre de l’évaluation de certification et visait à mettre en place un système de gestion pour un zoo.<br><br></div>",
+                    'https://project-zoo-arcadia-c0cc1a69ef90.herokuapp.com/',
+                    'https://github.com/fabry44/Studi_project_Zoo_Arcadia.git',
+                    '2024-07-22',
+                    ['Symfony', 'Bootstrap', 'PostgreSQL', 'MongoDB', 'Stimulus JS'],
+                    "{\"11\":\"Symfony Security + Voters pour restreindre l\u2019acc\u00e8s aux administrateurs, v\u00e9t\u00e9rinaires et employ\u00e9s.\",\"12\":\"Acc\u00e8s s\u00e9curis\u00e9 aux donn\u00e9es sensibles avec EasyAdmin v4.\"}"
                 ],
-
-                "education" => [
-                    [
-                        "institution" => "École Studi",
-                        "url" => "",
-                        "area" => "Développement Web et Web Mobile",
-                        "studyType" => "Certificat d'État niveau 5",
-                        "startDate" => "2023-07-20",
-                        "endDate" => "2025-01-01",
-                        "score" => "",
-                        "courses" => []
-                    ],
-                    [
-                        "institution" => "Lycée Félix le Dantec à Lannion",
-                        "url" => "",
-                        "area" => "Optique physique, géométrique et photonique",
-                        "studyType" => "BTS Génie Optique option Photonique",
-                        "startDate" => "2010-09-01",
-                        "endDate" => "2010-06-01",
-                        "score" => "",
-                        "courses" => []
-                    ],
-                    [
-                        "institution" => "Lycée Chateaubriand à Combourg",
-                        "url" => "",
-                        "area" => "Mathématiques",
-                        "studyType" => "Bac Scientifique",
-                        "startDate" => "",
-                        "endDate" => "2008-06-01",
-                        "score" => "",
-                        "courses" => []
-                    ]
+                [
+                    'SOS PRO, Site vitrine de service aux particuliers et aux entreprises',
+                    "<div>Le projet <strong>SOSPRO</strong> a été conçu pour gérer une entreprise de services à domicile et en entreprise.</div>",
+                    'sospro-jalila.fr',
+                    'https://github.com/fabry44/SOSPRO.git',
+                    '2024-11-17',
+                    ['Symfony', 'FullCalendar', 'MariaDB', 'UX Turbo', 'JWT'],
+                    "{\"0\":\"Int\u00e9gration de FullCalendar avec gestion des \u00e9v\u00e9nements en drag-and-drop.\"}"
                 ],
-                "skills" => [
-                    [
-                        "name" => "Languages",
-                        "level" => "",
-                        "keywords" => [
-                            "HTML",
-                            "CSS",
-                            "JavaScript",
-                            "PHP",
-                            "Rust",
-                            "Python",
-                        ]
-
-                    ],
-                    [
-                        "name" => "Frameworks et Librairies",
-                        "level" => "",
-                        "keywords" => [
-                            "Symfony",
-                            "Astro",
-                            "React",
-                            "Symfony",
-                            "Bootstrap",
-                            "Tailwind CSS",
-                            "Node.js",
-                        ]
-
-                    ],
-                    [
-                        "name" => "Bases de Données",
-                        "level" => "",
-                        "keywords" => [
-                            "MongoDB",
-                            "MySQL",
-                        ]
-
-                    ],
-                    [
-                        "name" => "Outils Additionnels",
-                        "level" => "",
-                        "keywords" => [
-                            "Figma",
-                            "Git",
-                            "GitHub",
-                            "Netlify",
-                        ]
-
-                    ]
+                [
+                    'Portfolio-API',
+                    "<div><strong>Portfolio Backend</strong> est une API développée avec <strong>Symfony 7</strong>.</div>",
+                    null,
+                    'https://github.com/fabry44/Portfolio-API.git',
+                    '2025-03-12',
+                    ['Symfony', 'OAuth2', 'JWT', 'Docker', 'MariaDB'],
+                    "{\"0\":\"API REST s\u00e9curis\u00e9e avec OAuth2 et JWT.\"}"
                 ],
-                "projects" => [
-                    [
-                        "name" => "Site web pour un zoo (Arcadia)",
-                        "description" => "Projet d'étude Studi (ECF) : conception d'un site web Zoo-Arcadia",
-                        "keywords" => ["HTML", "CSS", "JavaScript", "PHP", "Symfony", "Bootstrap"],
-                        "url" => "#",
-                        "type" => "application"
-                    ],
-                    [
-                        "name" => "SOS PRO, Site vitrine pour une auto-entreprise",
-                        "description" => "Site vitrine pour une auto-entreprise de services à la personne avec Symfony 7.2, Bootstrap 5, JQuery et MariaDB",
-                        "keywords" => ["HTML", "CSS", "JavaScript", "PHP", "Symfony", "Bootstrap", "MariaDB"],
-                        "url" => "#",
-                        "type" => "application"
-                    ]
+                [
+                    'Portfolio-Astro',
+                    "<div><strong>Portfolio-Astro</strong> est l’interface frontend de mon portfolio.</div>",
+                    'https://fabien-roy.netlify.app/',
+                    'https://github.com/fabry44/portfolio-astro.git',
+                    '2025-03-12',
+                    ['Astro.js', 'Tailwind CSS', 'React', 'Netlify'],
+                    "[\"Astro.js pour un site statique ultra-rapide.\"]"
                 ]
             ];
 
-            // **1️⃣ Création de l'utilisateur**
-            $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $dataPortfolio['basics']['email']]);
-            if ($existingUser) {
-                $io->warning("⚠️ Utilisateur avec l'email " . $dataPortfolio['basics']['email'] . " existe déjà.");
-                $user = $existingUser;
-                $user->setName($dataPortfolio['basics']['name'])
-                    ->setBirth(new \DateTimeImmutable($dataPortfolio['basics']['birthdate']))
-                    ->setLabel($dataPortfolio['basics']['label'])
-                    ->setEmail($dataPortfolio['basics']['email'])
-                    ->setPhone($dataPortfolio['basics']['phone'])
-                    ->setStatus($dataPortfolio['basics']['status'])
-                    ->setPassword(password_hash($dataPortfolio['basics']['password'], PASSWORD_BCRYPT))
-                    ->setSummary($dataPortfolio['basics']['summary']);
-                $this->entityManager->persist($user);
-                $io->success("✅ Utilisateur à été mis à jours.");
-            } else {
-                $user = new User();
-                $user->setName($dataPortfolio['basics']['name'])
-                    ->setBirth(new \DateTimeImmutable($dataPortfolio['basics']['birthdate']))
-                    ->setLabel($dataPortfolio['basics']['label'])
-                    ->setEmail($dataPortfolio['basics']['email'])
-                    ->setPhone($dataPortfolio['basics']['phone'])
-                    ->setStatus($dataPortfolio['basics']['status'])
-                    ->setPassword(password_hash($dataPortfolio['basics']['password'], PASSWORD_BCRYPT))
-                    ->setSummary($dataPortfolio['basics']['summary']);
-                $this->entityManager->persist($user);
-                $io->success("✅ Utilisateur ajouté.");
-            
-
-                // **2️⃣ Création de la localisation**
-                $location = new Location();
-                $location->setUser($user)
-                    ->setAddress($dataPortfolio['basics']['location']['address'])
-                    ->setPostalCode($dataPortfolio['basics']['location']['postalCode'])
-                    ->setCity($dataPortfolio['basics']['location']['city'])
-                    ->setCountryCode($dataPortfolio['basics']['location']['countryCode'])
-                    ->setRegion($dataPortfolio['basics']['location']['region']);
-                $this->entityManager->persist($location);
-                $io->success("✅ Localisation ajoutée.");
-            }
-
-            // **3️⃣ Insertion des formations**
-            foreach ($dataPortfolio['education'] as $edu) {
-                $education = new Education();
-                $education->setInstitution($edu['institution'])
-                    ->setUrl($edu['url'])
-                    ->setArea($edu['area'])
-                    ->setStudyType($edu['studyType'])
-                    ->setStartDate(new \DateTime($edu['startDate']))
-                    ->setEndDate(new \DateTime($edu['endDate']));
-                $this->entityManager->persist($education);
-            }
-            $io->success("✅ Formations ajoutées.");
-
-            // **4️⃣ Insertion des compétences**
-            foreach ($dataPortfolio['skills'] as $skillData) {
-                $skill = new Skill();
-                $skill->setName($skillData['name'])
-                    ->setKeywords($skillData['keywords']);
-                $this->entityManager->persist($skill);
-            }
-            $io->success("✅ Compétences ajoutées.");
-
-            $technology = [];
-            // **5️⃣ Insertion des projets**
-            foreach ($dataPortfolio['projects'] as $projectData) {
-                
+            foreach ($projects as $projectData) {
                 $project = new Project();
-                foreach ($projectData['keywords'] as $keyword) {
-                    $technology = $this->entityManager->getRepository(Technology::class)->findOneBy(['name' => $keyword]);
-                    $project->addTechnology($technology);
+                $project->setName($projectData[0])
+                    ->setDescription($projectData[1])
+                    ->setLink($projectData[2])
+                    ->setGithub($projectData[3])
+                    ->setDate(new \DateTime($projectData[4]))
+                    ->setHighlights($projectData[6]);
+
+                foreach ($projectData[5] as $tech) {
+                    $technology = $this->entityManager->getRepository(Technology::class)->findOneBy(['name' => $tech]);
+                    if ($technology) {
+                        $project->addTechnology($technology);
+                    }
                 }
-                $project->setName($projectData['name'])
-                    ->setDescription($projectData['description']);
                 $this->entityManager->persist($project);
             }
-            $io->success("✅ Projets ajoutés.");
 
-            // **Flush final**
+            // **Finalisation de l'import**
             $this->entityManager->flush();
             $io->success("🚀 Données du portfolio importées avec succès.");
             return Command::SUCCESS;
