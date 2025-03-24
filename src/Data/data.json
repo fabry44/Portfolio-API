@@ -3,12 +3,12 @@
         "email": "fabienroy2@gmail.com",
         "name": "Roy Fabien",
         "phone": "0650262098",
-        "birth": "1984-09-16T00:00:00+02:00",
+        "birth": "1984-09-16T00:00:00+00:00",
         "address": "22 rue des Renardi\u00e8res 44100 Nantes",
-        "linkedin": {},
-        "github": {},
-        "status": "Open to work",
-        "about": "<div>Apr\u00e8s 15 ans d\u2019exp\u00e9rience dans les r\u00e9seaux fibre optique, dont 6 ans en tant que conducteur de travaux, j\u2019ai d\u00e9cid\u00e9 de relever un nouveau d\u00e9fi en me reconvertissant dans le d\u00e9veloppement web et mobile. Passionn\u00e9 par la programmation depuis toujours, je me sp\u00e9cialise aujourd\u2019hui en Symfony tout en explorant Node.js et Python.<\/div>",
+        "linkedin": "https:\/\/www.linkedin.com\/in\/roy-fabien-13982a157",
+        "github": "https:\/\/github.com\/fabry44",
+        "status": "EN RECHERCHE ACTIVE",
+        "about": "<div>Je m'appelle <strong>Fabien Roy<\/strong>. Apr\u00e8s 15 ans d'exp\u00e9rience dans les r\u00e9seaux fibre optique, dont 6 ann\u00e9es en tant que conducteur de travaux sp\u00e9cialis\u00e9 dans le d\u00e9ploiement de la fibre optique, j\u2019ai d\u00e9cid\u00e9 d'entamer une reconversion vers le <strong>d\u00e9veloppement web et mobile<\/strong>.<br>J'ai obtenu un <strong>certificat d'\u00c9tat niveau 5 en D\u00e9veloppement Web et Web Mobile (DWWM)<\/strong> \u00e0 l'\u00e9cole Studi en candidat libre, tout en travaillant \u00e0 plein temps. Cette exp\u00e9rience a renforc\u00e9 ma pers\u00e9v\u00e9rance et ma capacit\u00e9 \u00e0 m\u2019adapter \u00e0 des d\u00e9fis exigeants.<br>Avant m\u00eame cette reconversion, ma passion pour la programmation \u00e9tait d\u00e9j\u00e0 pr\u00e9sente. Dans mon ancien m\u00e9tier, j\u2019utilisais des scripts en <strong>VBA <\/strong>pour automatiser des t\u00e2ches r\u00e9p\u00e9titives, optimisant ainsi mon temps et la qualit\u00e9 des r\u00e9sultats. Aujourd\u2019hui, cette aptitude \u00e0 rechercher des solutions innovantes s\u2019applique pleinement \u00e0 mes projets de d\u00e9veloppement.<\/div>",
         "function": "D\u00e9veloppeur Web et Web Mobile",
         "age": 40,
         "languages": [
@@ -17,26 +17,26 @@
             "Espagnole"
         ],
         "interests": [],
-        "img": "identity-67d4520136cf3358299333.webp"
+        "img": "identity-67d4520136cf3358299333-min-67d99ab154c1a780951172.webp"
     },
     "formations": [
         {
             "degree": "Certificat d'\u00c9tat niveau 5",
             "institution": "\u00c9cole Studi",
-            "date": "2025-01-01T00:00:00+01:00",
+            "date": "2024-12-11T00:00:00+00:00",
             "description": "D\u00e9veloppement Web et Web Mobile"
         },
         {
             "degree": "BTS G\u00e9nie Optique option Photonique",
             "institution": "Lyc\u00e9e F\u00e9lix le Dantec \u00e0 Lannion",
-            "date": "2010-06-01T00:00:00+02:00",
+            "date": "2010-06-01T00:00:00+00:00",
             "description": "Optique physique, g\u00e9om\u00e9trique et photonique"
         },
         {
             "degree": "Bac Scientifique",
             "institution": "Lyc\u00e9e Chateaubriand \u00e0 Combourg",
-            "date": "2008-06-01T00:00:00+02:00",
-            "description": "Math\u00e9matiques"
+            "date": "2008-06-01T00:00:00+00:00",
+            "description": "Bac Scientifique sp\u00e9cialit\u00e9 Math\u00e9matiques"
         }
     ],
     "projects": [
@@ -104,6 +104,24 @@
                     "icon": "Mongo",
                     "class": "bg-[#47A248] text-white",
                     "style": "background-color: #47A248; color: #fff;"
+                },
+                {
+                    "name": "Postrgresql",
+                    "icon": "Postgres",
+                    "class": "bg-[#336791] text-white",
+                    "style": "background-color: #336791; color: white;"
+                },
+                {
+                    "name": "Heroku",
+                    "icon": "Heroku",
+                    "class": "bg-[#409] text-white",
+                    "style": "background-color: #409; color: white;"
+                },
+                {
+                    "name": "Docker",
+                    "icon": "Docker",
+                    "class": "bg-[#2396ed] text-white",
+                    "style": "background-color: #2396ed; color: white;"
                 }
             ]
         },
@@ -167,10 +185,28 @@
                     "style": "background-color: #563D7C; color: #fff;"
                 },
                 {
+                    "name": "jQuery",
+                    "icon": "Jquery",
+                    "class": "bg-[#0769AD] text-white",
+                    "style": "background-color: #0769AD; color: #fff;"
+                },
+                {
                     "name": "MariaDB",
                     "icon": "Maria",
                     "class": "bg-[#003545] text-white",
                     "style": "background-color: #003545; color: #fff;"
+                },
+                {
+                    "name": "Docker",
+                    "icon": "Docker",
+                    "class": "bg-[#2396ed] text-white",
+                    "style": "background-color: #2396ed; color: white;"
+                },
+                {
+                    "name": "Matomo",
+                    "icon": "Matomo",
+                    "class": "bg-[#3152a0] text-white",
+                    "style": "background-color: #3152a0; color: white;"
                 }
             ]
         },
@@ -193,7 +229,7 @@
                 "9": "Dockeris\u00e9 pour un environnement stable en d\u00e9veloppement et production.",
                 "10": "D\u00e9ploiement automatis\u00e9 via GitHub Actions et Webhook Netlify."
             },
-            "link": null,
+            "link": "backoffice.fabien-roy.fr",
             "github": "https:\/\/github.com\/fabry44\/Portfolio-API.git",
             "technology": [
                 {
@@ -231,6 +267,12 @@
                     "icon": "Maria",
                     "class": "bg-[#003545] text-white",
                     "style": "background-color: #003545; color: #fff;"
+                },
+                {
+                    "name": "Docker",
+                    "icon": "Docker",
+                    "class": "bg-[#2396ed] text-white",
+                    "style": "background-color: #2396ed; color: white;"
                 }
             ]
         },
@@ -253,7 +295,7 @@
                 "Frontend Astro sur Netlify pour un h\u00e9bergement rapide et scalable.",
                 "S\u00e9paration nette backend\/frontend, facilitant l\u2019\u00e9volutivit\u00e9."
             ],
-            "link": "https:\/\/fabien-roy.netlify.app\/",
+            "link": "fabien-roy.fr",
             "github": "https:\/\/github.com\/fabry44\/portfolio-astro.git",
             "technology": [
                 {
@@ -291,6 +333,12 @@
                     "icon": "React",
                     "class": "bg-[#1c7777] text-white",
                     "style": "background-color: #1c7777; color: #fff;"
+                },
+                {
+                    "name": "Docker",
+                    "icon": "Docker",
+                    "class": "bg-[#2396ed] text-white",
+                    "style": "background-color: #2396ed; color: white;"
                 }
             ]
         }
@@ -391,7 +439,67 @@
             "icon": "Mysql",
             "class": "bg-[#00758F] text-white",
             "style": "background-color: #00758F; color: #fff;"
+        },
+        {
+            "name": "Postrgresql",
+            "icon": "Postgres",
+            "class": "bg-[#336791] text-white",
+            "style": "background-color: #336791; color: white;"
+        },
+        {
+            "name": "MariaDB",
+            "icon": "MariaDB",
+            "class": "bg-[#c49a6c] text-white",
+            "style": "background-color: #c49a6c; color: white;"
+        },
+        {
+            "name": "Symfony",
+            "icon": "Symfony",
+            "class": "bg-[#000000] text-white",
+            "style": "background-color: #000000; color: white;"
+        },
+        {
+            "name": "Heroku",
+            "icon": "Heroku",
+            "class": "bg-[#409] text-white",
+            "style": "background-color: #409; color: white;"
+        },
+        {
+            "name": "JQuery",
+            "icon": "Jquery",
+            "class": "bg-[#0868AC] text-white",
+            "style": "background-color: #0868AC; color: white;"
+        },
+        {
+            "name": "Django",
+            "icon": "Django",
+            "class": "bg-[#2ba977] text-white",
+            "style": "background-color: #2ba977; color: white;"
+        },
+        {
+            "name": "Docker",
+            "icon": "Docker",
+            "class": "bg-[#2396ed] text-white",
+            "style": "background-color: #2396ed; color: white;"
+        },
+        {
+            "name": "SQL",
+            "icon": "Sql",
+            "class": "bg-[#00bcf2] text-white",
+            "style": "background-color: #00bcf2; color: white;"
+        },
+        {
+            "name": "Matomo",
+            "icon": "Matomo",
+            "class": "bg-[#3152a0] text-white",
+            "style": "background-color: #3152a0; color: white;"
+        },
+        {
+            "name": "Github",
+            "icon": "Github",
+            "class": "bg-[#fff] text-white",
+            "style": "background-color: #fff; color: white;"
         }
     ],
-    "updated_at": "2025-03-14 17:58:48"
+    "updated_at": "2025-03-23 23:14:36"
 }

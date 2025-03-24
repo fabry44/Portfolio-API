@@ -36,6 +36,7 @@ class UserCrudController extends AbstractCrudController
             //     'mapped' => false,
             // ])->onlyWhenUpdating(),
             TextField::new('phone')->setLabel('Téléphone')->setRequired(true),
+            TextField::new('website')->setLabel('Site web')->setRequired(false),
             TextEditorField::new('summary')->setLabel('Résumé')->setRequired(true),
             TextField::new('status')->setLabel('Statut')->setRequired(true),
             TextField::new('label')->setLabel('Fonction')->setRequired(true),
