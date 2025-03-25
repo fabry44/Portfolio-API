@@ -5,6 +5,8 @@ namespace App\Controller\Api;
 use App\Entity\ContactRequest;
 use App\Form\ContactRequestType;
 use App\Form\ContactType;
+use App\Repository\UserRepository;
+use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,7 +24,9 @@ class ApiContactController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         ValidatorInterface $validator,
-        HtmlSanitizerInterface $htmlSanitizer
+        HtmlSanitizerInterface $htmlSanitizer,
+        UserRepository $userRepository,
+        SendMailService $sendMailService
     ): JsonResponse {
         // Décodage des données JSON envoyées par le frontend (Astro)
         $data = json_decode($request->getContent(), true);
@@ -62,6 +66,28 @@ class ApiContactController extends AbstractController
         // Sauvegarde dans la base de données
         $entityManager->persist($contactRequest);
         $entityManager->flush();
+
+        
+        // Envoi de l'email de notification à l'administrateur
+        $userAdmin = $userRepository->findOneAdmin();
+        $userAdminEmail = $userAdmin->getEmail();
+
+        $sendMailService->send(
+            'ne-pas-repondre@fabien-roy.fr',
+            $userAdminEmail,
+            'Nouvelle demande de contact',
+            'contact_request_notification',
+            ['contactRequest' => $contactRequest]
+        );
+
+        // Envoi du mail de confirmation à l'utilisateur
+        $sendMailService->send(
+            'ne-pas-repondre@fabien-roy.fr',
+            $contactRequest->getEmail(),
+            'Confirmation de votre demande de contact',
+            'contact_request_confirmation',
+            ['contactRequest' => $contactRequest]
+        );
 
         return new JsonResponse(['message' => 'Demande de contact soumise avec succès.'], JsonResponse::HTTP_CREATED);
     }
