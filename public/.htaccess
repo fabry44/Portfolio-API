@@ -1,6 +1,9 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # Permet l'accès direct au fichier githubWebhook.php sans redirection Symfony
+  RewriteCond %{REQUEST_URI} !/githubWebhook\.php$
+
   # Si le fichier ou le dossier existe, on l'affiche normalement
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
