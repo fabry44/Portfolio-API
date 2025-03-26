@@ -5,32 +5,37 @@ error_reporting(E_ALL);
 
 use Symfony\Component\Dotenv\Dotenv;
 
+// Charger Composer
 require __DIR__ . '/../vendor/autoload.php';
 
-// Charge les variables du fichier .env
+// Charger le fichier .env pour récupérer le secret
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__.'/../.env');
 
-// Récupération propre du secret depuis l'environnement
-$secret_token = $_ENV['GITHUB_WEBHOOK_SECRET'];
+$secret = $_ENV['GITHUB_WEBHOOK_SECRET'];
 
 $headers = getallheaders();
 
+// Vérifier la signature GitHub
 if (!isset($headers['X-Hub-Signature-256'])) {
-    exit('Accès refusé.');
+    http_response_code(403);
+    exit('Accès refusé : signature manquante.');
 }
 
-// Git Pull automatique depuis la branche "main"
-exec('cd /home/u120012058/domains/dashboard.fabien-roy.fr/public_html/Portfolio-API && git pull origin main 2>&1', $output);
+// Vérification de la signature
+$payload = file_get_contents('php://input');
+$signature = 'sha256=' . hash_hmac('sha256', $payload, $secret);
 
-// Composer install (optionnel mais recommandé)
-exec('cd /home/u120012058/domains/dashboard.fabien-roy.fr/public_html/Portfolio-API && php composer.phar install --no-main --optimize-autoloader 2>&1', $output);
+if (!hash_equals($signature, $headers['X-Hub-Signature-256'])) {
+    http_response_code(403);
+    exit('Accès refusé : signature invalide.');
+}
 
-// Migrations Symfony automatiques (optionnel mais conseillé)
-exec('cd /home/u120012058/domains/dashboard.fabien-roy.fr/public_html/Portfolio-API && php bin/console doctrine:migrations:migrate -n 2>&1', $output);
+// Si vérification OK, alors exécuter le déploiement
+$output = [];
+exec('cd /chemin/exact/vers/Portfolio-API && git pull origin dev 2>&1', $output);
+exec('cd /chemin/exact/vers/Portfolio-API && php composer.phar install --no-dev --optimize-autoloader 2>&1', $output);
+exec('cd /chemin/exact/vers/Portfolio-API && php bin/console doctrine:migrations:migrate -n 2>&1', $output);
+exec('cd /chemin/exact/vers/Portfolio-API && php bin/console cache:clear 2>&1', $output);
 
-// Vide cache Symfony (recommandé)
-exec('cd /home/u120012058/domains/dashboard.fabien-roy.fr/public_html/Portfolio-API && php bin/console cache:clear 2>&1', $output);
-
-// Affichage de résultat pour débogage (optionnel)
 echo implode("\n", $output);
