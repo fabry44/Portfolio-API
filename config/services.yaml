@@ -37,8 +37,6 @@ services:
             $logger: '@logger'
             $netlifyHookUrl: '%env(NETLIFY_BUILD_HOOK)%'
             
-
-
     # Service PortfolioDataService
     App\Service\PortfolioDataService: 
         arguments:
@@ -52,6 +50,11 @@ services:
             $profileRepository: '@App\Repository\ProfileRepository'
             $locationRepository: '@App\Repository\LocationRepository'
             $educationRepository: '@App\Repository\EducationRepository'
+            $params: '@parameter_bag'
+
+    App\Service\SendMailService:
+        arguments:
+            $mailer: '@mailer'
             $params: '@parameter_bag'
 
     # Déclarations des alias pour les interfaces globales de Symfony
