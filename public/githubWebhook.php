@@ -22,14 +22,21 @@ if (!isset($headers['X-Hub-Signature-256'])) {
     exit('Accès refusé : signature manquante.');
 }
 
-// Vérification de la signature
-$payload = file_get_contents('php://input');
-$signature = 'sha256=' . hash_hmac('sha256', $payload, $secret);
+// Récupération propre du payload GitHub
+$payload = trim(file_get_contents('php://input'));
 
-if (!hash_equals($signature, $headers['X-Hub-Signature-256'])) {
+// Calcul de la signature locale avec le payload exact
+$signatureLocale = 'sha256=' . hash_hmac('sha256', $payload, $secret);
+
+// Vérifie si la signature correspond
+if (!hash_equals($signatureLocale, $signatureGithub)) {
+    // Affiche clairement les signatures pour le débogage immédiat
     http_response_code(403);
-    exit('Accès refusé : signature invalide.');
+    exit('Accès refusé : signature invalide. ' 
+        . "GitHub : [$signatureGithub] " 
+        . "Locale : [$signatureLocale]");
 }
+
 
 // Si vérification OK, alors exécuter le déploiement
 $output = [];
