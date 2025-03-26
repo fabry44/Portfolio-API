@@ -14,7 +14,6 @@ $secret = getenv('GITHUB_WEBHOOK_SECRET');
 
 $headers = getallheaders();
 
-// Signature fournie par GitHub
 $signatureGithub = $headers['X-Hub-Signature-256'] ?? '';
 
 if (empty($signatureGithub)) {
@@ -22,10 +21,11 @@ if (empty($signatureGithub)) {
     exit('Accès refusé : signature manquante.');
 }
 
-// Payload envoyé par GitHub
-$payload = trim(file_get_contents('php://input'));
+// Récupération précise du payload (robuste)
+$payload = file_get_contents('php://input');
+$payload = trim($payload, "\n\r");
 
-// Signature calculée localement
+// Calcul de la signature locale exacte
 $signatureLocale = 'sha256=' . hash_hmac('sha256', $payload, $secret);
 
 if (!hash_equals($signatureLocale, $signatureGithub)) {
@@ -35,7 +35,7 @@ if (!hash_equals($signatureLocale, $signatureGithub)) {
         . "Locale : [$signatureLocale]");
 }
 
-// Si la vérification est correcte, effectuer le déploiement
+// Commandes de déploiement (reste inchangé)
 $output = [];
 exec('cd /home/u120012058/domains/dashboard.fabien-roy.fr/public_html/Portfolio-API && git pull origin main 2>&1', $output);
 exec('cd /home/u120012058/domains/dashboard.fabien-roy.fr/public_html/Portfolio-API && php composer.phar install --no-dev --optimize-autoloader 2>&1', $output);
