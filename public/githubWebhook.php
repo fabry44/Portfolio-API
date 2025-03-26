@@ -1,12 +1,15 @@
 <?php
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 use Symfony\Component\Dotenv\Dotenv;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 // Charge les variables du fichier .env
 $dotenv = new Dotenv();
-$dotenv->load(__DIR__.'/.env');
+$dotenv->load(__DIR__.'/../.env');
 
 // Récupération propre du secret depuis l'environnement
 $secret_token = $_ENV['GITHUB_WEBHOOK_SECRET'];
