@@ -20,7 +20,7 @@ if (!$signatureGithub) {
     exit('Accès refusé : signature GitHub absente.');
 }
 
-$payload = file_get_contents('php://input');
+$payload = file_get_contents('payload.json');
 
 // Gestion stricte de l'encodage UTF-8 (important selon la doc officielle)
 $payloadUtf8 = mb_convert_encoding($payload, 'UTF-8', 'UTF-8');
