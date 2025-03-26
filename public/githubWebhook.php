@@ -12,7 +12,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__.'/../.env');
 
-$secret = $_ENV['GITHUB_WEBHOOK_SECRET'];
+$secret = getenv('GITHUB_WEBHOOK_SECRET');
 
 $headers = getallheaders();
 
