@@ -2,14 +2,14 @@
     Demande de contact
 </h1>
 <p>
-    Une demande de contact a été effectuée à été effectuée par {{ context.contactRequest.firstName }} {{ context.contactRequest.lastName }} sur ton site !!
+    Une demande de contact a été effectuée à été effectuée par {{ contactRequest.firstName }} {{ contactRequest.lastName }} sur ton site !!
 </p>
 <p>
     Voici le message qu'il a laissé : <br>
-    {{ context.contactRequest.message }}
+    {{ contactRequest.message }}
 </p>
 <p>
-    Tu peux le contacter à l'adresse email suivante : <a href="mailto:{{ context.contactRequest.email }}">{{ context.contactRequest.email }}</a> ou par téléphone au {{ context.contactRequest.phone }}.
+    Tu peux le contacter à l'adresse email suivante : <a href="mailto:{{ contactRequest.email }}">{{ contactRequest.email }}</a> ou par téléphone au {{ contactRequest.phone }}.
 </p>
 <p>
     A bientôt !
