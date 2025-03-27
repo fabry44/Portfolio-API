@@ -42,7 +42,7 @@ class SendMailService
             ->context($context);
 
         // DEBUG : log du contexte
-        file_put_contents(__DIR__ . '/../../var/log/debug_mail_context.log', print_r($context, true));
+        file_put_contents(__DIR__ . '/../../var/log/mailer_error.log', print_r($context, true));
 
         // On envoie le mail
         try {
