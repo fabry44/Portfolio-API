@@ -38,14 +38,11 @@ class SendMailService
             ->from($from)
             ->to($to)
             ->subject($subject)
-            ->htmlTemplate("mail/$template.html.twig")
-            ->context($context);
+            ->htmlTemplate("mail/$template.html.twig", [
+                'context' => $context
+            ]);
 
         // On envoie le mail
-        try {
-            $this->mailer->send($email);
-        } catch (\Throwable $e) {
-            file_put_contents(__DIR__ . '/../../var/log/mailer_error.log', $e->getMessage() . "\n", FILE_APPEND);
-        }
+        $this->mailer->send($email);
     }
 }
