@@ -23,6 +23,8 @@ if (!$signatureGithub) {
 // Payload strictement brut, sans modification
 $payload = file_get_contents('php://input');
 
+file_put_contents(__DIR__.'/github_payload.log', $payload);
+
 // IMPORTANT : forcer l'encodage UTF-8 et retirer BOM ou espaces
 $payload = mb_convert_encoding($payload, 'UTF-8', 'UTF-8');
 $payload = trim($payload);
