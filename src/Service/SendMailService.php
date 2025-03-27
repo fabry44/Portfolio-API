@@ -38,7 +38,7 @@ class SendMailService
             ->from($from)
             ->to($to)
             ->subject($subject)
-            ->htmlTemplate("emails/$template.html.twig", [
+            ->htmlTemplate("mail/$template.html.twig", [
                 'context' => $context
             ]);
 
