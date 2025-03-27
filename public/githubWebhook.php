@@ -25,6 +25,8 @@ $payload = file_get_contents('php://input');
 
 file_put_contents(__DIR__.'/github_payload.log', $payload);
 
+file_put_contents(__DIR__.'/../github_signature.log', $signatureGithub);
+
 // IMPORTANT : forcer l'encodage UTF-8 et retirer BOM ou espaces
 $payload = mb_convert_encoding($payload, 'UTF-8', 'UTF-8');
 $payload = trim($payload);
@@ -32,9 +34,10 @@ $payload = trim($payload);
 // Calcul précis et strict (GitHub officiel)
 $signatureLocale = 'sha256=' . hash_hmac('sha256', $payload, $secret);
 
-if (!hash_equals($signatureLocale, $signatureGithub)) {
+if (!hash_equals($localSignature, $signatureGithub)) {
+    file_put_contents(__DIR__.'/../debug_signature.log', "GitHub : [$signatureGithub]\nLocale : [$localSignature]\nPayload :\n$payload");
     http_response_code(403);
-    exit("Accès refusé : signature invalide. GitHub : [$signatureGithub] Locale : [$signatureLocale]");
+    exit('Signature invalide');
 }
 
 // Si la vérification réussit, exécution des commandes
