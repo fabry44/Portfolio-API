@@ -11,7 +11,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__.'/../.env');
 
-$secret = getenv('GITHUB_WEBHOOK_SECRET');
+$secret = $_ENV['GITHUB_WEBHOOK_SECRET'] ?? null;
 $headers = getallheaders();
 $signatureGithub = $headers['X-Hub-Signature-256'] ?? null;
 
