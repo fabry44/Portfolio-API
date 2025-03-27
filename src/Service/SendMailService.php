@@ -41,8 +41,8 @@ class SendMailService
             ->htmlTemplate("mail/$template.html.twig")
             ->context($context);
 
-        // DEBUG : log du contexte
-        file_put_contents(__DIR__ . '/../../var/log/mailer_error.log', print_r($context, true) . "\n", FILE_APPEND);
+        var_dump($context);
+        die();
 
         // On envoie le mail
         try {
