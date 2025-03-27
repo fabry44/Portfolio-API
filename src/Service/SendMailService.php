@@ -32,9 +32,7 @@ class SendMailService
         string $template,
         array $context
     ): void
-    {   
-        file_put_contents(__DIR__ . '/../../var/log/debug_mail_context.log', print_r($context, true));
-        
+    {
         //On crée le mail
         $email = (new TemplatedEmail())
             ->from($from)
@@ -43,9 +41,12 @@ class SendMailService
             ->htmlTemplate("mail/$template.html.twig")
             ->context($context);
 
-        
-
         // On envoie le mail
-        $this->mailer->send($email);
+        try {
+            $this->mailer->send($email);
+        } catch (\Throwable $e) {
+            file_put_contents(__DIR__ . '/../../var/log/mailer_error.log', $e->getMessage() . "\n", FILE_APPEND);
+            file_put_contents(__DIR__ . '/../../var/log/debug_mail_context.log', print_r($context, true));
+        }
     }
 }
