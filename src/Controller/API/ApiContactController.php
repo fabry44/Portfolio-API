@@ -51,14 +51,14 @@ class ApiContactController extends AbstractController
         }
 
         // Nettoyage du message pour éviter les injections HTML et XSS
-        $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getFirstName());
-        $contactRequest->setFirstName($sanitizedMessage);
-        $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getLastName());
-        $contactRequest->setLastName($sanitizedMessage);
-        $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getEmail());
-        $contactRequest->setEmail($sanitizedMessage);
-        $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getPhone());
-        $contactRequest->setPhone($sanitizedMessage);
+        // $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getFirstName());
+        // $contactRequest->setFirstName($sanitizedMessage);
+        // $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getLastName());
+        // $contactRequest->setLastName($sanitizedMessage);
+        // $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getEmail());
+        // $contactRequest->setEmail($sanitizedMessage);
+        // $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getPhone());
+        // $contactRequest->setPhone($sanitizedMessage);
         $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getMessage());
         $contactRequest->setMessage($sanitizedMessage);
 
