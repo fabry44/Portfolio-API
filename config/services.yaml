@@ -52,11 +52,6 @@ services:
             $educationRepository: '@App\Repository\EducationRepository'
             $params: '@parameter_bag'
 
-    App\Service\SendMailService:
-        arguments:
-            $mailer: '@mailer'
-            $params: '@parameter_bag'
-
     # Déclarations des alias pour les interfaces globales de Symfony
     Symfony\Contracts\HttpClient\HttpClientInterface: '@http_client'
     Psr\Log\LoggerInterface: '@logger'
