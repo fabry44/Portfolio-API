@@ -1,5 +1,4 @@
 ###> symfony/framework-bundle ###
-/payload.json
 /.env
 /.env.local
 /.env.dev
