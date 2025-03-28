@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-
+use Psr\Log\LoggerInterface;
 class ApiContactController extends AbstractController
 {
     #[Route('/api/contact', name: 'api_contact', methods: ['POST'])]
@@ -26,7 +26,8 @@ class ApiContactController extends AbstractController
         ValidatorInterface $validator,
         HtmlSanitizerInterface $htmlSanitizer,
         UserRepository $userRepository,
-        SendMailService $sendMailService
+        SendMailService $sendMailService,
+        LoggerInterface $logger
     ): JsonResponse {
         // Décodage des données JSON envoyées par le frontend (Astro)
         $data = json_decode($request->getContent(), true);
@@ -72,22 +73,38 @@ class ApiContactController extends AbstractController
         $userAdmin = $userRepository->findOneAdmin();
         $userAdminEmail = $userAdmin->getEmail();
 
-        $sendMailService->send(
+        try {
+            $sendMailService->send(
             'ne-pas-repondre@fabien-roy.fr',
             $userAdminEmail,
             'Nouvelle demande de contact',
             'contact_request_notification',
             ['contactRequest' => $contactRequest]
-        );
+            );
+        } catch (\Exception $e) {
+            $logger->error('Erreur lors de l\'envoi de l\'email de notification à l\'administrateur : ' . $e->getMessage(), [
+            'exception' => $e,
+            'contactRequest' => $contactRequest,
+            ]);
+            return new JsonResponse(['error' => 'Une erreur est survenue lors de l\'envoi de l\'email de notification.'], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
 
         // Envoi du mail de confirmation à l'utilisateur
-        $sendMailService->send(
-            'ne-pas-repondre@fabien-roy.fr',
-            $contactRequest->getEmail(),
-            'Confirmation de votre demande de contact',
-            'contact_request_confirmation',
-            ['contactRequest' => $contactRequest]
-        );
+        try {
+            $sendMailService->send(
+                'ne-pas-repondre@fabien-roy.fr',
+                $contactRequest->getEmail(),
+                'Confirmation de votre demande de contact',
+                'contact_request_confirmation',
+                ['contactRequest' => $contactRequest]
+            );
+        } catch (\Exception $e) {
+            $logger->error('Erreur lors de l\'envoi de l\'email de notification à l\'administrateur : ' . $e->getMessage(), [
+            'exception' => $e,
+            'contactRequest' => $contactRequest,
+            ]);
+            return new JsonResponse(['error' => 'Une erreur est survenue lors de l\'envoi de l\'email de notification.'], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
 
         return new JsonResponse(['message' => 'Demande de contact soumise avec succès.'], JsonResponse::HTTP_CREATED);
     }
