@@ -41,9 +41,6 @@ class SendMailService
             ->htmlTemplate("mail/$template.html.twig")
             ->context($context);
 
-        var_dump($context);
-        die();
-
         // On envoie le mail
         try {
             $this->mailer->send($email);
