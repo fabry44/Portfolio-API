@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\ContactRequest;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -50,7 +51,14 @@ class ContactRequestType extends AbstractType
                 new NotBlank(),
                 new Length(['min' => 10]),
             ],
-        ]);
+        ])
+        ->add('rgpd', CheckboxType::class, [
+            'mapped' => false,
+            'constraints' => [
+                new NotBlank(),
+            ],
+            'label' => 'J\'accepte que mes données soient utilisées pour le traitement de ma demande.',
+        ])
         ;
     }
 

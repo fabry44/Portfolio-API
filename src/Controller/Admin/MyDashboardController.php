@@ -65,19 +65,19 @@ class MyDashboardController extends AbstractDashboardController
 
             // set this option if you prefer the sidebar (which contains the main menu)
             // to be displayed as a narrow column instead of the default expanded design
-            ->renderSidebarMinimized()
+            // ->renderSidebarMinimized()
 
             // by default, users can select between a "light" and "dark" mode for the
             // backend interface. Call this method if you prefer to disable the "dark"
             // mode for any reason (e.g. if your interface customizations are not ready for it)
-            ->disableDarkMode()
+            // ->disableDarkMode()
 
             // by default, the UI color scheme is 'auto', which means that the backend
             // will use the same mode (light/dark) as the operating system and will
             // change in sync when the OS mode changes.
             // Use this option to set which mode ('light', 'dark' or 'auto') will users see
             // by default in the backend (users can change it via the color scheme selector)
-            ->setDefaultColorScheme('dark')
+            ->setDefaultColorScheme('light')
             // instead of magic strings, you can use constants as the value of
             // this option: EasyCorp\Bundle\EasyAdminBundle\Config\Option\ColorScheme::DARK
 
@@ -109,13 +109,9 @@ class MyDashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-
-        yield MenuItem::subMenu('Portfolio', 'fa fa-image')->setSubItems([
-            MenuItem::linkToCrud('Contact', 'fa fa-envelope', ContactRequest::class),   
-            MenuItem::linkToCrud('Technologies', 'fa fa-laptop-code', Technology::class),
-            MenuItem::linkToCrud('Projets', 'fa fa-project-diagram', Project::class),
-            MenuItem::linkToCrud('Projets Photos', 'fa fa-images', ProjectPhoto::class),                      
+        yield MenuItem::subMenu('Portfolio', 'fa fa-image')->setSubItems([               
+            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+            MenuItem::linkToCrud('Contact', 'fa fa-envelope', ContactRequest::class),                     
         ]);
 
         yield MenuItem::subMenu('Utilisateurs', 'fa fa-users')->setSubItems([
@@ -127,6 +123,9 @@ class MyDashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Informations', 'fa fa-info-circle')->setSubItems([                       
             MenuItem::linkToCrud('Expériences', 'fa fa-briefcase', Work::class),
             MenuItem::linkToCrud('Formations', 'fa fa-graduation-cap', Education::class),
+            MenuItem::linkToCrud('Technologies', 'fa fa-laptop-code', Technology::class),
+            MenuItem::linkToCrud('Projets', 'fa fa-project-diagram', Project::class),
+            MenuItem::linkToCrud('Projets Photos', 'fa fa-images', ProjectPhoto::class), 
             MenuItem::linkToCrud('Skills', 'fa fa-laptop-code', Skill::class),            
             MenuItem::linkToCrud('Intérets', 'fa fa-heart', Interest::class),
             MenuItem::linkToCrud('Langues', 'fa fa-language', Language::class),

@@ -106,7 +106,7 @@ class ApiContactController extends AbstractController
             return new JsonResponse(['error' => 'Une erreur est survenue lors de l\'envoi de l\'email de notification.'], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return new JsonResponse(['message' => 'Demande de contact soumise avec succès.'], JsonResponse::HTTP_CREATED);
+        return new JsonResponse(['message' => 'Demande de contact soumise avec succès. Un email de confirmation a été envoyé.'], JsonResponse::HTTP_OK);
     }
 
     #[Route('/api/contact/form', name: 'api_contact_form', methods: ['GET'])]

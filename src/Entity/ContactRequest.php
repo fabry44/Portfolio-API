@@ -41,6 +41,9 @@ class ContactRequest
     #[ORM\Column(type: "datetime_immutable")]
     private \DateTimeImmutable $createdAt;
 
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private bool $rgpd = false;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -119,6 +122,17 @@ class ContactRequest
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isRgpd(): ?bool
+    {
+        return $this->rgpd;
+    }
+    public function setRgpd(bool $rgpd): static
+    {
+        $this->rgpd = $rgpd;
 
         return $this;
     }

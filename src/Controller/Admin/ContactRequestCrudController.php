@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -42,6 +43,7 @@ class ContactRequestCrudController extends AbstractCrudController
                 ->hideOnForm()
                 ->setFormat('dd/MM/yyyy HH:mm:ss')
                 ->setTimezone('Europe/Paris'),
+            BooleanField::new('rgpd')->setLabel('Consentement')->setRequired(false)->hideOnForm(),
         ];
 
 
@@ -52,11 +54,13 @@ class ContactRequestCrudController extends AbstractCrudController
     {
         return $actions
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
-            ->add(Crud::PAGE_EDIT, Action::SAVE_AND_ADD_ANOTHER)
+            ->remove(Crud::PAGE_INDEX, Action::EDIT)
+            ->remove(Crud::PAGE_INDEX, Action::DELETE)
             ->remove(Crud::PAGE_INDEX, Action::NEW)
+            ->setPermission(Action::DELETE, 'ROLE_ADMIN')
             ->setPermission(Action::DETAIL, 'ROLE_ADMIN')
-            ->setPermission(Action::NEW, 'ROLE_ADMIN')
             ->setPermission(Action::EDIT, 'ROLE_ADMIN')
+            ->setPermission(Action::NEW, 'ROLE_ADMIN')
             ->setPermission(Action::DELETE, 'ROLE_ADMIN');
     }
 
@@ -65,7 +69,6 @@ class ContactRequestCrudController extends AbstractCrudController
         // Configuration du CRUD
         return $crud
             ->setPageTitle('index', 'Gestion des contacts')
-            ->setPageTitle('edit', 'Edition du contact')
             ->setPageTitle('detail', 'Détail du contact');
     }
 }
