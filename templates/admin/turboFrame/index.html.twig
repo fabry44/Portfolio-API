@@ -1,0 +1,27 @@
+                                     
+<!-- ========== Start Status Github ========== -->
+<turbo-frame id="Statut_Github">
+        <h3 class="card-title">Statut de la mise à jour Github</h3>
+		<p class="card-text">Voici le statut de la dernière mise à jour du portfolio.</p>
+		{% if status is defined %}
+			<h5 class="card-title">{{ status }}</h5>
+			<p class="card-text">{{ message }}</p>
+		{% else %}
+			<p class="card-text">Aucune mise à jour effectuée.</p>
+		{% endif %}
+</turbo-frame>
+<!-- ========== End Status Github ========== -->
+
+<!-- ========== Start Status Netlify  ========== -->
+<turbo-frame id="Statut_Netlify">
+    <h3 class="card-title">Statut de la mise à jour Netlify</h3>
+	<p class="card-text">Voici le statut du dernier build Netlify.</p>
+	{% if status is defined %}
+		<h5 class="card-title">{{ status }}</h5>
+		<p class="card-text">{{ message }}</p>
+	{% else %}
+		<p class="card-text">Aucun build effectué.</p>
+	{% endif %}
+</turbo-frame>
+<!-- ========== End Status Netlify ========== -->
+

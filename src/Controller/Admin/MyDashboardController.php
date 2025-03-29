@@ -163,11 +163,42 @@ class MyDashboardController extends AbstractDashboardController
             ]);
     }
 
+    // public function configureAssets(): Assets
+    // {   
+    //     // $link = $this->getParameter('kernel.project_dir') . '/public/images/
+    //     return Assets::new()->addCssFile('styles/app.css');
+    //     ->addHtmlContentToBody('<script>document.documentElement.setAttribute("data-turbo", "true");
+            
+            
+    // }
+
+        // ===================
+    // CONFIGURATION DES ASSETS
+    // ===================
+
     public function configureAssets(): Assets
     {   
-        // $link = $this->getParameter('kernel.project_dir') . '/public/images/
-        return Assets::new()->addCssFile('styles/app.css');
+        // $link = $this->getParameter('kernel.project_dir') . '/public/images/Logo SOS PRO Min.svg';
+        return Assets::new()
+            // // Ajouter Turbo en fin de <body> pour qu'il soit pris en compte après le chargement complet de la page
+            ->addHtmlContentToHead('<script>document.documentElement.setAttribute("data-turbo", "true");</script>')
+            // Ajout des fichiers CSS et JS
+            ->addAssetMapperEntry('app')
+            ->addCssFile('styles/app.css')
+            // ->addCssFile('tarteaucitron/css/tarteaucitron.css')
             
+            // ->addJsFile('tarteaucitron/tarteaucitron.js')
+            // ->addJsFile('tarteaucitron/lang/tarteaucitron.fr.js')
+            // Ajout des balises <meta> dans le <head>
+            // ->addHtmlContentToHead(
+            //     '<script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.18.0/tarteaucitron.min.js" integrity="sha256-+Qxhk4pxoLWuJwAVKJsTwoUE9G9ZAiZiFStVukJPTaw=" crossorigin="anonymous"></script>'
+            // )
+            ->addHtmlContentToHead('<meta name="turbo-refresh-scroll" content="preserve">')
+            ->addHtmlContentToHead('<meta name="turbo-visit-control" content="reload">')
+            // ->addHtmlContentToHead(
+            //     '<link rel="icon" href="/images/Logo SOSPRO.svg"/>'
+            // )
+            ;
             
     }
 }

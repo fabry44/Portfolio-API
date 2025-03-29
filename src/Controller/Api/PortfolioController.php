@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class PortfolioController extends AbstractController
 {
@@ -28,7 +30,8 @@ class PortfolioController extends AbstractController
         PortfolioDataService $portfolioDataService,
         GitHubService $gitHubService,
         LoggerInterface $logger,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        
 
     ) {
         $this->resumeDataService = $resumeDataService;
@@ -41,9 +44,9 @@ class PortfolioController extends AbstractController
     /**
      * @Route("/api/update-portfolio", name="update_portfolio", methods={"POST"})
      */
-    #[Route('/api-update-portfolio', name: 'api_update_portfolio')]
+    #[Route('/api-update-portfolio', name: 'api_update_portfolio', methods: ['GET'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function updatePortfolio(): JsonResponse
+    public function updatePortfolio(Request $request): Response
     {
         try {
             // Étape 1 : Générer le fichier JSON depuis la BDD
@@ -131,20 +134,34 @@ class PortfolioController extends AbstractController
             }
 
 
-            return new JsonResponse([
-                'status' => 'success',
-                'message' => 'Mise à jour du repository réussie',
-            ], Response::HTTP_OK);
+            // return new JsonResponse([
+            //     'status' => 'success',
+            //     'message' => 'Mise à jour du repository réussie',
+            // ], Response::HTTP_OK);
 
+            // Rendre la vue avec le graphique
+            // return $this->render('admin/turboFrame/index.html.twig', [
+            //     'status' => 'success',
+            //     'message' => 'Mise à jour du repository réussie',
+            // ]);
+
+            
+                return $this->render('admin/turboFrame/index.html.twig', [
+                    'status' => 'success',
+                    'message' => '✅ Portfolio mis à jour avec succès.',
+                ]);
+          
+        
+            
+            
         
 
         } catch (\Exception $e) {
             $this->logger->error("Erreur dans la mise à jour du repository : " . $e->getMessage());
-            return new JsonResponse([
+            return $this->render('admin/turboFrame/index.html.twig', [
                 'status' => 'error',
-                'message' => 'Erreur lors de la mise à jour du repository',
-                'error' => $e->getMessage(),
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+                'message' => 'Erreur dans la mise à jour du repository : ' . $e->getMessage(),
+            ]);
         }
     }
 }

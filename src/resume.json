@@ -3,10 +3,10 @@
     "basics": {
         "name": "Roy Fabien",
         "label": "D\u00e9veloppeur Web et Web Mobile",
-        "image": "identity-67d4520136cf3358299333-min-67d99ab154c1a780951172.webp",
+        "image": "identity-67d5735a5e4c1444809506.webp",
         "email": "fabienroy2@gmail.com",
         "phone": "0650262098",
-        "summary": "<div>Je m'appelle <strong>Fabien Roy<\/strong>. Apr\u00e8s 15 ans d'exp\u00e9rience dans les r\u00e9seaux fibre optique, dont 6 ann\u00e9es en tant que conducteur de travaux sp\u00e9cialis\u00e9 dans le d\u00e9ploiement de la fibre optique, j\u2019ai d\u00e9cid\u00e9 d'entamer une reconversion vers le <strong>d\u00e9veloppement web et mobile<\/strong>.<br>J'ai obtenu un <strong>certificat d'\u00c9tat niveau 5 en D\u00e9veloppement Web et Web Mobile (DWWM)<\/strong> \u00e0 l'\u00e9cole Studi en candidat libre, tout en travaillant \u00e0 plein temps. Cette exp\u00e9rience a renforc\u00e9 ma pers\u00e9v\u00e9rance et ma capacit\u00e9 \u00e0 m\u2019adapter \u00e0 des d\u00e9fis exigeants.<br>Avant m\u00eame cette reconversion, ma passion pour la programmation \u00e9tait d\u00e9j\u00e0 pr\u00e9sente. Dans mon ancien m\u00e9tier, j\u2019utilisais des scripts en <strong>VBA <\/strong>pour automatiser des t\u00e2ches r\u00e9p\u00e9titives, optimisant ainsi mon temps et la qualit\u00e9 des r\u00e9sultats. Aujourd\u2019hui, cette aptitude \u00e0 rechercher des solutions innovantes s\u2019applique pleinement \u00e0 mes projets de d\u00e9veloppement.<\/div>",
+        "summary": "<div>Je m'appelle <strong>Fabien Roy<\/strong>. Apr\u00e8s 15 ans d'exp\u00e9rience dans les r\u00e9seaux fibre optique, dont 6 ann\u00e9es en tant que conducteur de travaux sp\u00e9cialis\u00e9 dans le d\u00e9ploiement de la fibre optique, j\u2019ai d\u00e9cid\u00e9 d'entamer une reconversion vers le <strong>d\u00e9veloppement web et mobile<\/strong>.<br><br><\/div><div>J'ai obtenu un <strong>certificat d'\u00c9tat niveau 5 en D\u00e9veloppement Web et Web Mobile (DWWM)<\/strong> \u00e0 l'\u00e9cole Studi en candidat libre, tout en travaillant \u00e0 plein temps. Cette exp\u00e9rience a renforc\u00e9 ma pers\u00e9v\u00e9rance et ma capacit\u00e9 \u00e0 m\u2019adapter \u00e0 des d\u00e9fis exigeants.<br><br><\/div><div>Avant m\u00eame cette reconversion, ma passion pour la programmation \u00e9tait d\u00e9j\u00e0 pr\u00e9sente. Dans mon ancien m\u00e9tier, j\u2019utilisais des scripts en <strong>VBA<\/strong> pour automatiser des t\u00e2ches r\u00e9p\u00e9titives, optimisant ainsi mon temps et la qualit\u00e9 des r\u00e9sultats. Aujourd\u2019hui, cette aptitude \u00e0 rechercher des solutions innovantes s\u2019applique pleinement \u00e0 mes projets de d\u00e9veloppement.<br><br><\/div><div>Je me sp\u00e9cialise en <strong>d\u00e9veloppement backend avec Symfony<\/strong> et continue d'explorer d'autres technologies comme Node.js, Rust et Python. Chaque jour, je cherche \u00e0 am\u00e9liorer mes comp\u00e9tences, \u00e0 travailler sur des projets concrets et \u00e0 approfondir mes connaissances.<br><br><\/div>",
         "location": {
             "address": "22 rue des Renardi\u00e8res",
             "postalCode": "44100",
@@ -17,8 +17,8 @@
         "profiles": [
             {
                 "network": "Linkedin",
-                "username": "roy-fabien-13982a157",
-                "url": "https:\/\/www.linkedin.com\/in\/roy-fabien-13982a157"
+                "username": null,
+                "url": "www.linkedin.com\/in\/roy-fabien-13982a157"
             },
             {
                 "network": "Github",
@@ -29,22 +29,32 @@
     },
     "work": [
         {
-            "name": "CDH",
-            "location": "44-Gu\u00e9m\u00e9n\u00e9-Penfao",
+            "name": "Soci\u00e9t\u00e9 ERT Technologies",
+            "location": "44 \u2013 Nantes",
             "description": null,
-            "position": "Conducteur de travaux Tirage et raccordement Fibre Optique",
-            "startDate": "2019-04-01",
-            "endDate": null,
+            "position": "Monteur C\u00e2bleur FIBRE OPTIQUE",
+            "startDate": "2007-08-01",
+            "endDate": "2011-04-01",
+            "summary": null,
+            "highlights": []
+        },
+        {
+            "name": "La Signalisation de Bretagne",
+            "location": "Anetz - 44",
+            "description": null,
+            "position": "TECHNICIEN FIBRE OPTIQUE FTTH",
+            "startDate": "2011-04-01",
+            "endDate": "2012-09-01",
             "summary": null,
             "highlights": []
         },
         {
             "name": "Groupe Circet",
-            "location": "44-carquefou",
+            "location": "44-St Herblain",
             "description": null,
-            "position": "Chef de chantier puis Conducteur de travaux",
-            "startDate": "2013-11-01",
-            "endDate": "2019-04-01",
+            "position": "Technicien fibre optique",
+            "startDate": "2012-09-01",
+            "endDate": "2013-02-01",
             "summary": null,
             "highlights": []
         },
@@ -60,31 +70,21 @@
         },
         {
             "name": "Groupe Circet",
-            "location": "44-St Herblain",
+            "location": "44-carquefou",
             "description": null,
-            "position": "Technicien fibre optique",
-            "startDate": "2012-09-01",
-            "endDate": "2013-02-01",
+            "position": "Chef de chantier puis Conducteur de travaux",
+            "startDate": "2013-11-01",
+            "endDate": "2019-04-01",
             "summary": null,
             "highlights": []
         },
         {
-            "name": "La Signalisation de Bretagne",
-            "location": "Anetz - 44",
+            "name": "CDH",
+            "location": "44-Gu\u00e9m\u00e9n\u00e9-Penfao",
             "description": null,
-            "position": "TECHNICIEN FIBRE OPTIQUE FTTH",
-            "startDate": "2011-04-01",
-            "endDate": "2012-09-01",
-            "summary": null,
-            "highlights": []
-        },
-        {
-            "name": "Soci\u00e9t\u00e9 ERT Technologies",
-            "location": "44 \u2013 Nantes",
-            "description": null,
-            "position": "Monteur C\u00e2bleur FIBRE OPTIQUE",
-            "startDate": "2007-08-01",
-            "endDate": "2011-04-01",
+            "position": "Conducteur de travaux Tirage et raccordement Fibre Optique",
+            "startDate": "2019-04-01",
+            "endDate": null,
             "summary": null,
             "highlights": []
         }
@@ -92,11 +92,11 @@
     "education": [
         {
             "institution": "\u00c9cole Studi",
-            "url": "https:\/\/www.studi.com",
+            "url": "",
             "area": "D\u00e9veloppement Web et Web Mobile",
             "studyType": "Certificat d'\u00c9tat niveau 5",
             "startDate": "2023-07-20",
-            "endDate": "2024-12-11",
+            "endDate": "2025-01-01",
             "score": null,
             "courses": []
         },
@@ -105,17 +105,17 @@
             "url": "",
             "area": "Optique physique, g\u00e9om\u00e9trique et photonique",
             "studyType": "BTS G\u00e9nie Optique option Photonique",
-            "startDate": null,
+            "startDate": "2010-09-01",
             "endDate": "2010-06-01",
             "score": null,
             "courses": []
         },
         {
             "institution": "Lyc\u00e9e Chateaubriand \u00e0 Combourg",
-            "url": null,
-            "area": "Bac Scientifique sp\u00e9cialit\u00e9 Math\u00e9matiques",
+            "url": "",
+            "area": "Math\u00e9matiques",
             "studyType": "Bac Scientifique",
-            "startDate": null,
+            "startDate": "2025-03-11",
             "endDate": "2008-06-01",
             "score": null,
             "courses": []
@@ -142,10 +142,7 @@
                 "PHP",
                 "Symfony",
                 "Bootstrap",
-                "MongoDB",
-                "Postrgresql",
-                "Heroku",
-                "Docker"
+                "MongoDB"
             ],
             "endDate": "2024-07-22",
             "url": "https:\/\/project-zoo-arcadia-c0cc1a69ef90.herokuapp.com\/"
@@ -172,10 +169,7 @@
                 "PHP",
                 "Symfony",
                 "Bootstrap",
-                "jQuery",
-                "MariaDB",
-                "Docker",
-                "Matomo"
+                "MariaDB"
             ],
             "endDate": "2024-11-17",
             "url": "sospro-jalila.fr"
@@ -200,11 +194,10 @@
                 "JavaScript",
                 "PHP",
                 "Symfony",
-                "MariaDB",
-                "Docker"
+                "MariaDB"
             ],
             "endDate": "2025-03-12",
-            "url": "backoffice.fabien-roy.fr"
+            "url": null
         },
         {
             "name": "Portfolio-Astro",
@@ -225,81 +218,75 @@
                 "JavaScript",
                 "Astro",
                 "Tailwind CSS",
-                "React",
-                "Docker"
+                "React"
             ],
             "endDate": "2025-03-12",
-            "url": "fabien-roy.fr"
+            "url": "https:\/\/fabien-roy.netlify.app\/"
         }
     ],
     "skills": [
         {
             "name": "Languages",
-            "level": null,
-            "keywords": {
-                "0": "HTML",
-                "1": "CSS",
-                "2": "JavaScript",
-                "3": "PHP",
-                "6": "SQL",
-                "7": "Python"
-            }
+            "level": "beginner",
+            "keywords": [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "PHP",
+                "Rust",
+                "Python"
+            ]
         },
         {
             "name": "Frameworks et Librairies",
-            "level": null,
-            "keywords": {
-                "0": "Symfony",
-                "4": "Bootstrap",
-                "5": "Tailwind CSS",
-                "6": "Node.js",
-                "7": "JQuery",
-                "8": "Django",
-                "9": "React",
-                "10": "Astro"
-            }
+            "level": "intermediate",
+            "keywords": [
+                "Symfony",
+                "Astro",
+                "React",
+                "Symfony",
+                "Bootstrap",
+                "Tailwind CSS",
+                "Node.js"
+            ]
         },
         {
             "name": "Bases de Donn\u00e9es",
-            "level": null,
-            "keywords": {
-                "2": "MariaDB",
-                "3": "PostgreSQL",
-                "4": "MongoDB",
-                "5": "MySQL"
-            }
+            "level": "beginner",
+            "keywords": [
+                "MongoDB",
+                "MySQL"
+            ]
         },
         {
             "name": "Outils Additionnels",
-            "level": null,
+            "level": "intermediate",
             "keywords": [
                 "Figma",
                 "Git",
                 "GitHub",
-                "Netlify",
-                "Docker",
-                "Heroku"
+                "Netlify"
             ]
         }
     ],
     "languages": [
         {
             "language": "Fran\u00e7ais",
-            "fluency": "master"
+            "fluency": "Langue maternelle"
         },
         {
             "language": "Anglais",
-            "fluency": "advanced"
+            "fluency": "Interm\u00e9diaire"
         },
         {
             "language": "Espagnole",
-            "fluency": "beginner"
+            "fluency": "D\u00e9butant"
         }
     ],
     "interests": [],
     "references": [],
     "meta": {
         "version": "v1.0.0",
-        "lastModified": "2025-03-23T23:14:36+00:00"
+        "lastModified": "2025-03-30T00:19:46+01:00"
     }
 }
