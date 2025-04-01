@@ -68,13 +68,13 @@ class PortfolioDataService
         $user = $this->userRepository->findOneBy([]);
         $location = $this->locationRepository->findOneBy(["user" => $user]);
         $profiles = $this->profileRepository->findBy(["user" => $user]);
-        $works = $this->workRepository->findAll();
+        $works = array_reverse($this->workRepository->findAll());
         $skills = $this->skillRepository->findAll();
         $languages = $this->languageRepository->findAll();
         $interests = $this->interestRepository->findAll();
         $portfolioReferences = $this->portfolioReferenceRepository->findAll();
         $projects = $this->projectRepository->findAll();
-        $education = $this->educationRepository->findAll();
+        $education = array_reverse($this->educationRepository->findAll());
         $technologies = $this->technologyRepository->findAll();
 
         // Calcul de l'âge
