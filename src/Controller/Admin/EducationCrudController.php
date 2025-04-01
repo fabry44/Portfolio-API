@@ -39,7 +39,6 @@ class EducationCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     'widget' => 'single_text',
                     'required' => false,
-                    'empty_data' => null,
                 ]),
             DateField::new('endDate')->setLabel('End Date')->setRequired(true)->setEmptyData(null),
             TextField::new('score')->setLabel('Score')->setRequired(false),
