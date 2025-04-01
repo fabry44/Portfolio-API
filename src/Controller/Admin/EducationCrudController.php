@@ -33,14 +33,8 @@ class EducationCrudController extends AbstractCrudController
             TextField::new('url')->setLabel('URL')->setRequired(false),
             TextField::new('area')->setLabel('Area')->setRequired(true),
             TextField::new('studyType')->setLabel('Study Type')->setRequired(false),
-            DateField::new('startDate')->setLabel('Start Date')
-                ->setRequired(false)
-                ->setFormType(DateType::class)
-                ->setFormTypeOptions([
-                    'widget' => 'single_text',
-                    'required' => false,
-                ]),
-            DateField::new('endDate')->setLabel('End Date')->setRequired(true)->setEmptyData(null),
+            DateField::new('startDate')->setLabel('Début')->setRequired(true)->setEmptyData(null),
+            DateField::new('endDate')->setLabel('Fin')->setRequired(true)->setEmptyData(null),
             TextField::new('score')->setLabel('Score')->setRequired(false),
             ArrayField::new('courses')->setLabel('Courses')->setRequired(false)
         ];
