@@ -23,7 +23,6 @@ class ApiContactController extends AbstractController
     public function submitContact(
         Request $request,
         EntityManagerInterface $entityManager,
-        ValidatorInterface $validator,
         HtmlSanitizerInterface $htmlSanitizer,
         UserRepository $userRepository,
         SendMailService $sendMailService,
@@ -62,6 +61,10 @@ class ApiContactController extends AbstractController
         // $contactRequest->setPhone($sanitizedMessage);
         $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getMessage());
         $contactRequest->setMessage($sanitizedMessage);
+        
+        $rgpd = filter_var($contactRequest->isRgpd(), FILTER_VALIDATE_BOOLEAN);
+
+        $contactRequest->setRgpd($rgpd);
 
 
         // Sauvegarde dans la base de données

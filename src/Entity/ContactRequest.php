@@ -41,7 +41,7 @@ class ContactRequest
     #[ORM\Column(type: "datetime_immutable")]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    #[ORM\Column(type: 'boolean')]
     private bool $rgpd = false;
 
     public function __construct()

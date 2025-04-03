@@ -133,7 +133,6 @@ class PortfolioController extends AbstractController
                 $this->logger->info("Image du projet poussée sur GitHub : $image");
             }
 
-
             // return new JsonResponse([
             //     'status' => 'success',
             //     'message' => 'Mise à jour du repository réussie',
@@ -144,18 +143,11 @@ class PortfolioController extends AbstractController
             //     'status' => 'success',
             //     'message' => 'Mise à jour du repository réussie',
             // ]);
-
             
-                return $this->render('admin/turboFrame/index.html.twig', [
-                    'status' => 'success',
-                    'message' => '✅ Portfolio mis à jour avec succès.',
-                ]);
-          
-        
-            
-            
-        
-
+            return $this->render('admin/turboFrame/index.html.twig', [
+                'status' => 'success',
+                'message' => '✅ Portfolio mis à jour avec succès.',
+            ]);
         } catch (\Exception $e) {
             $this->logger->error("Erreur dans la mise à jour du repository : " . $e->getMessage());
             return $this->render('admin/turboFrame/index.html.twig', [
