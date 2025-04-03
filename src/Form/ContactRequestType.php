@@ -53,7 +53,6 @@ class ContactRequestType extends AbstractType
             ],
         ])
         ->add('rgpd', CheckboxType::class, [
-            'mapped' => false,
             'constraints' => [
                 new NotBlank(),
             ],
