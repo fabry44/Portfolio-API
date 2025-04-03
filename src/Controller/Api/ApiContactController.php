@@ -62,7 +62,12 @@ class ApiContactController extends AbstractController
         $sanitizedMessage = $htmlSanitizer->sanitize($contactRequest->getMessage());
         $contactRequest->setMessage($sanitizedMessage);
         
-        $rgpd = filter_var($contactRequest->isRgpd(), FILTER_VALIDATE_BOOLEAN);
+        $rgpd = $contactRequest->isRgpd();
+        if ($rgpd==true) {
+            $rgpd = 1;
+        } else {
+            $rgpd = 0;
+        }
 
         $contactRequest->setRgpd($rgpd);
 
